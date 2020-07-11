@@ -7,6 +7,7 @@
 --------------------------------------------------------------------------------
 import System.Exit
 import System.IO (hPutStrLn)
+import Data.Char (isSpace)
 
 import XMonad
 import XMonad.Config.Desktop
@@ -26,6 +27,7 @@ import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import XMonad.Layout.Spacing
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Prompt
+import XMonad.Prompt.Input
 import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Shell
 import XMonad.Util.EZConfig
@@ -76,6 +78,17 @@ runItOnce cmd = spawn $ "~/bin/runonce " ++ cmd
 killItOnce :: String -> X ()
 killItOnce cmd = spawn $ "~/bin/killonce " ++ cmd
 
+------------------------------------------------------------------------
+-- CALCULATOR PROMPT
+------------------------------------------------------------------------
+calcPrompt :: XPConfig -> String -> X () 
+calcPrompt c ans =
+    inputPrompt c (trim ans) ?+ \input -> 
+        liftIO(runProcessWithInput "wcalc" [input] "") >>= calcPrompt c 
+    where
+        trim  = f . f
+            where f = reverse . dropWhile isSpace
+                  
 ------------------------------------------------------------------------
 -- SEARCH ENGINES
 ------------------------------------------------------------------------
@@ -144,6 +157,7 @@ myKeys =
       -- , ("M-C-d", sendMessage DeArrange)
       , ("M-m", spawnOnce myFileManager)
       , ("M-r", runItOnce myRedshiftOn)
+      , ("M-c", calcPrompt defaultXPConfig "calculator")
       , ("M-S-r", killItOnce myRedshiftOff)
       , ("M-S-0", spawn "xscreensaver-command -lock")
       , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
@@ -166,7 +180,7 @@ myStartupHook = do
   spawnOnce "xsetroot -solid black"
   runItOnce myRedshiftOn
   runItOnce myScreensaverOn
-  spawnOnce "emacs --daemon &"
+  runItOnce "emacs --daemon &"
 
 ------------------------------------------------------------------------
 -- WORKSPACES
@@ -242,7 +256,6 @@ myLayouts = avoidStruts
   where
     others = spacing mySpacing $
                ResizableTall 1 (1.5/100) (3/5) []
-                 ||| Full
                  ||| emptyBSP
                  ||| Grid
 
