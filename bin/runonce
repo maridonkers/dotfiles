@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]
+then
+  echo "Usage: $0 nameofprocess";
+  exit 1;
+fi
+PROGRAM=`which $1`
+
+PID=`pgrep -f "${PROGRAM}"`
+if [ ${PID} ]
+then
+  kill "${PID}";
+fi
+
+$* &
