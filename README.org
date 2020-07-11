@@ -1,0 +1,4 @@
+My configuration files.
+
+* Dotfiles
+See [[https://www.atlassian.com/git/tutorials/dotfiles][dotfiles]] for a technique to manage dotfiles in git.
