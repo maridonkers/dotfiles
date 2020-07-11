@@ -195,9 +195,9 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 --------------------------------------------------------------------------------
 main = do
   -- Launching instances of xmobar on their monitors.
-  xmproc0 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc0"
-  -- xmproc0 <- spawnPipe "xmobar -x 0 /home/dt/.config/xmobar/xmobarrc0"
-  -- xmproc1 <- spawnPipe "xmobar -x 1 /home/dt/.config/xmobar/xmobarrc1"
+  xmproc0 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc0.hs"
+  -- xmproc0 <- spawnPipe "xmobar -x 0 /home/dt/.config/xmobar/xmobarrc0.hs"
+  -- xmproc1 <- spawnPipe "xmobar -x 1 /home/dt/.config/xmobar/xmobarrc1.hs"
 
   xmonad $ defaults xmproc0
 
