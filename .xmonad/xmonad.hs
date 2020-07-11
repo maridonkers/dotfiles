@@ -51,7 +51,7 @@ myTerminal = "xterm"
 mySpacing :: Int
 mySpacing = 5
 
-myBorderWidth :: Dimension 
+myBorderWidth :: Dimension
 myBorderWidth = 2
 
 myFocusedBorderColor :: String
@@ -63,14 +63,14 @@ myEditor = "bin/ec"
 myFileManager :: String
 myFileManager = "pcmanfm"
 
-myRedshiftOn :: String
-myRedshiftOn = "redshift"
+-- myRedshiftOn :: String
+-- myRedshiftOn = "redshift"
+
+-- myRedshiftOff :: String
+-- myRedshiftOff = "redshift ; redshift -x"
 
 myScreensaverOn :: String
 myScreensaverOn = "xscreensaver -no-splash &"
-
-myRedshiftOff :: String
-myRedshiftOff = "redshift ; redshift -x"
 
 runItOnce :: String -> X ()
 runItOnce cmd = spawn $ "~/bin/runonce " ++ cmd
@@ -81,14 +81,14 @@ killItOnce cmd = spawn $ "~/bin/killonce " ++ cmd
 ------------------------------------------------------------------------
 -- CALCULATOR PROMPT
 ------------------------------------------------------------------------
-calcPrompt :: XPConfig -> String -> X () 
+calcPrompt :: XPConfig -> String -> X ()
 calcPrompt c ans =
-    inputPrompt c (trim ans) ?+ \input -> 
-        liftIO(runProcessWithInput "wcalc" [input] "") >>= calcPrompt c 
+    inputPrompt c (trim ans) ?+ \input ->
+        liftIO(runProcessWithInput "wcalc" [input] "") >>= calcPrompt c
     where
         trim  = f . f
             where f = reverse . dropWhile isSpace
-                  
+
 ------------------------------------------------------------------------
 -- SEARCH ENGINES
 ------------------------------------------------------------------------
@@ -156,9 +156,9 @@ myKeys =
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
       , ("M-m", spawnOnce myFileManager)
-      , ("M-r", runItOnce myRedshiftOn)
+      -- , ("M-r", runItOnce myRedshiftOn)
       , ("M-c", calcPrompt defaultXPConfig "calculator")
-      , ("M-S-r", killItOnce myRedshiftOff)
+      -- , ("M-S-r", killItOnce myRedshiftOff)
       , ("M-S-0", spawn "xscreensaver-command -lock")
       , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
       , ("M-C-S-0", spawn "systemctl hibernate")
@@ -178,9 +178,9 @@ myStartupHook :: X ()
 myStartupHook = do
   addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
-  runItOnce myRedshiftOn
+  -- runItOnce myRedshiftOn
   runItOnce myScreensaverOn
-  runItOnce "emacs --daemon &"
+  runItOnce "emacs --daemon"
 
 ------------------------------------------------------------------------
 -- WORKSPACES
@@ -199,18 +199,21 @@ myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
                $ ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   where
-        clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ "<fn=2>" ++ ws ++ "</fn>" ++ "</action>" |
+        clickable l = [ "<action=xdotool key super+" ++ show (n) ++
+                        ">" ++ "<fn=2>" ++ ws ++ "</fn>"
+                        ++ "</action>" |
                       (i,ws) <- zip [1..9] l,
                       let n = i ]
 
 windowCount :: X (Maybe String)
-windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+windowCount = gets $ Just . show . length .
+  W.integrate' . W.stack . W.workspace .
+  W.current . windowset
 
 --------------------------------------------------------------------------------
 main = do
   -- Launching instances of xmobar on their monitors.
   xmproc0 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc0.hs"
-  -- xmproc0 <- spawnPipe "xmobar -x 0 /home/dt/.config/xmobar/xmobarrc0.hs"
   -- xmproc1 <- spawnPipe "xmobar -x 1 /home/dt/.config/xmobar/xmobarrc1.hs"
 
   xmonad $ defaults xmproc0
@@ -243,12 +246,13 @@ defaults xmproc0 = desktopConfig {
         },
     startupHook = myStartupHook
     }
-  
+
 --------------------------------------------------------------------------------
 -- | Customize layouts.
 --
 -- Use the 'M-<Esc>' key binding defined above to toggle between the
--- current layout and a full screen layout.
+-- current layout and a full screen layout. Use 'M-f' key binding for
+-- a full screen layout with xmobar visible at the top.
 myLayouts = avoidStruts
   $ mouseResize
   $ windowArrange
@@ -269,13 +273,12 @@ myXPConfig = def
   , font = "xft:monospace:size=9"
   }
 
-  -- The same config above minus the autocomplete feature which is annoying
+-- The same config above minus the autocomplete feature which is annoying
 -- on certain Xprompts, like the search engine prompts.
 npXPConfig :: XPConfig
 npXPConfig = myXPConfig
   { autoComplete = Nothing
   }
-
 
 --------------------------------------------------------------------------------
 -- | Manipulate windows as they are created. The list given to
