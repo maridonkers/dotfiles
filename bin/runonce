@@ -8,7 +8,7 @@ fi
 PROGRAM=`which $1`
 
 PID=`pgrep -f "${PROGRAM}"`
-if [ -z ${PID} ]
+if [ -z "${PID}" ]
 then
   $* &
 fi
