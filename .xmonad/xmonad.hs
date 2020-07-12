@@ -4,6 +4,7 @@
 -- This configuration file for xmonad is adapted from DT's dotfiles.
 -- See: https://gitlab.com/dwt1/dotfiles
 --
+-- hlint xmonad.hs --report
 --------------------------------------------------------------------------------
 import System.Exit
 import System.IO (hPutStrLn)
@@ -196,10 +197,10 @@ xmobarEscape = concatMap doubleLts
         doubleLts x   = [x]
 
 myWorkspaces :: [String]
-myWorkspaces = clickable . (map xmobarEscape)
+myWorkspaces = clickable . map xmobarEscape
                $ ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   where
-        clickable l = [ "<action=xdotool key super+" ++ show (n) ++
+        clickable l = [ "<action=xdotool key super+" ++ show n ++
                         ">" ++ "<fn=2>" ++ ws ++ "</fn>"
                         ++ "</action>" |
                       (i,ws) <- zip [1..9] l,
@@ -231,7 +232,7 @@ defaults xmproc0 = desktopConfig {
     workspaces = myWorkspaces,
     manageHook = myManageHook <+> manageHook desktopConfig <+> manageDocks,
     handleEventHook = docksEventHook <+> screenCornerEventHook,
-    layoutHook = desktopLayoutModifiers $ screenCornerLayoutHook $ myLayouts,
+    layoutHook = desktopLayoutModifiers $ screenCornerLayoutHook myLayouts,
     logHook = dynamicLogWithPP xmobarPP
         { ppOutput = \x -> hPutStrLn xmproc0 x --  >> hPutStrLn xmproc1 x  >> hPutStrLn xmproc2 x
           , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
