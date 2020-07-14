@@ -6,9 +6,13 @@
 --
 -- hlint xmonad.hs --report
 --------------------------------------------------------------------------------
+-- https://wiki.haskell.org/Xmonad/Config_archive/adamvo%27s_xmonad.hs
+{-# OPTIONS_GHC -W -fwarn-unused-imports #-}
+
 import System.Exit
 import System.IO (hPutStrLn)
 import Data.Char (isSpace)
+-- import Data.Typeable
 
 import XMonad
 import XMonad.Config.Desktop
@@ -20,6 +24,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook,
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import qualified XMonad.StackSet as W
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.BinarySpacePartition (emptyBSP)
 import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.NoBorders (noBorders)
@@ -72,6 +77,9 @@ myFileManager = "pcmanfm"
 
 myScreensaverOn :: String
 myScreensaverOn = "xscreensaver -no-splash &"
+
+-- logCommand :: String
+-- logCommand = "echo \"" ++ (show (typeOf defaults)) ++ "\" > /tmp/XMONAD.txt"
 
 runItOnce :: String -> X ()
 runItOnce cmd = spawn $ "~/bin/runonce " ++ cmd
@@ -160,6 +168,7 @@ myKeys =
       -- , ("M-r", runItOnce myRedshiftOn)
       , ("M-c", calcPrompt defaultXPConfig "calculator")
       -- , ("M-S-r", killItOnce myRedshiftOff)
+      -- , ("M-l", spawn logCommand)
       , ("M-S-0", spawn "xscreensaver-command -lock")
       , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
       , ("M-C-S-0", spawn "systemctl hibernate")
@@ -220,10 +229,13 @@ main = do
   xmonad $ defaults xmproc0
 
     `additionalKeysP` myKeys
-
+    
 --------------------------------------------------------------------------------
 -- | Customized defaults.
 -- Main desktop configuration with some overrides.
+--
+-- Handle -> XConfig (ModifiedLayout AvoidStruts (ModifiedLayout ScreenCornerLayout (ModifiedLayout AvoidStruts (ModifiedLayout MouseResize (ModifiedLayout WindowArranger (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Spacing (Choose ResizableTall (Choose BinarySpacePartition Grid)))))))))
+-- https://gist.github.com/sboehler/5f48017a6b53805485180a9a6d81196b
 defaults xmproc0 = desktopConfig {
     terminal = myTerminal,
     borderWidth = myBorderWidth,
