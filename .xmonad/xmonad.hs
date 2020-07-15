@@ -164,7 +164,7 @@ myKeys =
       , ("M-<Space>", goToSelected defaultGSConfig)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
-      , ("M-m", spawnOnce myFileManager)
+      , ("M-m", spawn myFileManager)
       -- , ("M-r", runItOnce myRedshiftOn)
       , ("M-c", calcPrompt defaultXPConfig "calculator")
       -- , ("M-S-r", killItOnce myRedshiftOff)
@@ -302,6 +302,8 @@ npXPConfig = myXPConfig
 -- For className, use the second value that xprop gives you.
 myManageHook = composeOne
   [ className =? "mpv" -?> doFloat
+    , className =? "Pinentry" -?> doFloat
+    , className =? "Pavucontrol"  -?> doFloat
     , isDialog -?> doCenterFloat
 
     -- Move transient windows to their parent:
