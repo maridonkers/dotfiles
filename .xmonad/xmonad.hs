@@ -152,6 +152,7 @@ myKeys =
       , ("M-C-<Up>", windows W.swapUp >> windows W.focusDown)
       , ("M-M1-<Up>", rotSlavesDown)
       , ("M-M1-<Down>", rotAllDown)
+      , ("M-=", toggleWS)
       , ("M-<Tab>", nextWS)
       , ("M-S-<Tab>", prevWS)
       , ("M-C-<Tab>", shiftToNext >> nextWS)
