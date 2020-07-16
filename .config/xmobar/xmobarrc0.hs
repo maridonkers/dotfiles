@@ -1,6 +1,4 @@
 -- http://projects.haskell.org/xmobar/
--- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
--- you can find weather location codes here: http://weather.noaa.gov/index.html
 
 Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
        , additionalFonts = [ "xft:FontAwesome:pixelsize=13", "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true" ]
@@ -11,11 +9,10 @@ Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=t
        , hideOnStart = False
        , allDesktops = True
        , persistent = True
-       -- , iconRoot = "/home/mdo/.xmonad/xpm/"  -- default: "."
        -- RefreshRate is in 1/10th of seconds.
        , commands = [ 
                       -- Time and date
-                      Run Date "%b %d %Y (%H:%M)" "date" 300
+                      Run Date "%a, %b %d %Y (%H:%M)" "date" 300
                       -- Network up and down
                     , Run Network "wlp3s0" ["-t", "<rx>kb <tx>kb"] 10
                       -- Cpu usage in percent
