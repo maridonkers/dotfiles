@@ -7,7 +7,7 @@
 -- hlint xmonad.hs --report
 --------------------------------------------------------------------------------
 -- https://wiki.haskell.org/Xmonad/Config_archive/adamvo%27s_xmonad.hs
-{-# OPTIONS_GHC -W -fwarn-unused-imports #-}
+{-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
 import System.Exit
 import System.IO (hPutStrLn)
@@ -15,6 +15,13 @@ import Data.Char (isSpace)
 -- import Data.Typeable
 
 import XMonad
+import XMonad.Actions.CycleWS
+import XMonad.Actions.GridSelect
+import XMonad.Actions.MouseResize
+import XMonad.Actions.NoBorders
+import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
+import qualified XMonad.Actions.Search as S
+import XMonad.Actions.SwapWorkspaces
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap,
                                 xmobarPP, xmobarColor,
@@ -22,30 +29,24 @@ import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap,
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook,
                                  manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ScreenCorners
 import XMonad.Hooks.SetWMName
-import qualified XMonad.StackSet as W
-import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.BinarySpacePartition (emptyBSP)
 import XMonad.Layout.Grid (Grid(..))
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ResizableTile (ResizableTall(..))
-import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import XMonad.Layout.Spacing
+import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Prompt
-import XMonad.Prompt.Input
 import XMonad.Prompt.ConfirmPrompt
+import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
+import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-import XMonad.Actions.CycleWS
-import XMonad.Actions.GridSelect
-import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
-import XMonad.Actions.NoBorders
-import XMonad.Actions.MouseResize
-import qualified XMonad.Actions.Search as S
-import XMonad.Hooks.ScreenCorners
-import XMonad.Util.SpawnOnce
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+import XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
 -- VARIABLES
@@ -180,6 +181,11 @@ myKeys =
       , ("<XF86AudioPrev>", spawn "clementine -r")
       , ("<XF86AudioNext>", spawn "clementine -f")
       ]
+      -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
+      ++ [(m ++ k, windows $ f w)
+           | (w, k) <- zip myWorkspaces (map show [1..9])
+           , (m, f) <- [("M-C-", swapWithCurrent)]]
+
       -- Appending search engine prompts to keybindings list.
       -- Look at "search engines" section of this config for values for "k".
       ++ [("M-s " ++ k, S.promptSearch npXPConfig f) | (k,f) <- searchList ]
@@ -228,7 +234,6 @@ main = do
   -- xmproc1 <- spawnPipe "xmobar -x 1 /home/dt/.config/xmobar/xmobarrc1.hs"
 
   xmonad $ defaults xmproc0
-
     `additionalKeysP` myKeys
     
 --------------------------------------------------------------------------------
