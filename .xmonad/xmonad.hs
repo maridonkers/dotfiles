@@ -196,7 +196,7 @@ myStartupHook = do
   addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
   -- runItOnce myRedshiftOn
-  runItOnce myScreensaverOn
+  spawnOnce myScreensaverOn
   runItOnce "emacs --daemon"
 
 ------------------------------------------------------------------------
