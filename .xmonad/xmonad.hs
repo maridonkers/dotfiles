@@ -181,10 +181,10 @@ myKeys =
       , ("<XF86AudioPrev>", spawn "clementine -r")
       , ("<XF86AudioNext>", spawn "clementine -f")
       ]
+      
       -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
-      ++ [(m ++ k, windows $ f w)
-           | (w, k) <- zip myWorkspaces (map show [1..9])
-           , (m, f) <- [("M-C-", swapWithCurrent)]]
+      ++ [("M-C-" ++ k, windows $ swapWithCurrent w)
+           | (w, k) <- zip myWorkspaces (map show [1..9])]
 
       -- Appending search engine prompts to keybindings list.
       -- Look at "search engines" section of this config for values for "k".
