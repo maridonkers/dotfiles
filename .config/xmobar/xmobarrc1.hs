@@ -4,7 +4,7 @@ Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=t
        , additionalFonts = [ "xft:FontAwesome:pixelsize=13", "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true" ]
        , bgColor = "#292d3e"
        , fgColor = "#FFB86C"
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
+       , position = Static { xpos = 1920 , ypos = 0, width = 1366, height = 24 }
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
@@ -21,12 +21,12 @@ Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=t
                     , Run Memory ["-t", "<used>M (<usedratio>%)"] 10
                       -- Disk space free
                     , Run DiskU [("/", "/: <free>"),
-                                 ("/boot", "boot: <free>"),
+                                 -- ("/boot", "boot: <free>"),
                                  ("/home", "home: <free>"),
                                  ("/mnt/data", "data: <free>")] [] 600
-                    , Run DiskIO [("sda", "sda:<read> <write>"), ("sdb", "sdb:<read> <write>")] [] 10
+                    -- , Run DiskIO [("sda", "sda:<read> <write>"), ("sdb", "sdb:<read> <write>")] [] 10
                       -- Runs a standard shell command 'uname -r' to get kernel version
-                    , Run Com "uname" ["-r"] "" 36000
+                    -- , Run Com "uname" ["-r"] "" 36000
                       -- Prints out the left side items such as workspaces, layout, etc.
                       -- The workspaces are 'clickable' in my configs.
                     , Run UnsafeStdinReader
@@ -34,5 +34,5 @@ Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=t
        , sepChar = "%"
        , alignSep = "}{"
        --<fc=#b3afc2>%uname% </fc> ... <fc=#82AAFF>| </fc><fc=#22CCBB>%diskio% </fc>
-       , template = " <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#b3afc2>%uname% </fc><fc=#666666>| </fc><fc=#FFB86C>%multicpu% </fc><fc=#666666>| </fc><fc=#FF5555>%memory% </fc><fc=#666666>| </fc><fc=#82AAFF>%disku%  <fc=#82AAFF>| </fc><fc=#22CCBB>%diskio% </fc></fc><fc=#666666>| </fc><fc=#c3e88d>%wlp3s0% </fc><fc=#666666>| </fc><fc=#666666>| </fc><fc=#8BE9FD>%date%</fc> "
+       , template = " <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#666666>| </fc><fc=#FFB86C>%multicpu% </fc><fc=#666666>| </fc><fc=#FF5555>%memory% </fc><fc=#666666>| </fc><fc=#82AAFF>%disku%  </fc><fc=#666666>| </fc><fc=#c3e88d>%wlp3s0% </fc><fc=#666666>| </fc><fc=#666666>| </fc><fc=#8BE9FD>%date%</fc> "
        }

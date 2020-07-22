@@ -39,6 +39,7 @@ import XMonad.Layout.ResizableTile (ResizableTall(..))
 import XMonad.Layout.Spacing
 import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
+import qualified XMonad.Layout.IndependentScreens as LIS
 import XMonad.Prompt
 import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Input
@@ -47,6 +48,12 @@ import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
+
+-- togglevga = do
+--   screencount <- LIS.countScreens
+--   if screencount > 1
+--    then spawn "xrandr --output VGA1 --off"
+--    else spawn "xrandr --output VGA1 --auto --right-of LVDS1"
 
 ------------------------------------------------------------------------
 -- VARIABLES
@@ -144,7 +151,9 @@ myKeys =
       , ("M-f", sendMessage (Toggle "Full"))
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
-      , ("M-e", spawn myEditor)
+      , ("M-/ e", spawn myEditor)
+      , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
+      , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
       , ("M-S-<Right>", sendMessage Expand)
       , ("M-<Left>", windows W.focusDown)
@@ -162,13 +171,15 @@ myKeys =
       , ("M-M1-<Right>", nextWS)
       , ("M-C-M1-<Left>", shiftToPrev >> prevWS)
       , ("M-C-M1-<Right>", shiftToNext >> nextWS)
+      , ("M-C-<Left>", prevScreen)
+      , ("M-C-<Right>", nextScreen)
       , ("M-S-<Space>", sendMessage NextLayout)
       , ("M-<Space>", goToSelected defaultGSConfig)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
-      , ("M-m", spawn myFileManager)
+      , ("M-/ m", spawn myFileManager)
       -- , ("M-r", runItOnce myRedshiftOn)
-      , ("M-c", calcPrompt defaultXPConfig "calculator")
+      , ("M-/ c", calcPrompt defaultXPConfig "calculator")
       -- , ("M-S-r", killItOnce myRedshiftOff)
       -- , ("M-l", spawn logCommand)
       , ("M-S-0", spawn "xscreensaver-command -lock")
@@ -193,6 +204,7 @@ myKeys =
 
 myStartupHook :: X ()
 myStartupHook = do
+  -- spawnOnce "/home/bin/start-xrandr"
   addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
   -- runItOnce myRedshiftOn
@@ -229,11 +241,20 @@ windowCount = gets $ Just . show . length .
 
 --------------------------------------------------------------------------------
 main = do
+  screencount <- LIS.countScreens
+  if screencount > 1
+   then do
+    spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
+    spawn "pactl set-card-profile 0 output:hdmi-stereo"
+   else do
+    spawn "xrandr --output LVDS-1 --primary --auto"
+    spawn "pactl set-card-profile 0 output:analog-stereo"
+    
   -- Launching instances of xmobar on their monitors.
-  xmproc0 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc0.hs"
-  -- xmproc1 <- spawnPipe "xmobar -x 1 /home/dt/.config/xmobar/xmobarrc1.hs"
+  xmproc0 <- spawnPipe "xmobar -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
+  xmproc1 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
 
-  xmonad $ defaults xmproc0
+  xmonad $ defaults xmproc0 xmproc1
     `additionalKeysP` myKeys
     
 --------------------------------------------------------------------------------
@@ -242,7 +263,7 @@ main = do
 --
 -- Handle -> XConfig (ModifiedLayout AvoidStruts (ModifiedLayout ScreenCornerLayout (ModifiedLayout AvoidStruts (ModifiedLayout MouseResize (ModifiedLayout WindowArranger (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Spacing (Choose ResizableTall (Choose BinarySpacePartition Grid)))))))))
 -- https://gist.github.com/sboehler/5f48017a6b53805485180a9a6d81196b
-defaults xmproc0 = desktopConfig {
+defaults xmproc0 xmproc1 = desktopConfig {
     terminal = myTerminal,
     borderWidth = myBorderWidth,
     focusedBorderColor = myFocusedBorderColor,
@@ -252,7 +273,7 @@ defaults xmproc0 = desktopConfig {
     handleEventHook = docksEventHook <+> screenCornerEventHook,
     layoutHook = desktopLayoutModifiers $ screenCornerLayoutHook myLayouts,
     logHook = dynamicLogWithPP xmobarPP
-        { ppOutput = \x -> hPutStrLn xmproc0 x --  >> hPutStrLn xmproc1 x  >> hPutStrLn xmproc2 x
+        { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x  -- >> hPutStrLn xmproc2 x
           , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
           , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
           , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
