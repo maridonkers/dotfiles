@@ -204,7 +204,6 @@ myKeys =
 
 myStartupHook :: X ()
 myStartupHook = do
-  -- spawnOnce "/home/bin/start-xrandr"
   addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
   -- runItOnce myRedshiftOn
@@ -250,7 +249,7 @@ main = do
     spawn "xrandr --output LVDS-1 --primary --auto"
     spawn "pactl set-card-profile 0 output:analog-stereo"
     
-  -- Launching instances of xmobar on their monitors.
+  -- Launching instances of xmobar on their monitors. TODO check if only one monitor.
   xmproc0 <- spawnPipe "xmobar -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
   xmproc1 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
 
