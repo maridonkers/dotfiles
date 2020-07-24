@@ -6,12 +6,17 @@
 --
 -- hlint xmonad.hs --report
 --------------------------------------------------------------------------------
+-- Examples:
+-- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips
 -- https://wiki.haskell.org/Xmonad/Config_archive/adamvo%27s_xmonad.hs
+-- https://wiki.haskell.org/Xmonad/Config_archive/dmwit%27s_xmonad.hs
+--
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
 import System.Exit
 import System.IO (hPutStrLn)
 import Data.Char (isSpace)
+
 -- import Data.Typeable
 
 import XMonad
@@ -20,12 +25,12 @@ import XMonad.Actions.GridSelect
 import XMonad.Actions.MouseResize
 import XMonad.Actions.NoBorders
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
-import qualified XMonad.Actions.Search as S
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap,
                                 xmobarPP, xmobarColor,
                                 shorten, PP(..))
+import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook,
                                  manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
@@ -33,13 +38,13 @@ import XMonad.Hooks.ScreenCorners
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.BinarySpacePartition (emptyBSP)
 import XMonad.Layout.Grid (Grid(..))
+import XMonad.Layout.IndependentScreens
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ResizableTile (ResizableTall(..))
 import XMonad.Layout.Spacing
 import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
-import qualified XMonad.Layout.IndependentScreens as LIS
 import XMonad.Prompt
 import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Input
@@ -49,15 +54,14 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
--- togglevga = do
---   screencount <- LIS.countScreens
---   if screencount > 1
---    then spawn "xrandr --output VGA1 --off"
---    else spawn "xrandr --output VGA1 --auto --right-of LVDS1"
-
 ------------------------------------------------------------------------
 -- VARIABLES
 ------------------------------------------------------------------------
+
+xF86AudioRaiseVolume,xF86AudioLowerVolume,xF86AudioMute :: KeySym
+xF86AudioRaiseVolume = 0x1008ff13
+xF86AudioLowerVolume = 0x1008ff11
+xF86AudioMute = 0x1008ff12
 
 myTerminal :: String
 myTerminal = "xterm"
@@ -107,110 +111,6 @@ calcPrompt c ans =
             where f = reverse . dropWhile isSpace
 
 ------------------------------------------------------------------------
--- SEARCH ENGINES
-------------------------------------------------------------------------
--- Xmonad has several search engines available to use located in
--- XMonad.Actions.Search. Additionally, you can add other search engines
--- such as those listed below.
--- archwiki, ebay,
-news, reddit, urban :: S.SearchEngine
-
--- archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
--- ebay     = S.searchEngine "ebay" "https://www.ebay.com/sch/i.html?_nkw="
-news     = S.searchEngine "news" "https://news.google.com/search?q="
-reddit   = S.searchEngine "reddit" "https://www.reddit.com/search/?q="
-urban    = S.searchEngine "urban" "https://www.urbandictionary.com/define.php?term="
-
-searchList :: [(String, S.SearchEngine)]
-searchList = [ --("a", archwiki)
-             ("d", S.duckduckgo)
-             --, ("e", ebay)
-             , ("g", S.google)
-             , ("h", S.hoogle)
-             , ("i", S.images)
-             , ("n", news)
-             , ("r", reddit)
-             , ("s", S.stackage)
-             , ("t", S.thesaurus)
-             , ("v", S.vocabulary)
-             , ("b", S.wayback)
-             , ("u", urban)
-             , ("w", S.wikipedia)
-             , ("y", S.youtube)
-             , ("z", S.amazon)
-             ]
-
-------------------------------------------------------------------------
--- KEY BINDINGS
-------------------------------------------------------------------------
--- Add some extra key bindings; M1 is Alt key.
-myKeys =
-      [("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
-      , ("M-p", shellPrompt myXPConfig)
-      , ("M-<Esc>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
-      , ("M-f", sendMessage (Toggle "Full"))
-      , ("M-<Backspace>", kill)
-      , ("M-b", withFocused toggleBorder)
-      , ("M-/ e", spawn myEditor)
-      , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
-      , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
-      , ("M-S-<Left>", sendMessage Shrink)
-      , ("M-S-<Right>", sendMessage Expand)
-      , ("M-<Left>", windows W.focusDown)
-      , ("M-<Right>", windows W.focusUp)
-      , ("M-C-<Down>", windows W.swapDown >> windows W.focusUp)
-      , ("M-C-<Up>", windows W.swapUp >> windows W.focusDown)
-      , ("M-M1-<Up>", rotSlavesDown)
-      , ("M-M1-<Down>", rotAllDown)
-      , ("M-=", toggleWS)
-      , ("M-<Tab>", nextWS)
-      , ("M-S-<Tab>", prevWS)
-      , ("M-C-<Tab>", shiftToNext >> nextWS)
-      , ("M-C-S-<Tab>", shiftToPrev >> prevWS)
-      , ("M-M1-<Left>", prevWS)
-      , ("M-M1-<Right>", nextWS)
-      , ("M-C-M1-<Left>", shiftToPrev >> prevWS)
-      , ("M-C-M1-<Right>", shiftToNext >> nextWS)
-      , ("M-C-<Left>", prevScreen)
-      , ("M-C-<Right>", nextScreen)
-      , ("M-S-<Space>", sendMessage NextLayout)
-      , ("M-<Space>", goToSelected defaultGSConfig)
-      -- , ("M-C-u", sendMessage Arrange)
-      -- , ("M-C-d", sendMessage DeArrange)
-      , ("M-/ m", spawn myFileManager)
-      -- , ("M-r", runItOnce myRedshiftOn)
-      , ("M-/ c", calcPrompt defaultXPConfig "calculator")
-      -- , ("M-S-r", killItOnce myRedshiftOff)
-      -- , ("M-l", spawn logCommand)
-      , ("M-S-0", spawn "xscreensaver-command -lock")
-      , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
-      , ("M-C-S-0", spawn "systemctl hibernate")
-      , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
-      , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
-      , ("<XF86AudioMute>", spawn "amixer set Master toggle")
-      , ("<XF86AudioPlay>", spawn "clementine -t")
-      , ("<XF86AudioPrev>", spawn "clementine -r")
-      , ("<XF86AudioNext>", spawn "clementine -f")
-      ]
-      
-      -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
-      ++ [("M-C-" ++ k, windows $ swapWithCurrent w)
-           | (w, k) <- zip myWorkspaces (map show [1..9])]
-
-      -- Appending search engine prompts to keybindings list.
-      -- Look at "search engines" section of this config for values for "k".
-      ++ [("M-s " ++ k, S.promptSearch npXPConfig f) | (k,f) <- searchList ]
-      ++ [("M-S-s " ++ k, S.selectSearch f) | (k,f) <- searchList ]
-
-myStartupHook :: X ()
-myStartupHook = do
-  addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
-  spawnOnce "xsetroot -solid black"
-  -- runItOnce myRedshiftOn
-  spawnOnce myScreensaverOn
-  runItOnce "emacs --daemon"
-
-------------------------------------------------------------------------
 -- WORKSPACES
 ------------------------------------------------------------------------
 -- Workspaces are clickable meaning that the mouse can be used to switch
@@ -238,9 +138,79 @@ windowCount = gets $ Just . show . length .
   W.integrate' . W.stack . W.workspace .
   W.current . windowset
 
+------------------------------------------------------------------------
+-- KEY BINDINGS
+------------------------------------------------------------------------
+-- Add some extra key bindings; M1 is Alt key.
+myKeys =
+      [("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
+      , ("M-p", shellPrompt myXPConfig)
+      , ("M-<Esc>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
+      , ("M-f", sendMessage (Toggle "Full"))
+      , ("M-<Backspace>", kill)
+      , ("M-b", withFocused toggleBorder)
+      , ("M-/ e", spawn myEditor)
+      , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
+      , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
+      , ("M-/ m", spawn myFileManager)
+      , ("M-/ c", calcPrompt defaultXPConfig "calculator")
+      , ("M-S-<Left>", sendMessage Shrink)
+      , ("M-S-<Right>", sendMessage Expand)
+      , ("M-<Left>", windows W.focusDown)
+      , ("M-<Right>", windows W.focusUp)
+      , ("M-C-<Down>", windows W.swapDown >> windows W.focusUp)
+      , ("M-C-<Up>", windows W.swapUp >> windows W.focusDown)
+      , ("M-M1-<Up>", rotSlavesDown)
+      , ("M-M1-<Down>", rotAllDown)
+      , ("M-=", toggleWS)
+      , ("M-<Tab>", nextWS)
+      , ("M-S-<Tab>", prevWS)
+      , ("M-C-<Tab>", shiftToNext >> nextWS)
+      , ("M-C-S-<Tab>", shiftToPrev >> prevWS)
+      , ("M-M1-<Left>", prevWS)
+      , ("M-M1-<Right>", nextWS)
+      , ("M-C-M1-<Left>", shiftToPrev >> prevWS)
+      , ("M-C-M1-<Right>", shiftToNext >> nextWS)
+      , ("M-C-<Left>", prevScreen)
+      , ("M-C-<Right>", nextScreen)
+      , ("M-S-C-<Left>", shiftPrevScreen)
+      , ("M-S-C-<Right>", shiftNextScreen)
+      , ("M-S-C-<Up>", swapPrevScreen)
+      , ("M-S-C-<Down>", swapNextScreen)
+      , ("M-S-<Space>", sendMessage NextLayout)
+      , ("M-<Space>", goToSelected defaultGSConfig)
+      -- , ("M-C-u", sendMessage Arrange)
+      -- , ("M-C-d", sendMessage DeArrange)
+      -- , ("M-r", runItOnce myRedshiftOn)
+      -- , ("M-S-r", killItOnce myRedshiftOff)
+      -- , ("M-l", spawn logCommand)
+      , ("M-S-0", spawn "xscreensaver-command -lock")
+      , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
+      , ("M-C-S-0", spawn "systemctl hibernate")
+      , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
+      , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
+      , ("<XF86AudioMute>", spawn "amixer set Master toggle")
+      , ("<XF86AudioPlay>", spawn "clementine -t")
+      , ("<XF86AudioPrev>", spawn "clementine -r")
+      , ("<XF86AudioNext>", spawn "clementine -f")
+      ]
+
+      -- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips
+      
+      -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
+      ++ [("M-C-" ++ k, windows $ swapWithCurrent w)
+           | (w, k) <- zip myWorkspaces (map show [1..9])]
+
+myStartupHook :: X ()
+myStartupHook = do
+  addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
+  spawnOnce "xsetroot -solid black"
+  -- runItOnce myRedshiftOn
+  spawnOnce myScreensaverOn
+  runItOnce "emacs --daemon"
 --------------------------------------------------------------------------------
 main = do
-  screencount <- LIS.countScreens
+  screencount <- countScreens
   if screencount > 1
    then do
     spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
@@ -253,16 +223,7 @@ main = do
   xmproc0 <- spawnPipe "xmobar -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
   xmproc1 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
 
-  xmonad $ defaults xmproc0 xmproc1
-    `additionalKeysP` myKeys
-    
---------------------------------------------------------------------------------
--- | Customized defaults.
--- Main desktop configuration with some overrides.
---
--- Handle -> XConfig (ModifiedLayout AvoidStruts (ModifiedLayout ScreenCornerLayout (ModifiedLayout AvoidStruts (ModifiedLayout MouseResize (ModifiedLayout WindowArranger (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Spacing (Choose ResizableTall (Choose BinarySpacePartition Grid)))))))))
--- https://gist.github.com/sboehler/5f48017a6b53805485180a9a6d81196b
-defaults xmproc0 xmproc1 = desktopConfig {
+  xmonad $ defaultConfig {
     terminal = myTerminal,
     borderWidth = myBorderWidth,
     focusedBorderColor = myFocusedBorderColor,
@@ -285,7 +246,8 @@ defaults xmproc0 xmproc1 = desktopConfig {
         },
     startupHook = myStartupHook
     }
-
+    `additionalKeysP` myKeys
+    
 --------------------------------------------------------------------------------
 -- | Customize layouts.
 --
@@ -313,7 +275,7 @@ myXPConfig = def
   }
 
 -- The same config above minus the autocomplete feature which is annoying
--- on certain Xprompts, like the search engine prompts.
+-- on certain Xprompts.
 npXPConfig :: XPConfig
 npXPConfig = myXPConfig
   { autoComplete = Nothing
