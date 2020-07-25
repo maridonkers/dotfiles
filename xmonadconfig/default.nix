@@ -1,3 +1,4 @@
+# Required: cabal2nix
 # To initialize project use:
 #   nix-shell --packages ghc --run 'cabal init -p xmonadconfig'
 # To enter a Nix-shell use:
