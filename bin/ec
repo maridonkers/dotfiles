@@ -1,0 +1,6 @@
+#!/bin/sh
+
+emacsclient -nc -a "" $* & 
+
+# For Emacs 26 (installed via flatpak).
+#flatpak run org.gnu.emacs $* &
