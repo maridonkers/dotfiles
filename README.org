@@ -4,6 +4,6 @@ My configuration files.
 See [[https://www.atlassian.com/git/tutorials/dotfiles][dotfiles]] for a technique to manage dotfiles in git.
 
 * Already on GitHub
-**  [NixOS configuration](https://github.com/maridonkers/nixos-configuration)
-**  [Emacs configuration](https://github.com/maridonkers/emacs-config)
+- [[https://github.com/maridonkers/nixos-configuration][NixOS configuration]]
+- [[https://github.com/maridonkers/emacs-config][Emacs configuration]]
 
