@@ -10,6 +10,7 @@
 -- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips
 -- https://wiki.haskell.org/Xmonad/Config_archive/adamvo%27s_xmonad.hs
 -- https://wiki.haskell.org/Xmonad/Config_archive/dmwit%27s_xmonad.hs
+-- https://gitlab.com/dwt1/dotfiles  (xmonad and xmobar configuration)
 -- https://xiangji.me/2018/11/19/my-xmonad-configuration/
 --
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
