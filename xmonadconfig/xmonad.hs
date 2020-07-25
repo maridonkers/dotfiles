@@ -94,8 +94,8 @@ myScreensaverOn = "xscreensaver -no-splash &"
 runItOnce :: String -> X ()
 runItOnce cmd = spawn $ "~/bin/runonce " ++ cmd
 
-killItOnce :: String -> X ()
-killItOnce cmd = spawn $ "~/bin/killonce " ++ cmd
+-- killItOnce :: String -> X ()
+-- killItOnce cmd = spawn $ "~/bin/killonce " ++ cmd
 
 ------------------------------------------------------------------------
 -- CALCULATOR PROMPT
@@ -121,6 +121,12 @@ xmobarEscape = concatMap doubleLts
         doubleLts '<' = "<<"
         doubleLts x   = [x]
 
+myFirstWorkspace :: Integer
+myFirstWorkspace = 1
+
+myLastWorkspace :: Integer
+myLastWorkspace = 9
+
 myWorkspaces :: [String]
 myWorkspaces = clickable . map xmobarEscape
                $ ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -128,7 +134,7 @@ myWorkspaces = clickable . map xmobarEscape
         clickable l = [ "<action=xdotool key super+" ++ show n ++
                         ">" ++ "<fn=2>" ++ ws ++ "</fn>"
                         ++ "</action>" |
-                      (i,ws) <- zip [1..9] l,
+                      (i,ws) <- zip [myFirstWorkspace .. myLastWorkspace] l,
                       let n = i ]
 
 windowCount :: X (Maybe String)
@@ -197,7 +203,7 @@ myKeys =
       
       -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
       ++ [("M-C-" ++ k, windows $ swapWithCurrent w)
-           | (w, k) <- zip myWorkspaces (map show [1..9])]
+           | (w, k) <- zip myWorkspaces (map show [myFirstWorkspace .. myLastWorkspace])]
 
 myStartupHook :: X ()
 myStartupHook = do
@@ -206,11 +212,12 @@ myStartupHook = do
   -- runItOnce myRedshiftOn
   spawnOnce myScreensaverOn
   runItOnce "emacs --daemon"
+  
 --------------------------------------------------------------------------------
 main :: IO ()
 main = do
   screencount <- countScreens
-  if screencount > 1
+  if screencount > (1 :: Integer)
    then do
     spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
     spawn "pactl set-card-profile 0 output:hdmi-stereo"
