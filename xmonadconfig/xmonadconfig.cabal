@@ -6,9 +6,8 @@ cabal-version:       >=1.10
 name:                xmonadconfig
 version:             0.1.0.0
 synopsis:            Configuration for xmonad
-description:         To get a development environment to edit the xmonad.hs file.
-                     Use `nix-shell -A env` to enter the environment and when
-                     a .cabal change results in e.g. new dependencies.
+description:         To get a development environment to edit xmonad.hs file with
+                     build and GHCi in Emacs or on command line. See default.nix file.
 -- bug-reports:
 -- license:
 license-file:        LICENSE
