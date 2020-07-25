@@ -146,7 +146,7 @@ windowCount = gets $ Just . show . length .
 -- KEY BINDINGS
 ------------------------------------------------------------------------
 -- Add some extra key bindings; M1 is Alt key.
-myKeys :: [([Char], X ())]
+myKeys :: [(String, X ())]
 myKeys =
       [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-p", shellPrompt myXPConfig)
