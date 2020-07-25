@@ -1,10 +1,10 @@
 -- http://projects.haskell.org/xmobar/
 
-Config { font    = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
+Config { font = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true"
        , additionalFonts = [ "xft:FontAwesome:pixelsize=13", "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true" ]
        , bgColor = "#292d3e"
        , fgColor = "#FFB86C"
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
+       , position = Static { xpos = 0 , ypos = 1056, width = 1920, height = 24 }
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True

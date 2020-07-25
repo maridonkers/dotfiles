@@ -10,6 +10,7 @@
 -- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips
 -- https://wiki.haskell.org/Xmonad/Config_archive/adamvo%27s_xmonad.hs
 -- https://wiki.haskell.org/Xmonad/Config_archive/dmwit%27s_xmonad.hs
+-- https://xiangji.me/2018/11/19/my-xmonad-configuration/
 --
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
@@ -30,43 +31,39 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap,
                                 xmobarPP, xmobarColor,
                                 shorten, PP(..))
-import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
+-- import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook,
                                  manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ScreenCorners
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.BinarySpacePartition (emptyBSP)
-import XMonad.Layout.Grid (Grid(..))
+-- import XMonad.Hooks.SetWMName
+-- import XMonad.Layout.BinarySpacePartition (emptyBSP)
+-- import XMonad.Layout.Grid (Grid(..))
 import XMonad.Layout.IndependentScreens
-import XMonad.Layout.LayoutModifier (ModifiedLayout)
+-- import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ResizableTile (ResizableTall(..))
 import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
-import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
+import XMonad.Layout.WindowArranger (windowArrange)
 import XMonad.Prompt
 import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+import XMonad.Util.Run (runProcessWithInput, spawnPipe)
 import XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
 -- VARIABLES
 ------------------------------------------------------------------------
 
-xF86AudioRaiseVolume,xF86AudioLowerVolume,xF86AudioMute :: KeySym
-xF86AudioRaiseVolume = 0x1008ff13
-xF86AudioLowerVolume = 0x1008ff11
-xF86AudioMute = 0x1008ff12
-
 myTerminal :: String
 myTerminal = "xterm"
 
-mySpacing :: Int
+mySpacing :: Integer
 mySpacing = 5
 
 myBorderWidth :: Dimension
@@ -142,8 +139,9 @@ windowCount = gets $ Just . show . length .
 -- KEY BINDINGS
 ------------------------------------------------------------------------
 -- Add some extra key bindings; M1 is Alt key.
+myKeys :: [([Char], X ())]
 myKeys =
-      [("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
+      [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-p", shellPrompt myXPConfig)
       , ("M-<Esc>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
       , ("M-f", sendMessage (Toggle "Full"))
@@ -153,7 +151,7 @@ myKeys =
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-/ m", spawn myFileManager)
-      , ("M-/ c", calcPrompt defaultXPConfig "calculator")
+      , ("M-/ c", calcPrompt def "calculator") -- defaultXPConfig "calculator")
       , ("M-S-<Left>", sendMessage Shrink)
       , ("M-S-<Right>", sendMessage Expand)
       , ("M-<Left>", windows W.focusDown)
@@ -177,8 +175,9 @@ myKeys =
       , ("M-S-C-<Right>", shiftNextScreen)
       , ("M-S-C-<Up>", swapPrevScreen)
       , ("M-S-C-<Down>", swapNextScreen)
-      , ("M-S-<Space>", sendMessage NextLayout)
-      , ("M-<Space>", goToSelected defaultGSConfig)
+      , ("M-`", sendMessage NextLayout)
+      -- , ("M-S-`", setLayout $ layoutHook conf)
+      , ("M-<Space>", goToSelected def) --defaultGSConfig)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
       -- , ("M-r", runItOnce myRedshiftOn)
@@ -194,8 +193,6 @@ myKeys =
       , ("<XF86AudioPrev>", spawn "clementine -r")
       , ("<XF86AudioNext>", spawn "clementine -f")
       ]
-
-      -- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips
       
       -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
       ++ [("M-C-" ++ k, windows $ swapWithCurrent w)
@@ -203,12 +200,13 @@ myKeys =
 
 myStartupHook :: X ()
 myStartupHook = do
-  addScreenCorners [(SCUpperLeft, goToSelected defaultGSConfig)]
+  addScreenCorners [(SCUpperLeft, goToSelected def)] --defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
   -- runItOnce myRedshiftOn
   spawnOnce myScreensaverOn
   runItOnce "emacs --daemon"
 --------------------------------------------------------------------------------
+main :: IO ()
 main = do
   screencount <- countScreens
   if screencount > 1
@@ -223,7 +221,7 @@ main = do
   xmproc0 <- spawnPipe "xmobar -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
   xmproc1 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
 
-  xmonad $ defaultConfig {
+  xmonad $ def {
     terminal = myTerminal,
     borderWidth = myBorderWidth,
     focusedBorderColor = myFocusedBorderColor,
@@ -254,31 +252,51 @@ main = do
 -- Use the 'M-<Esc>' key binding defined above to toggle between the
 -- current layout and a full screen layout. Use 'M-f' key binding for
 -- a full screen layout with xmobar visible at the top.
+-- myLayouts :: XMonad.Layout.LayoutModifier.ModifiedLayout
+--                      XMonad.Hooks.ManageDocks.AvoidStruts
+--                      (XMonad.Layout.LayoutModifier.ModifiedLayout
+--                         MouseResize
+--                         (XMonad.Layout.LayoutModifier.ModifiedLayout
+--                            XMonad.Layout.WindowArranger.WindowArranger
+--                            (XMonad.Layout.ToggleLayouts.ToggleLayouts
+--                               (XMonad.Layout.LayoutModifier.ModifiedLayout
+--                                  XMonad.Layout.NoBorders.WithBorder Full)
+--                               (XMonad.Layout.LayoutModifier.ModifiedLayout
+--                                  Spacing
+--                                  (Choose
+--                                     ResizableTall
+--                                     (XMonad.Layout.LayoutModifier.ModifiedLayout
+--                                        XMonad.Layout.NoBorders.WithBorder
+--                                        (XMonad.Layout.LayoutModifier.ModifiedLayout
+--                                           (XMonad.Layout.Decoration.Decoration
+--                                              TabbedDecoration
+--                                              XMonad.Layout.Decoration.DefaultShrinker)
+--                                           XMonad.Layout.Simplest.Simplest)))))))
+--                      Window
 myLayouts = avoidStruts
   $ mouseResize
   $ windowArrange
   $ toggleLayouts (noBorders Full) others
   where
-    others = spacing mySpacing $
-               ResizableTall 1 (1.5/100) (3/5) []
-                 ||| emptyBSP
-                 ||| Grid
+    others = spacingRaw True
+                        (Border 0 mySpacing mySpacing mySpacing)
+                        True
+                        (Border mySpacing mySpacing mySpacing mySpacing)
+                        True
+             $ ResizableTall 1 (1.5/100) (3/5) []
+                 ||| noBorders simpleTabbed
+                 -- ||| emptyBSP
+                 -- ||| Grid
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a
 -- great replacement for dzen.
+myXPConfig :: XPConfig
 myXPConfig = def
   { position = Top
   , alwaysHighlight = True
   , promptBorderWidth = 0
   , font = "xft:monospace:size=9"
-  }
-
--- The same config above minus the autocomplete feature which is annoying
--- on certain Xprompts.
-npXPConfig :: XPConfig
-npXPConfig = myXPConfig
-  { autoComplete = Nothing
   }
 
 --------------------------------------------------------------------------------
@@ -288,6 +306,7 @@ npXPConfig = myXPConfig
 --
 -- Use the `xprop' tool to get the info you need for these matches.
 -- For className, use the second value that xprop gives you.
+myManageHook :: ManageHook
 myManageHook = composeOne
   [ className =? "mpv" -?> doFloat
     , className =? "Pinentry" -?> doFloat
