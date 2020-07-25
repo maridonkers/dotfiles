@@ -260,27 +260,6 @@ main = do
 -- Use the 'M-<Esc>' key binding defined above to toggle between the
 -- current layout and a full screen layout. Use 'M-f' key binding for
 -- a full screen layout with xmobar visible at the top.
--- myLayouts :: XMonad.Layout.LayoutModifier.ModifiedLayout
---                      XMonad.Hooks.ManageDocks.AvoidStruts
---                      (XMonad.Layout.LayoutModifier.ModifiedLayout
---                         MouseResize
---                         (XMonad.Layout.LayoutModifier.ModifiedLayout
---                            XMonad.Layout.WindowArranger.WindowArranger
---                            (XMonad.Layout.ToggleLayouts.ToggleLayouts
---                               (XMonad.Layout.LayoutModifier.ModifiedLayout
---                                  XMonad.Layout.NoBorders.WithBorder Full)
---                               (XMonad.Layout.LayoutModifier.ModifiedLayout
---                                  Spacing
---                                  (Choose
---                                     ResizableTall
---                                     (XMonad.Layout.LayoutModifier.ModifiedLayout
---                                        XMonad.Layout.NoBorders.WithBorder
---                                        (XMonad.Layout.LayoutModifier.ModifiedLayout
---                                           (XMonad.Layout.Decoration.Decoration
---                                              TabbedDecoration
---                                              XMonad.Layout.Decoration.DefaultShrinker)
---                                           XMonad.Layout.Simplest.Simplest)))))))
---                      Window
 myLayouts = avoidStruts
   $ mouseResize
   $ windowArrange
