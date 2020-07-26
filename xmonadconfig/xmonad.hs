@@ -216,8 +216,8 @@ myStartupHook = do
 --------------------------------------------------------------------------------
 main :: IO ()
 main = do
-  screencount <- countScreens
-  if screencount > (1 :: Integer)
+  numberOfScreens <- countScreens
+  if numberOfScreens > (1 :: Integer)
    then do
     spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
     spawn "pactl set-card-profile 0 output:hdmi-stereo"
