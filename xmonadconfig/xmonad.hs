@@ -36,7 +36,7 @@ import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap,
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook,
                                  manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.ScreenCorners
+-- import XMonad.Hooks.ScreenCorners
 -- import XMonad.Hooks.SetWMName
 -- import XMonad.Layout.BinarySpacePartition (emptyBSP)
 -- import XMonad.Layout.Grid (Grid(..))
@@ -207,7 +207,7 @@ myKeys =
 
 myStartupHook :: X ()
 myStartupHook = do
-  addScreenCorners [(SCUpperLeft, goToSelected def)] --defaultGSConfig)]
+  -- addScreenCorners [(SCUpperLeft, goToSelected def)] --defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
   -- runItOnce myRedshiftOn
   spawnOnce myScreensaverOn
@@ -236,8 +236,8 @@ main = do
     modMask = mod4Mask, -- Use the "Win" key for the mod key
     workspaces = myWorkspaces,
     manageHook = myManageHook <+> manageHook desktopConfig <+> manageDocks,
-    handleEventHook = docksEventHook <+> screenCornerEventHook,
-    layoutHook = desktopLayoutModifiers $ screenCornerLayoutHook myLayouts,
+    handleEventHook = docksEventHook, -- <+> screenCornerEventHook,
+    layoutHook = desktopLayoutModifiers myLayouts, -- $ screenCornerLayoutHook myLayouts,
     logHook = dynamicLogWithPP xmobarPP
         { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x  -- >> hPutStrLn xmproc2 x
           , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
