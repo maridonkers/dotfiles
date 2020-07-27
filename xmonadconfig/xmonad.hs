@@ -85,8 +85,14 @@ myFileManager = "pcmanfm"
 myFirefox :: String
 myFirefox = "firefox"
 
+myThunderbird :: String
+myThunderbird = "thunderbird"
+
 myChromium :: String
 myChromium = "chromium"
+
+myBrave :: String
+myBrave = "brave"
 
 myGoogleChrome :: String
 myGoogleChrome = "google-chrome-stable"
@@ -158,9 +164,11 @@ myKeys =
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ m", spawn myFileManager)
-      , ("M-/ f", spawn myFirefox)
+      , ("M-/ b", spawn myBrave)
       , ("M-/ c", spawn myChromium)
       , ("M-/ g", spawn myGoogleChrome)
+      , ("M-/ f", spawn myFirefox)
+      , ("M-/ t", spawn myThunderbird)
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
