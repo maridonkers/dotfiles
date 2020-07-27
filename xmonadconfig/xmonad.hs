@@ -54,7 +54,7 @@ import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-import XMonad.Util.Run (runProcessWithInput, spawnPipe)
+import XMonad.Util.Run (runProcessWithInput, spawnPipe, runInTerm)
 import XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
@@ -76,8 +76,20 @@ myFocusedBorderColor = "#ff0000"
 myEditor :: String
 myEditor = "bin/ec"
 
+myGHCI :: String
+myGHCI = "ghci"
+
 myFileManager :: String
 myFileManager = "pcmanfm"
+
+myFirefox :: String
+myFirefox = "firefox"
+
+myChromium :: String
+myChromium = "chromium"
+
+myGoogleChrome :: String
+myGoogleChrome = "google-chrome-stable"
 
 -- myRedshiftOn :: String
 -- myRedshiftOn = "redshift"
@@ -96,17 +108,6 @@ runItOnce cmd = spawn $ "~/bin/runonce " ++ cmd
 
 -- killItOnce :: String -> X ()
 -- killItOnce cmd = spawn $ "~/bin/killonce " ++ cmd
-
-------------------------------------------------------------------------
--- CALCULATOR PROMPT
-------------------------------------------------------------------------
-calcPrompt :: XPConfig -> String -> X ()
-calcPrompt c ans =
-    inputPrompt c (trim ans) ?+ \input ->
-        liftIO(runProcessWithInput "wcalc" [input] "") >>= calcPrompt c
-    where
-        trim  = f . f
-            where f = reverse . dropWhile isSpace
 
 ------------------------------------------------------------------------
 -- WORKSPACES
@@ -155,10 +156,13 @@ myKeys =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-/ e", spawn myEditor)
+      , ("M-/ h", runInTerm "" myGHCI)
+      , ("M-/ m", spawn myFileManager)
+      , ("M-/ f", spawn myFirefox)
+      , ("M-/ c", spawn myChromium)
+      , ("M-/ g", spawn myGoogleChrome)
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
-      , ("M-/ m", spawn myFileManager)
-      , ("M-/ c", calcPrompt def "calculator") -- defaultXPConfig "calculator")
       , ("M-S-<Left>", sendMessage Shrink)
       , ("M-S-<Right>", sendMessage Expand)
       , ("M-<Left>", windows W.focusUp)
