@@ -64,6 +64,9 @@ import XMonad.Util.SpawnOnce
 myTerminal :: String
 myTerminal = "xterm"
 
+myFloatingTerminal :: String
+myFloatingTerminal = "xterm -title \"floatterm\""
+
 mySpacing :: Integer
 mySpacing = 5
 
@@ -161,6 +164,7 @@ myKeys =
       , ("M-f", sendMessage (Toggle "Full"))
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
+      , ("M-C-<Return>", spawn myFloatingTerminal)
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ m", spawn myFileManager)
@@ -308,6 +312,8 @@ myXPConfig = def
 myManageHook :: ManageHook
 myManageHook = composeOne
   [ className =? "mpv" -?> doFloat
+    , title =? "ghci" -?> doFloat
+    , title =? "floatterm" -?> doFloat
     , className =? "Pinentry" -?> doFloat
     , className =? "Pavucontrol"  -?> doFloat
     , isDialog -?> doCenterFloat
