@@ -202,7 +202,7 @@ myKeys =
       -- , ("M-r", runItOnce myRedshiftOn)
       -- , ("M-S-r", killItOnce myRedshiftOff)
       -- , ("M-l", spawn logCommand)
-      , ("M-S-0", spawn "xscreensaver-command -lock")
+      , ("M-0", spawn "xscreensaver-command -lock")
       , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
       , ("M-C-S-0", spawn "systemctl hibernate")
       , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
