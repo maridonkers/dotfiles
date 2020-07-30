@@ -17,7 +17,6 @@
 
 import System.Exit
 import System.IO (hPutStrLn)
-import Data.Char (isSpace)
 
 -- import Data.Typeable
 
@@ -52,11 +51,10 @@ import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import XMonad.Layout.WindowArranger (windowArrange)
 import XMonad.Prompt
 import XMonad.Prompt.ConfirmPrompt
-import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-import XMonad.Util.Run (runProcessWithInput, spawnPipe, runInTerm)
+import XMonad.Util.Run (spawnPipe, runInTerm)
 import XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
