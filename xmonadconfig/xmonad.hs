@@ -26,6 +26,8 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.MouseResize
 import XMonad.Actions.NoBorders
+-- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Actions-OnScreen.html
+--import XMonad.Actions.OnScreen
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Config.Desktop
@@ -286,7 +288,7 @@ myLayouts = avoidStruts
                         True
                         (Border mySpacing mySpacing mySpacing mySpacing)
                         True
-             $ ResizableTall 1 (1.5/100) (3/5) []
+             $ ResizableTall 1 (1.5/100) (2/3) []
                  ||| noBorders simpleTabbed
                  -- ||| emptyBSP
                  -- ||| Grid
@@ -316,6 +318,7 @@ myManageHook = composeOne
     , title =? "floatterm" -?> doFloat
     , className =? "Pinentry" -?> doFloat
     , className =? "Pavucontrol"  -?> doFloat
+    , className =? "Clementine" -?> doFloat
     , isDialog -?> doCenterFloat
 
     -- Move transient windows to their parent:
