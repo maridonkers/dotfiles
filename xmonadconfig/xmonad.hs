@@ -188,16 +188,16 @@ myKeys =
       , ("M-S-<Tab>", prevWS)
       , ("M-C-<Tab>", shiftToNext >> nextWS)
       , ("M-C-S-<Tab>", shiftToPrev >> prevWS)
-      , ("M-M1-<Left>", prevWS)
-      , ("M-M1-<Right>", nextWS)
+      , ("M-C-<Left>", prevWS)
+      , ("M-C-<Right>", nextWS)
       , ("M-C-M1-<Left>", shiftToPrev >> prevWS)
       , ("M-C-M1-<Right>", shiftToNext >> nextWS)
-      , ("M-C-<Left>", prevScreen)
-      , ("M-C-<Right>", nextScreen)
-      , ("M-S-C-<Left>", shiftPrevScreen)
-      , ("M-S-C-<Right>", shiftNextScreen)
-      , ("M-S-C-<Up>", swapPrevScreen)
-      , ("M-S-C-<Down>", swapNextScreen)
+      , ("M-M1-<Left>", prevScreen)
+      , ("M-M1-<Right>", nextScreen)
+      , ("M-S-M1-<Left>", shiftPrevScreen)
+      , ("M-S-M1-<Right>", shiftNextScreen)
+      , ("M-S-M1-<Up>", swapPrevScreen)
+      , ("M-S-M1-<Down>", swapNextScreen)
       , ("M-`", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       , ("M-<Space>", goToSelected def) --defaultGSConfig)
@@ -236,7 +236,9 @@ main = do
   if numberOfScreens > (1 :: Integer)
    then do
     spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
-    spawn "pactl set-card-profile 0 output:hdmi-stereo"
+    -- TODO HDMI output stopped working (...)
+    -- spawn "pactl set-card-profile 0 output:hdmi-stereo"
+    spawn "pactl set-card-profile 0 output:analog-stereo"
    else do
     spawn "xrandr --output LVDS-1 --primary --auto"
     spawn "pactl set-card-profile 0 output:analog-stereo"
@@ -317,6 +319,7 @@ myManageHook = composeOne
     , className =? "Pinentry" -?> doFloat
     , className =? "Pavucontrol"  -?> doFloat
     , className =? "Clementine" -?> doFloat
+    -- , className =? "Pcmanfm" -?> doFloat
     , isDialog -?> doCenterFloat
 
     -- Move transient windows to their parent:
