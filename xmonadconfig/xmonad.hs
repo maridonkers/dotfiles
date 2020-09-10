@@ -19,6 +19,7 @@ import System.Exit
 import System.IO (hPutStrLn)
 
 -- import Data.Typeable
+import qualified Data.Map as M
 
 import XMonad
 import XMonad.Actions.CycleWS
@@ -58,7 +59,7 @@ import XMonad.Util.Run (spawnPipe, runInTerm)
 import XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
--- VARIABLES
+-- DEFINITIONS
 ------------------------------------------------------------------------
 
 myTerminal :: String
@@ -66,6 +67,13 @@ myTerminal = "xterm"
 
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\""
+
+-- https://www.reddit.com/r/xmonad/comments/hm2tg0/how_to_toggle_floating_state_on_a_window/
+toggleFloat :: Window -> X()
+toggleFloat w = windows (\s -> if M.member w (W.floating s)
+                               then W.sink w s
+                               else (W.float w (W.RationalRect 0 0 (1/2) (4/5)) s))
+
 
 mySpacing :: Integer
 mySpacing = 5
@@ -160,6 +168,7 @@ myKeys :: [(String, X ())]
 myKeys =
       [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-p", shellPrompt myXPConfig)
+      , ("M-t", withFocused toggleFloat)
       , ("M-<Esc>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
       , ("M-f", sendMessage (Toggle "Full"))
       , ("M-<Backspace>", kill)
