@@ -72,8 +72,7 @@ myFloatingTerminal = "xterm -title \"floatterm\""
 toggleFloat :: Window -> X()
 toggleFloat w = windows (\s -> if M.member w (W.floating s)
                                then W.sink w s
-                               else (W.float w (W.RationalRect 0 0 (1/2) (4/5)) s))
-
+                               else W.float w (W.RationalRect 0 0 (1/2) (4/5)) s)
 
 mySpacing :: Integer
 mySpacing = 5
@@ -245,16 +244,17 @@ main = do
   if numberOfScreens > (1 :: Integer)
    then do
     spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
-    -- TODO HDMI output stopped working (...)
-    -- spawn "pactl set-card-profile 0 output:hdmi-stereo"
-    spawn "pactl set-card-profile 0 output:analog-stereo"
+    spawn "pactl set-card-profile 0 output:hdmi-stereo"
+    -- spawn "pactl set-card-profile 0 output:analog-stereo"
    else do
     spawn "xrandr --output LVDS-1 --primary --auto"
     spawn "pactl set-card-profile 0 output:analog-stereo"
-    
+
+  -- TODO -p position parameter for both instances.
   -- Launching instances of xmobar on their monitors. TODO check if only one monitor.
-  xmproc0 <- spawnPipe "xmobar -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
-  xmproc1 <- spawnPipe "xmobar -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
+  xmproc0 <- spawnPipe "xmobar -b -p \"xpos=0 , width=1920, height=24\" -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
+  -- xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , ypos=744, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
+  xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
 
   xmonad $ def {
     terminal = myTerminal,
