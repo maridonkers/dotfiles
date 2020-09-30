@@ -68,6 +68,9 @@ myTerminal = "xterm"
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\""
 
+myMonadTerminal :: String
+myMonadTerminal = "termonad"
+
 -- https://www.reddit.com/r/xmonad/comments/hm2tg0/how_to_toggle_floating_state_on_a_window/
 toggleFloat :: Window -> X()
 toggleFloat w = windows (\s -> if M.member w (W.floating s)
@@ -173,6 +176,7 @@ myKeys =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
+      , ("M-M1-<Return>", spawn myMonadTerminal)
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ m", spawn myFileManager)
