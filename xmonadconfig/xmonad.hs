@@ -15,48 +15,50 @@
 --
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
-import System.Exit
-import System.IO (hPutStrLn)
+import           System.Exit
+import           System.IO                        (hPutStrLn)
 
 -- import Data.Typeable
-import qualified Data.Map as M
+import qualified Data.Map                         as M
 
-import XMonad
-import XMonad.Actions.CycleWS
-import XMonad.Actions.GridSelect
-import XMonad.Actions.MouseResize
-import XMonad.Actions.NoBorders
+import           XMonad
+import           XMonad.Actions.CycleWS
+import           XMonad.Actions.GridSelect
+import           XMonad.Actions.MouseResize
+import           XMonad.Actions.NoBorders
 -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Actions-OnScreen.html
 --import XMonad.Actions.OnScreen
-import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
-import XMonad.Actions.SwapWorkspaces
-import XMonad.Config.Desktop
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap,
-                                xmobarPP, xmobarColor,
-                                shorten, PP(..))
+import           XMonad.Actions.RotSlaves         (rotAllDown, rotSlavesDown)
+import           XMonad.Actions.SwapWorkspaces
+import           XMonad.Config.Desktop
+import           XMonad.Hooks.DynamicLog          (PP (..), dynamicLogWithPP,
+                                                   shorten, wrap, xmobarColor,
+                                                   xmobarPP)
 -- import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook,
-                                 manageDocks, ToggleStruts(..))
-import XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.ManageDocks         (ToggleStruts (..),
+                                                   avoidStruts, docksEventHook,
+                                                   manageDocks)
+import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Hooks.ScreenCorners
 -- import XMonad.Hooks.SetWMName
 -- import XMonad.Layout.BinarySpacePartition (emptyBSP)
 -- import XMonad.Layout.Grid (Grid(..))
-import XMonad.Layout.IndependentScreens
+import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
-import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.ResizableTile (ResizableTall(..))
-import XMonad.Layout.Spacing
-import XMonad.Layout.Tabbed
-import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
-import XMonad.Layout.WindowArranger (windowArrange)
-import XMonad.Prompt
-import XMonad.Prompt.ConfirmPrompt
-import XMonad.Prompt.Shell
-import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig
-import XMonad.Util.Run (spawnPipe, runInTerm)
-import XMonad.Util.SpawnOnce
+import           XMonad.Layout.NoBorders          (noBorders)
+import           XMonad.Layout.ResizableTile      (ResizableTall (..))
+import           XMonad.Layout.Spacing
+import           XMonad.Layout.Tabbed
+import           XMonad.Layout.ToggleLayouts      (ToggleLayout (..),
+                                                   toggleLayouts)
+import           XMonad.Layout.WindowArranger     (windowArrange)
+import           XMonad.Prompt
+import           XMonad.Prompt.ConfirmPrompt
+import           XMonad.Prompt.Shell
+import qualified XMonad.StackSet                  as W
+import           XMonad.Util.EZConfig
+import           XMonad.Util.Run                  (runInTerm, spawnPipe)
+import           XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
 -- DEFINITIONS
@@ -109,6 +111,9 @@ myChromium = "chromium"
 
 myGoogleChrome :: String
 myGoogleChrome = "google-chrome-stable"
+
+myTorBrowser :: String
+myTorBrowser = "tor-browser"
 
 -- myRedshiftOn :: String
 -- myRedshiftOn = "redshift"
@@ -184,6 +189,7 @@ myKeys =
       , ("M-/ g", spawn myGoogleChrome)
       , ("M-/ f", spawn myFirefox)
       , ("M-/ o", spawn myOpera)
+      , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
@@ -228,7 +234,7 @@ myKeys =
       , ("<XF86AudioPrev>", spawn "clementine -r")
       , ("<XF86AudioNext>", spawn "clementine -f")
       ]
-      
+
       -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
       ++ [("M-C-" ++ k, windows $ swapWithCurrent w)
            | (w, k) <- zip myWorkspaces (map show [myFirstWorkspace .. myLastWorkspace])]
@@ -240,7 +246,7 @@ myStartupHook = do
   -- runItOnce myRedshiftOn
   spawnOnce myScreensaverOn
   runItOnce "emacs --daemon"
-  
+
 --------------------------------------------------------------------------------
 main :: IO ()
 main = do
@@ -284,7 +290,7 @@ main = do
     startupHook = myStartupHook
     }
     `additionalKeysP` myKeys
-    
+
 --------------------------------------------------------------------------------
 -- | Customize layouts.
 --
