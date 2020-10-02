@@ -45,6 +45,7 @@ import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Layout.Grid (Grid(..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
+-- import           XMonad.Layout                   
 import           XMonad.Layout.NoBorders          (noBorders)
 import           XMonad.Layout.ResizableTile      (ResizableTall (..))
 import           XMonad.Layout.Spacing
@@ -308,6 +309,7 @@ myLayouts = avoidStruts
                         (Border mySpacing mySpacing mySpacing mySpacing)
                         True
              $ ResizableTall 1 (1.5/100) (2/3) []
+                 ||| Mirror (ResizableTall 1 (1.5/100) (2/3) [])
                  ||| noBorders simpleTabbed
                  -- ||| emptyBSP
                  -- ||| Grid
