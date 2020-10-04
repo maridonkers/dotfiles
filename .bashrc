@@ -1,6 +1,6 @@
 # https://askubuntu.com/questions/432217/prevent-duplicate-entries-in-path
 [[ ":$PATH:" =~ ":~/bin:" ]] || PATH="$PATH:~/bin"
-[[ ":$PATH:" =~ ":~/.racket/7.5/bin" ]] || PATH="$PATH:~/.racket/7.5/bin"
+[[ ":$PATH:" =~ ":~/.cabal/bin" ]] || PATH="$PATH:~/.cabal/bin"
 
 export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 export TERM="xterm-256color"              # getting proper colors

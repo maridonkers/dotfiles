@@ -4,7 +4,7 @@
 -- This configuration file for xmonad is adapted from DT's dotfiles.
 -- See: https://gitlab.com/dwt1/dotfiles
 --
--- hlint xmonad.hs --report
+-- hlint xmonad.hs
 --------------------------------------------------------------------------------
 -- Examples:
 -- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips
@@ -66,13 +66,13 @@ import           XMonad.Util.SpawnOnce
 ------------------------------------------------------------------------
 
 myTerminal :: String
-myTerminal = "xterm"
+myTerminal = "termonad"
 
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\""
 
-myMonadTerminal :: String
-myMonadTerminal = "termonad"
+myRegularTerminal :: String
+myRegularTerminal = "xterm"
 
 -- https://www.reddit.com/r/xmonad/comments/hm2tg0/how_to_toggle_floating_state_on_a_window/
 toggleFloat :: Window -> X()
@@ -182,7 +182,7 @@ myKeys =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
-      , ("M-M1-<Return>", spawn myMonadTerminal)
+      , ("M-M1-<Return>", spawn myRegularTerminal)
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ m", spawn myFileManager)
