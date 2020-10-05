@@ -57,7 +57,8 @@ myColourConfig =
     -- cursor.
     { cursorBgColour = Set (createColour 220 200  20) -- yellow
     -- Set the default foreground colour of text of the terminal.
-    , foregroundColour = Set (createColour 255 255 255) -- white
+    -- , foregroundColour = Set (createColour 185 128 0) -- amber
+    , foregroundColour = Set (createColour 225 225 225) -- whiteish
     -- Set the extended palette that has 8 colours standard colors and then 8
     -- light colors.
     , palette = ExtendedPalette myStandardColours
