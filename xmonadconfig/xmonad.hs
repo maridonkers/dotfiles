@@ -66,13 +66,13 @@ import           XMonad.Util.SpawnOnce
 ------------------------------------------------------------------------
 
 myTerminal :: String
-myTerminal = "termonad"
+myTerminal = "xterm"
 
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\""
 
-myRegularTerminal :: String
-myRegularTerminal = "xterm"
+myDevelopmentTerminal :: String
+myDevelopmentTerminal = "termonad"
 
 -- https://www.reddit.com/r/xmonad/comments/hm2tg0/how_to_toggle_floating_state_on_a_window/
 toggleFloat :: Window -> X()
@@ -181,8 +181,8 @@ myKeys =
       , ("M-f", sendMessage (Toggle "Full"))
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
-      , ("M-C-<Return>", spawn myFloatingTerminal)
-      , ("M-M1-<Return>", spawn myRegularTerminal)
+      , ("M-C-<Return>", spawn myDevelopmentTerminal)
+      , ("M-M1-<Return>", spawn myFloatingTerminal)
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ m", spawn myFileManager)
