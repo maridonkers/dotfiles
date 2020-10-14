@@ -105,7 +105,7 @@ myFirefox :: String
 myFirefox = "firefox"
 
 myOpera :: String
-myOpera = "opera"
+myOpera = "opera --disable-seccomp-filter-sandbox"
 
 myChromium :: String
 myChromium = "chromium"
