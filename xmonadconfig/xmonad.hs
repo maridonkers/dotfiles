@@ -98,6 +98,9 @@ myGHCI = "ghci"
 myFileManager :: String
 myFileManager = "pcmanfm"
 
+myKeepassXc :: String
+myKeepassXc = "keepassxc"
+
 myThunderbird :: String
 myThunderbird = "thunderbird"
 
@@ -185,6 +188,7 @@ myKeys =
       , ("M-M1-<Return>", spawn myFloatingTerminal)
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
+      , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
       , ("M-/ g", spawn myGoogleChrome)
