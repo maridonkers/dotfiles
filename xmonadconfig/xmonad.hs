@@ -95,6 +95,9 @@ myEditor = "bin/ec"
 myGHCI :: String
 myGHCI = "ghci"
 
+myPython :: String
+myPython = "python"
+
 myFileManager :: String
 myFileManager = "pcmanfm"
 
@@ -188,6 +191,7 @@ myKeys =
       , ("M-M1-<Return>", spawn myFloatingTerminal)
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
+      , ("M-/ i", runInTerm "" myPython)
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
@@ -340,6 +344,7 @@ myManageHook :: ManageHook
 myManageHook = composeOne
   [ className =? "mpv" -?> doFloat
     , title =? "ghci" -?> doFloat
+    , title =? "python" -?> doFloat
     , title =? "floatterm" -?> doFloat
     , className =? "Pinentry" -?> doFloat
     , className =? "Pavucontrol"  -?> doFloat
