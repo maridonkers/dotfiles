@@ -13,7 +13,7 @@ Emacs.font: DejaVuSansMono-14
 ! Xft.dpi: 96
 
 ! Default size of xterm.
-xterm*geometry: 127x37
+xterm*geometry: 94x28
 
 !Xcursor*theme: aero-large-drop
 !Xcursor*size: 48
