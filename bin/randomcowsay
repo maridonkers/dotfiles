@@ -1,0 +1,4 @@
+#!/bin/sh
+
+RANDOMCOW=`cowsay -l | tail -n +2 | shuf -n1 | cut -d" " -f1`
+fortune -as | cowsay -f "${RANDOMCOW}"

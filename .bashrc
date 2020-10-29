@@ -9,6 +9,8 @@ export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 
+~/bin/randomcowsay
+
 # https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc
 if [[ ${EUID} == 0 ]] ; then
     PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
