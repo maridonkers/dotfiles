@@ -40,7 +40,7 @@ XTerm*renderFont: true
 !                 xft:JoyPixels:size=10, \
 !                 xft:Monospace:style=Medium:size=10
 XTerm*faceName: xft:Mononoki Nerd Font
-XTerm*faceSize: 13
+XTerm*faceSize: 12
 XTerm*utf8: 2
 XTerm*locale: true
 
