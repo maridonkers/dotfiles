@@ -81,7 +81,7 @@ mySpacing :: Integer
 mySpacing = 5
 
 myBorderWidth :: Dimension
-myBorderWidth = 2
+myBorderWidth = 1
 
 myFocusedBorderColor :: String
 myFocusedBorderColor = "#ff0000"
