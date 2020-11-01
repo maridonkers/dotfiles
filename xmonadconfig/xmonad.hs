@@ -41,8 +41,8 @@ import           XMonad.Hooks.ManageDocks         (ToggleStruts (..),
 import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Hooks.ScreenCorners
 -- import XMonad.Hooks.SetWMName
--- import XMonad.Layout.BinarySpacePartition (emptyBSP)
--- import XMonad.Layout.Grid (Grid(..))
+import XMonad.Layout.BinarySpacePartition (emptyBSP)
+import XMonad.Layout.Grid (Grid(..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
 -- import           XMonad.Layout                   
@@ -180,8 +180,8 @@ myKeys =
       [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-p", shellPrompt myXPConfig)
       , ("M-t", withFocused toggleFloat)
-      , ("M-<Esc>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
-      , ("M-f", sendMessage (Toggle "Full"))
+      , ("M-<Space>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
+      , ("M-<Esc>", sendMessage (Toggle "Full"))
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
@@ -223,7 +223,7 @@ myKeys =
       , ("M-S-C-<Down>", swapNextScreen)
       , ("M-`", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
-      , ("M-<Space>", goToSelected def) --defaultGSConfig)
+      , ("M-m", goToSelected def) --defaultGSConfig)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
       -- , ("M-r", runItOnce myRedshiftOn)
@@ -312,11 +312,11 @@ myLayouts = avoidStruts
                         True
                         (Border mySpacing mySpacing mySpacing mySpacing)
                         True
-             $ ResizableTall 1 (1.5/100) (2/3) []
-                 ||| Mirror (ResizableTall 1 (1.5/100) (2/3) [])
+             $ ResizableTall 1 (1.5/100) (6/10) []
+                 ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
+                 ||| emptyBSP
+                 ||| Grid
                  ||| noBorders simpleTabbed
-                 -- ||| emptyBSP
-                 -- ||| Grid
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a
