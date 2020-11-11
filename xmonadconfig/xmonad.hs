@@ -16,11 +16,12 @@
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
 import           System.Exit
-import           System.IO                        (hPutStrLn)
+import           System.IO                          (hPutStrLn)
 
 -- import Data.Typeable
-import qualified Data.Map                         as M
+import qualified Data.Map                           as M
 
+-- import qualified Debug.Trace                        as D
 import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
@@ -28,37 +29,38 @@ import           XMonad.Actions.MouseResize
 import           XMonad.Actions.NoBorders
 -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Actions-OnScreen.html
 --import XMonad.Actions.OnScreen
-import           XMonad.Actions.RotSlaves         (rotAllDown, rotSlavesDown)
+import           XMonad.Actions.RotSlaves           (rotAllDown, rotSlavesDown)
 import           XMonad.Actions.SwapWorkspaces
 import           XMonad.Config.Desktop
-import           XMonad.Hooks.DynamicLog          (PP (..), dynamicLogWithPP,
-                                                   shorten, wrap, xmobarColor,
-                                                   xmobarPP)
+import           XMonad.Hooks.DynamicLog            (PP (..), dynamicLogWithPP,
+                                                     shorten, wrap, xmobarColor,
+                                                     xmobarPP)
 -- import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
-import           XMonad.Hooks.ManageDocks         (ToggleStruts (..),
-                                                   avoidStruts, docksEventHook,
-                                                   manageDocks)
+import           XMonad.Hooks.ManageDocks           (ToggleStruts (..),
+                                                     avoidStruts,
+                                                     docksEventHook,
+                                                     manageDocks)
 import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Hooks.ScreenCorners
 -- import XMonad.Hooks.SetWMName
-import XMonad.Layout.BinarySpacePartition (emptyBSP)
-import XMonad.Layout.Grid (Grid(..))
+import           XMonad.Layout.BinarySpacePartition (emptyBSP)
+import           XMonad.Layout.Grid                 (Grid (..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
--- import           XMonad.Layout                   
-import           XMonad.Layout.NoBorders          (noBorders)
-import           XMonad.Layout.ResizableTile      (ResizableTall (..))
+-- import           XMonad.Layout
+import           XMonad.Layout.NoBorders            (noBorders)
+import           XMonad.Layout.ResizableTile        (ResizableTall (..))
 import           XMonad.Layout.Spacing
 import           XMonad.Layout.Tabbed
-import           XMonad.Layout.ToggleLayouts      (ToggleLayout (..),
-                                                   toggleLayouts)
-import           XMonad.Layout.WindowArranger     (windowArrange)
+import           XMonad.Layout.ToggleLayouts        (ToggleLayout (..),
+                                                     toggleLayouts)
+import           XMonad.Layout.WindowArranger       (windowArrange)
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
 import           XMonad.Prompt.Shell
-import qualified XMonad.StackSet                  as W
+import qualified XMonad.StackSet                    as W
 import           XMonad.Util.EZConfig
-import           XMonad.Util.Run                  (runInTerm, spawnPipe)
+import           XMonad.Util.Run                    (runInTerm, spawnPipe)
 import           XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
@@ -175,8 +177,8 @@ windowCount = gets $ Just . show . length .
 -- KEY BINDINGS
 ------------------------------------------------------------------------
 -- Add some extra key bindings; M1 is Alt key.
-myKeys :: [(String, X ())]
-myKeys =
+keysAdditional :: [(String, X ())]
+keysAdditional =
       [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-p", shellPrompt myXPConfig)
       , ("M-t", withFocused toggleFloat)
@@ -255,6 +257,7 @@ myStartupHook = do
 --------------------------------------------------------------------------------
 main :: IO ()
 main = do
+  -- D.trace "DO YOU SEE THIS?" undefined
   numberOfScreens <- countScreens
   if numberOfScreens > (1 :: Integer)
    then do
@@ -294,7 +297,11 @@ main = do
         },
     startupHook = myStartupHook
     }
-    `additionalKeysP` myKeys
+    -- Remove some keybindings (e.g. Emacs s-l has lots of lsp bindings).
+    `removeKeys` [ (mod4Mask , xK_l)
+                 , (mod4Mask , xK_h)
+                 ]
+    `additionalKeysP` keysAdditional
 
 --------------------------------------------------------------------------------
 -- | Customize layouts.
