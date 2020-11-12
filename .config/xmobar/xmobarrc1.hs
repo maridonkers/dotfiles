@@ -24,7 +24,8 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true
                       -- Disk space free
                     , Run DiskU [("/", "/: <free>"),
                                  -- ("/boot", "boot: <free>"),
-                                 ("/home", "home: <free>")] [] 600
+                                 ("/home", "home: <free>")
+                                ] [] 600
                     -- , Run DiskIO [("sda", "sda:<read> <write>"), ("sdb", "sdb:<read> <write>")] [] 10
                       -- Runs a standard shell command 'uname -r' to get kernel version
                     -- , Run Com "uname" ["-r"] "" 36000

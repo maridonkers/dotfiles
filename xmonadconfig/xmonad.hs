@@ -261,7 +261,8 @@ main = do
   numberOfScreens <- countScreens
   if numberOfScreens > (1 :: Integer)
    then do
-    spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1"
+    -- spawn "xrandr --output LVDS-1 --primary --auto  --output HDMI-1 --auto --left-of LVDS-1"
+    spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"
     spawn "pactl set-card-profile 0 output:hdmi-stereo"
     -- spawn "pactl set-card-profile 0 output:analog-stereo"
    else do
@@ -270,9 +271,9 @@ main = do
 
   -- TODO -p position parameter for both instances.
   -- Launching instances of xmobar on their monitors. TODO check if only one monitor.
-  xmproc0 <- spawnPipe "xmobar -b -p \"xpos=0 , width=1920, height=24\" -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
+  xmproc0 <- spawnPipe "xmobar -b -p \"xpos=0, width=1920, height=24\" -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
   -- xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , ypos=744, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
-  xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
+  xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
 
   xmonad $ def {
     terminal = myTerminal,
