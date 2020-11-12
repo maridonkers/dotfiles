@@ -25,6 +25,7 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true
                                  ("/home", "home: <free>"),
                                  ("/boot", "boot: <free>")
                                 ] [] 600
+                      -- Disk read/write speed
                     , Run DiskIO [("sda", "sda:<read> <write>"), ("sdb", "sdb:<read> <write>")] [] 10
                       -- Runs a standard shell command 'uname -r' to get kernel version
                     , Run Com "uname" ["-r"] "" 36000
@@ -34,6 +35,5 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       --<fc=#b3afc2>%uname% </fc> ... <fc=#82AAFF>| </fc><fc=#22CCBB>%diskio% </fc>
-       , template = " <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#b3afc2>%uname% </fc><fc=#666666>| </fc><fc=#FFB86C>%multicpu% </fc><fc=#666666>| </fc><fc=#FF5555>%memory% </fc><fc=#666666>| </fc><fc=#82AAFF>%disku%  <fc=#82AAFF>| </fc><fc=#22CCBB>%diskio% </fc></fc><fc=#666666>| </fc><fc=#c3e88d>%wlp3s0% </fc><fc=#666666>| </fc><fc=#666666>| </fc><fc=#8BE9FD>%date%</fc> "
+       , template = " <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#b3afc2>%uname% </fc><fc=#666666>| </fc><fc=#FFB86C>%multicpu% </fc><fc=#666666>| </fc><fc=#FF5555>%memory% </fc><fc=#666666>| </fc><fc=#22CCBB>%diskio% </fc><fc=#666666>| </fc><fc=#c3e88d>%wlp3s0% </fc><fc=#666666>| </fc><fc=#82AAFF>%disku%  </fc><fc=#82AAFF>| </fc><fc=#8BE9FD>%date%</fc> "
        }
