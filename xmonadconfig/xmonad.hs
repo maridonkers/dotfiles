@@ -229,7 +229,7 @@ keysAdditional =
       , ("M-S-C-<Down>", swapNextScreen)
       , ("M-`", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
-      , ("M-m", goToSelected def) --defaultGSConfig)
+      , ("M-C-<Space>", goToSelected def) --defaultGSConfig)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
       -- , ("M-r", runItOnce myRedshiftOn)
