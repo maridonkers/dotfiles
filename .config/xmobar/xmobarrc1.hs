@@ -35,5 +35,5 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#666666>| </fc><fc=#FFB86C>%multicpu% </fc><fc=#666666>| </fc><fc=#FF5555>%memory% </fc><fc=#666666>| </fc><fc=#c3e88d>%wlp3s0% </fc><fc=#666666>| </fc><fc=#82AAFF>%disku%  </fc><fc=#666666>| </fc>><fc=#8BE9FD>%date%</fc> "
+       , template = " <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#666666>| </fc><fc=#FFB86C>%multicpu% </fc><fc=#666666>| </fc><fc=#FF5555>%memory% </fc><fc=#666666>| </fc><fc=#c3e88d>%wlp3s0% </fc><fc=#666666>| </fc><fc=#82AAFF>%disku% </fc><fc=#666666>| </fc><fc=#8BE9FD>%date%</fc> "
        }
