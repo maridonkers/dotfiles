@@ -109,12 +109,6 @@ myThunderbird = "thunderbird"
 myFirefox :: String
 myFirefox = "firefox"
 
-myOpera :: String
-myOpera = "opera --disable-seccomp-filter-sandbox"
-
-myVivaldi :: String
-myVivaldi = "vivaldi"
-
 myChromium :: String
 myChromium = "chromium"
 
@@ -194,8 +188,6 @@ keysAdditional =
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
       , ("M-/ f", spawn myFirefox)
-      , ("M-/ o", spawn myOpera)
-      , ("M-/ v", spawn myVivaldi)
       , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
