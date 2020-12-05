@@ -112,6 +112,9 @@ myFirefox = "firefox"
 myChromium :: String
 myChromium = "chromium"
 
+myGoogleChrome :: String
+myGoogleChrome = "google-chrome-stable"
+
 myTorBrowser :: String
 myTorBrowser = "tor-browser"
 
@@ -187,6 +190,7 @@ keysAdditional =
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
+      , ("M-/ g", spawn myGoogleChrome)
       , ("M-/ f", spawn myFirefox)
       , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
