@@ -18,8 +18,11 @@
 import           System.Exit
 import           System.IO                          (hPutStrLn)
 
+import           Data.Char                          (isSpace)
 -- import Data.Typeable
 import qualified Data.Map                           as M
+
+import           Text.Printf
 
 -- import qualified Debug.Trace                        as D
 import           XMonad
@@ -57,10 +60,13 @@ import           XMonad.Layout.ToggleLayouts        (ToggleLayout (..),
 import           XMonad.Layout.WindowArranger       (windowArrange)
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
+import           XMonad.Prompt.Input
 import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet                    as W
 import           XMonad.Util.EZConfig
-import           XMonad.Util.Run                    (runInTerm, spawnPipe)
+import           XMonad.Util.Run                    (runInTerm,
+                                                     runProcessWithInput,
+                                                     spawnPipe)
 import           XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
@@ -105,6 +111,9 @@ myKeepassXc = "keepassxc"
 
 myThunderbird :: String
 myThunderbird = "thunderbird"
+
+myYouTube :: String
+myYouTube = "smtube"
 
 myFirefox :: String
 myFirefox = "firefox"
@@ -170,6 +179,15 @@ windowCount = gets $ Just . show . length .
   W.integrate' . W.stack . W.workspace .
   W.current . windowset
 
+mpvPrompt :: String -> X ()
+mpvPrompt url = do
+    str <- inputPrompt cfg "Path|URL"
+    case str of
+        Just s  -> spawn $ printf "mpv \"%s\"" s
+        Nothing -> pure ()
+  where
+    cfg = myXPConfig { defaultText = "" }
+
 ------------------------------------------------------------------------
 -- KEY BINDINGS
 ------------------------------------------------------------------------
@@ -194,6 +212,8 @@ keysAdditional =
       , ("M-/ f", spawn myFirefox)
       , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
+      , ("M-/ y", spawn myYouTube)
+      , ("M-/ u", mpvPrompt "mpv")
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
