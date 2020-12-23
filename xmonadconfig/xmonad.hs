@@ -83,7 +83,7 @@ myFloatingTerminal = "xterm -title \"floatterm\""
 toggleFloat :: Window -> X()
 toggleFloat w = windows (\s -> if M.member w (W.floating s)
                                then W.sink w s
-                               else W.float w (W.RationalRect 0 0 (1/2) (4/5)) s)
+                               else W.float w (W.RationalRect 0 0 (1/2) (3/5)) s)
 
 mySpacing :: Integer
 mySpacing = 5
@@ -202,6 +202,7 @@ keysAdditional =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
+      , ("M-y", mpvPrompt "mpv")
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ i", runInTerm "" myPython)
@@ -213,7 +214,6 @@ keysAdditional =
       , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
       , ("M-/ y", spawn myYouTube)
-      , ("M-/ u", mpvPrompt "mpv")
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
