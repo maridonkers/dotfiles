@@ -134,7 +134,7 @@ myTorBrowser = "tor-browser"
 -- myRedshiftOff = "redshift ; redshift -x"
 
 myScreensaverOn :: String
-myScreensaverOn = "xscreensaver -no-splash &"
+myScreensaverOn = "xlock -mode blank"
 
 -- logCommand :: String
 -- logCommand = "echo \"" ++ (show (typeOf defaults)) ++ "\" > /tmp/XMONAD.txt"
@@ -247,8 +247,10 @@ keysAdditional =
       -- , ("M-r", runItOnce myRedshiftOn)
       -- , ("M-S-r", killItOnce myRedshiftOff)
       -- , ("M-l", spawn logCommand)
-      , ("M-0", spawn "xscreensaver-command -lock")
-      , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
+      -- , ("M-0", spawn "xscreensaver-command -lock")
+      -- , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
+      , ("M-0", spawn myScreensaverOn)
+      , ("M-C-0", spawn $ myScreensaverOn ++ " -startCmd \"systemctl suspend\"")
       , ("M-C-S-0", spawn "systemctl hibernate")
       , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
       , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
@@ -267,7 +269,6 @@ myStartupHook = do
   -- addScreenCorners [(SCUpperLeft, goToSelected def)] --defaultGSConfig)]
   spawnOnce "xsetroot -solid black"
   -- runItOnce myRedshiftOn
-  spawnOnce myScreensaverOn
   runItOnce "emacs --daemon"
 
 --------------------------------------------------------------------------------
