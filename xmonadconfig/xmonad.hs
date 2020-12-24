@@ -112,9 +112,6 @@ myKeepassXc = "keepassxc"
 myThunderbird :: String
 myThunderbird = "thunderbird"
 
-myYouTube :: String
-myYouTube = "smtube"
-
 myFirefox :: String
 myFirefox = "firefox"
 
@@ -213,7 +210,6 @@ keysAdditional =
       , ("M-/ f", spawn myFirefox)
       , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
-      , ("M-/ y", spawn myYouTube)
       , ("M-/ s h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-/ s a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
@@ -288,9 +284,9 @@ main = do
 
   -- TODO -p position parameter for both instances.
   -- Launching instances of xmobar on their monitors. TODO check if only one monitor.
-  xmproc0 <- spawnPipe "xmobar -b -p \"xpos=0, width=1920, height=24\" -x 1 /home/mdo/.config/xmobar/xmobarrc0.hs"
-  -- xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , ypos=744, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
-  xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1.hs"
+  xmproc0 <- spawnPipe "xmobar -b -p \"xpos=0, width=1920, height=24\" -x 1 /home/mdo/.config/xmobar/xmobarrc0"
+  -- xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , ypos=744, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1"
+  xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1"
 
   xmonad $ def {
     terminal = myTerminal,
