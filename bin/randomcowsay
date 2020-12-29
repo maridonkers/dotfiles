@@ -1,4 +1,4 @@
 #!/bin/sh
 
-RANDOMCOW=`cowsay -l | tail -n +2 | sed 's/\s/\n/g' | shuf -n1`
+RANDOMCOW=`cowsay -l | grep -v 'Cow files in ' | sed 's/\s/\n/g' | shuf -n1`
 fortune -as | cowsay -f "${RANDOMCOW}"

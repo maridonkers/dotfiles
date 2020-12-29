@@ -9,6 +9,7 @@ export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 
+export COWPATH="${HOME}/lib/cowfiles.nixos:${HOME}/lib/cowfiles"
 ~/bin/randomcowsay
 
 # https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc
