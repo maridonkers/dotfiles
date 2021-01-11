@@ -51,7 +51,7 @@ import           XMonad.Layout.Grid                 (Grid (..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
 -- import           XMonad.Layout
-import           XMonad.Layout.NoBorders            (noBorders)
+import           XMonad.Layout.NoBorders            (noBorders, hasBorder, smartBorders)
 import           XMonad.Layout.ResizableTile        (ResizableTall (..))
 import           XMonad.Layout.Spacing
 import           XMonad.Layout.Tabbed
@@ -328,11 +328,12 @@ myLayouts = avoidStruts
   $ windowArrange
   $ toggleLayouts (noBorders Full) others
   where
-    others = spacingRaw True
-                        (Border 0 mySpacing mySpacing mySpacing)
-                        True
-                        (Border mySpacing mySpacing mySpacing mySpacing)
-                        True
+    others = smartBorders
+             $ spacingRaw True
+                          (Border 0 mySpacing mySpacing mySpacing)
+                          True
+                          (Border mySpacing mySpacing mySpacing mySpacing)
+                          True
              $ ResizableTall 1 (1.5/100) (6/10) []
                  ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
                  ||| emptyBSP
@@ -350,6 +351,10 @@ myXPConfig = def
   , font = "xft:monospace:size=9"
   }
 
+-- | Is the focused window a floating window?
+isFloat :: Query Bool
+isFloat = ask >>= (\w -> liftX $ withWindowSet $ \ws -> return $ M.member w $ W.floating ws)
+
 --------------------------------------------------------------------------------
 -- | Manipulate windows as they are created. The list given to
 -- @composeOne@ is processed from top to bottom. The first matching
@@ -359,7 +364,7 @@ myXPConfig = def
 -- For className, use the second value that xprop gives you.
 myManageHook :: ManageHook
 myManageHook = composeOne
-  [ className =? "mpv" -?> doFloat
+  [ className =? "mpv" -?> doFloat <+> hasBorder False
     , title =? "ghci" -?> doFloat
     , title =? "python" -?> doFloat
     , title =? "floatterm" -?> doFloat
