@@ -64,6 +64,7 @@ import           XMonad.Prompt.Input
 import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet                    as W
 import           XMonad.Util.EZConfig
+-- import           XMonad.Util.PositionStore
 import           XMonad.Util.Run                    (runInTerm,
                                                      runProcessWithInput,
                                                      spawnPipe)
@@ -79,11 +80,39 @@ myTerminal = "xterm"
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\""
 
+{-
+-- https://github.com/SimSaladin/configs/blob/646a363ed2f47db190e41a4ed58808687f92e0dd/.xmonad/xmonad.hs
+-- | Float current according to saved position
+myFloatCurrent :: X ()
+myFloatCurrent = withFocused $ \window -> withWindowSet $ \ws -> do
+    ps <- getPosStore
+    let sr@(Rectangle _srX _srY srW srH) = screenRect . W.screenDetail $ W.current ws
+    case posStoreQuery ps window sr of
+        Just (Rectangle x y w h) -> do
+            let r' = W.RationalRect (fromIntegral x / fromIntegral srW)
+                                    (fromIntegral y / fromIntegral srH)
+                                    (fromIntegral w / fromIntegral srW)
+                                    (fromIntegral h / fromIntegral srH)
+            io $ writeFile "/tmp/xm" (show r')
+            windows $ W.float window r'
+        Nothing  -> return ()
+
+-- | Save float position of the window
+saveFloatPosition :: Window -> X ()
+saveFloatPosition window = do
+    sr <- withWindowSet $ return . screenRect . W.screenDetail . W.current
+    (_, rect) <- floatLocation window
+    modifyPosStore $ \ps -> posStoreInsert ps window (scaleRationalRect sr rect) sr
+-}
+
 -- https://www.reddit.com/r/xmonad/comments/hm2tg0/how_to_toggle_floating_state_on_a_window/
 toggleFloat :: Window -> X()
-toggleFloat w = windows (\s -> if M.member w (W.floating s)
-                               then W.sink w s
-                               else W.float w (W.RationalRect 0 0 (1/2) (3/5)) s)
+toggleFloat w = do
+  -- (_, rr) <- floatLocation w
+  let rr = W.RationalRect 0 0 (1/2) (3/5)
+  windows (\s -> if M.member w (W.floating s)
+                 then W.sink w s
+                 else W.float w rr s)
 
 mySpacing :: Integer
 mySpacing = 5
@@ -350,10 +379,6 @@ myXPConfig = def
   , promptBorderWidth = 0
   , font = "xft:monospace:size=9"
   }
-
--- | Is the focused window a floating window?
-isFloat :: Query Bool
-isFloat = ask >>= (\w -> liftX $ withWindowSet $ \ws -> return $ M.member w $ W.floating ws)
 
 --------------------------------------------------------------------------------
 -- | Manipulate windows as they are created. The list given to
