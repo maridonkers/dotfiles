@@ -109,7 +109,7 @@ saveFloatPosition window = do
 toggleFloat :: Window -> X()
 toggleFloat w = do
   -- (_, rr) <- floatLocation w
-  let rr = W.RationalRect 0 0 (1/2) (3/5)
+  let rr = W.RationalRect 0 0 (1/2) (1/2)
   windows (\s -> if M.member w (W.floating s)
                  then W.sink w s
                  else W.float w rr s)
@@ -222,7 +222,7 @@ keysAdditional :: [(String, X ())]
 keysAdditional =
       [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-p", shellPrompt myXPConfig)
-      , ("M-t", withFocused toggleFloat)
+      , ("M-M1-<Space>", withFocused toggleFloat)
       , ("M-<Space>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
       , ("M-<Esc>", sendMessage (Toggle "Full"))
       , ("M-<Backspace>", kill)
