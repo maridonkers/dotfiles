@@ -51,7 +51,8 @@ import           XMonad.Layout.Grid                 (Grid (..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
 -- import           XMonad.Layout
-import           XMonad.Layout.NoBorders            (noBorders, hasBorder, smartBorders)
+import           XMonad.Layout.NoBorders            (hasBorder, noBorders,
+                                                     smartBorders)
 import           XMonad.Layout.ResizableTile        (ResizableTall (..))
 import           XMonad.Layout.Spacing
 import           XMonad.Layout.Tabbed
@@ -147,8 +148,8 @@ myFirefox = "firefox"
 myChromium :: String
 myChromium = "chromium"
 
-myGoogleChrome :: String
-myGoogleChrome = "google-chrome-stable"
+myBrave :: String
+myBrave = "brave"
 
 myTorBrowser :: String
 myTorBrowser = "tor-browser"
@@ -224,7 +225,7 @@ keysAdditional =
       , ("M-p", shellPrompt myXPConfig)
       , ("M-M1-<Space>", withFocused toggleFloat)
       , ("M-<Space>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
-      , ("M-<Esc>", sendMessage (Toggle "Full"))
+      , ("M-<Esc>", goToSelected def) --defaultGSConfig)
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
@@ -235,7 +236,7 @@ keysAdditional =
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
-      , ("M-/ g", spawn myGoogleChrome)
+      , ("M-/ b", spawn myBrave)
       , ("M-/ f", spawn myFirefox)
       , ("M-/ p", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
@@ -266,7 +267,7 @@ keysAdditional =
       , ("M-S-C-<Down>", swapNextScreen)
       , ("M-`", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
-      , ("M-C-<Space>", goToSelected def) --defaultGSConfig)
+      , ("M-C-<Space>", sendMessage (Toggle "Full"))
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
       -- , ("M-r", runItOnce myRedshiftOn)
