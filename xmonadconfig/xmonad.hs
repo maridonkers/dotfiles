@@ -15,6 +15,7 @@
 --
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
+import qualified GHC.IO.Encoding                    as GIO
 import           System.Exit
 import           System.IO                          (hPutStrLn)
 
@@ -76,10 +77,10 @@ import           XMonad.Util.SpawnOnce
 ------------------------------------------------------------------------
 
 myTerminal :: String
-myTerminal = "xterm"
+myTerminal = "xterm -e \"exec screen\""
 
 myFloatingTerminal :: String
-myFloatingTerminal = "xterm -title \"floatterm\""
+myFloatingTerminal = "xterm -title \"floatterm\" -e \"exec screen\""
 
 {-
 -- https://github.com/SimSaladin/configs/blob/646a363ed2f47db190e41a4ed58808687f92e0dd/.xmonad/xmonad.hs
@@ -300,6 +301,7 @@ myStartupHook = do
 --------------------------------------------------------------------------------
 main :: IO ()
 main = do
+  GIO.setFileSystemEncoding GIO.char8
   -- D.trace "DO YOU SEE THIS?" undefined
   numberOfScreens <- countScreens
   if numberOfScreens > (1 :: Integer)

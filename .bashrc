@@ -18,6 +18,9 @@ alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 alias sless="vim -R"  
 alias mdless="mdcat -p"
 
+alias ps="ps -ww"
+alias s="screen"
+
 # Security CAM.
 export SC_IPADDRESS="192.168.1.4"
 
@@ -30,3 +33,4 @@ if [[ ${EUID} == 0 ]] ; then
 else
     PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 fi
+
