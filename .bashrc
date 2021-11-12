@@ -19,13 +19,13 @@ alias sless="vim -R"
 alias mdless="mdcat -p"
 
 alias ps="ps -ww"
-alias s="screen"
+alias s="screen -ls"
 
 # Security CAM.
 export SC_IPADDRESS="192.168.1.4"
 
 export COWPATH="${HOME}/lib/cowfiles.nixos:${HOME}/lib/cowfiles"
-~/bin/randomcowsay
+#~/bin/randomcowsay
 
 # https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc
 if [[ ${EUID} == 0 ]] ; then

@@ -398,8 +398,8 @@ myManageHook = composeOne
     , title =? "floatterm" -?> doFloat
     , className =? "Pinentry" -?> doFloat
     , className =? "Pavucontrol"  -?> doFloat
-    , className =? "Clementine" -?> doFloat
-    -- , className =? "Pcmanfm" -?> doFloat
+    -- , className =? "Clementine" -?> doFloat
+    , className =? "Pcmanfm" -?> doFloat
     , isDialog -?> doCenterFloat
 
     -- Move transient windows to their parent:
