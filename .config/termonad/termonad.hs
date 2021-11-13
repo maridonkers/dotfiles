@@ -37,6 +37,7 @@ fontConf =
 -- for Termonad.
 --
 -- This shows how a few settings can be changed.
+-- https://hackage.haskell.org/package/termonad-1.0.0.0/docs/Termonad-Config.html
 myTMConfig :: TMConfig
 myTMConfig =
   defaultTMConfig
@@ -44,6 +45,7 @@ myTMConfig =
         defaultConfigOptions
           { fontConfig = fontConf
           ,  showScrollbar = ShowScrollbarNever
+          ,  showTabbar = ShowTabbarNever
           , confirmExit = False
           , showMenu = False
           , cursorBlinkMode = CursorBlinkModeOff
