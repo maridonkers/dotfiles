@@ -20,6 +20,8 @@ alias mdless="mdcat -p"
 
 alias ps="ps -ww"
 alias s="screen -ls"
+alias z="screen -ls | grep '(Detached)'"
+alias r="screen -DR"
 
 # Security CAM.
 export SC_IPADDRESS="192.168.1.4"

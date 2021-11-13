@@ -12,8 +12,9 @@ import           Termonad               (CursorBlinkMode (CursorBlinkModeOff),
                                          Option (Set),
                                          ShowScrollbar (ShowScrollbarNever),
                                          TMConfig, confirmExit, cursorBlinkMode,
-                                         defaultConfigOptions, defaultTMConfig,
-                                         defaultFontConfig, fontConfig, fontFamily, fontSize,
+                                         defaultConfigOptions,
+                                         defaultFontConfig, defaultTMConfig,
+                                         fontConfig, fontFamily, fontSize,
                                          options, showMenu, showScrollbar,
                                          start)
 import           Termonad.Config.Colour (AlphaColour, ColourConfig, List8,
@@ -29,7 +30,7 @@ fontConf :: FontConfig
 fontConf =
   defaultFontConfig
     { fontFamily = "Noto Sans Mono"
-    , fontSize = FontSizePoints 13
+    , fontSize = FontSizePoints 12
     }
 
 -- | This is our main 'TMConfig'.  It holds all of the non-colour settings

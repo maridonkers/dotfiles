@@ -77,7 +77,8 @@ import           XMonad.Util.SpawnOnce
 ------------------------------------------------------------------------
 
 myTerminal :: String
-myTerminal = "xterm -e \"exec screen\""
+-- myTerminal = "xterm -e \"exec screen\""
+myTerminal = "~/bin/termonad"
 
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\" -e \"exec screen\""
