@@ -11,12 +11,13 @@ import           Termonad               (CursorBlinkMode (CursorBlinkModeOff),
                                          FontConfig, FontSize (FontSizePoints),
                                          Option (Set),
                                          ShowScrollbar (ShowScrollbarNever),
+                                         ShowTabBar (ShowTabBarNever),
                                          TMConfig, confirmExit, cursorBlinkMode,
                                          defaultConfigOptions,
                                          defaultFontConfig, defaultTMConfig,
                                          fontConfig, fontFamily, fontSize,
                                          options, showMenu, showScrollbar,
-                                         start)
+                                         showTabBar, start)
 import           Termonad.Config.Colour (AlphaColour, ColourConfig, List8,
                                          Palette (ExtendedPalette),
                                          addColourExtension, createColour,
@@ -45,7 +46,7 @@ myTMConfig =
         defaultConfigOptions
           { fontConfig = fontConf
           ,  showScrollbar = ShowScrollbarNever
-          ,  showTabbar = ShowTabbarNever
+          ,  showTabBar = ShowTabBarNever
           , confirmExit = False
           , showMenu = False
           , cursorBlinkMode = CursorBlinkModeOff
