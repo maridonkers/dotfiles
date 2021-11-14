@@ -232,7 +232,7 @@ keysAdditional =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
-      , ("M-y", mpvPrompt "mpv")
+      , ("M-v", mpvPrompt "mpv")
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", runInTerm "" myGHCI)
       , ("M-/ i", runInTerm "" myPython)
