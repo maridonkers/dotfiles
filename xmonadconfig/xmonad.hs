@@ -19,7 +19,7 @@ import qualified GHC.IO.Encoding                    as GIO
 import           System.Exit
 import           System.IO                          (hPutStrLn)
 
-import           Data.Char                          (isSpace)
+-- import           Data.Char                          (isSpace)
 -- import Data.Typeable
 import qualified Data.Map                           as M
 
@@ -67,9 +67,7 @@ import           XMonad.Prompt.Shell
 import qualified XMonad.StackSet                    as W
 import           XMonad.Util.EZConfig
 -- import           XMonad.Util.PositionStore
-import           XMonad.Util.Run                    (runInTerm,
-                                                     runProcessWithInput,
-                                                     spawnPipe)
+import           XMonad.Util.Run                    (spawnPipe)
 import           XMonad.Util.SpawnOnce
 
 ------------------------------------------------------------------------
@@ -209,7 +207,7 @@ windowCount = gets $ Just . show . length .
   W.current . windowset
 
 mpvPrompt :: String -> X ()
-mpvPrompt url = do
+mpvPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
         Just s  -> spawn $ printf "mpv \"%s\"" s
@@ -349,29 +347,28 @@ main = do
                  , (mod4Mask , xK_h)
                  ]
     `additionalKeysP` keysAdditional
-
---------------------------------------------------------------------------------
--- | Customize layouts.
---
--- Use the 'M-<Esc>' key binding defined above to toggle between the
--- current layout and a full screen layout. Use 'M-f' key binding for
--- a full screen layout with xmobar visible at the top.
-myLayouts = avoidStruts
-  $ mouseResize
-  $ windowArrange
-  $ toggleLayouts (noBorders Full) others
   where
-    others = smartBorders
-             $ spacingRaw True
-                          (Border 0 mySpacing mySpacing mySpacing)
-                          True
-                          (Border mySpacing mySpacing mySpacing mySpacing)
-                          True
-             $ ResizableTall 1 (1.5/100) (6/10) []
-                 ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
-                 ||| emptyBSP
-                 ||| Grid
-                 ||| noBorders simpleTabbed
+    -- | Customize layouts.
+    --
+    -- Use the 'M-<Esc>' key binding defined above to toggle between the
+    -- current layout and a full screen layout. Use 'M-f' key binding for
+    -- a full screen layout with xmobar visible at the top.
+    myLayouts = avoidStruts
+      $ mouseResize
+      $ windowArrange
+      $ toggleLayouts (noBorders Full) others
+      where
+        others = smartBorders
+                 $ spacingRaw True
+                              (Border 0 mySpacing mySpacing mySpacing)
+                              True
+                              (Border mySpacing mySpacing mySpacing mySpacing)
+                              True
+                 $ ResizableTall 1 (1.5/100) (6/10) []
+                     ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
+                     ||| emptyBSP
+                     ||| Grid
+                     ||| noBorders simpleTabbed
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a
