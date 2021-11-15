@@ -129,11 +129,11 @@ myFocusedBorderColor = "#ff0000"
 myEditor :: String
 myEditor = "bin/ec"
 
-myGHCI :: String
-myGHCI = "ghci"
+myFloatingGHCI :: String
+myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
 
-myPython :: String
-myPython = "python"
+myFloatingPython :: String
+myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 
 myFileManager :: String
 myFileManager = "pcmanfm"
@@ -234,8 +234,8 @@ keysAdditional =
       , ("M-C-<Return>", spawn myFloatingTerminal)
       , ("M-v", mpvPrompt "mpv")
       , ("M-/ e", spawn myEditor)
-      , ("M-/ h", runInTerm "" myGHCI)
-      , ("M-/ i", runInTerm "" myPython)
+      , ("M-/ h", spawn myFloatingGHCI)
+      , ("M-/ i", spawn myFloatingPython)
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
