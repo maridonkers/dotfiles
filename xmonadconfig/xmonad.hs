@@ -225,7 +225,7 @@ keysAdditional =
       , ("M-p", shellPrompt myXPConfig)
       , ("M-<Space>", sendMessage (Toggle "Full"))
       , ("M-<Esc>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
-      , ("M-C-<Space>", withFocused toggleFloat)
+      , ("M-<Home>", withFocused toggleFloat)
       , ("M-m", goToSelected def) --defaultGSConfig)
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
