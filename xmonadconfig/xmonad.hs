@@ -365,10 +365,10 @@ main = do
                               (Border mySpacing mySpacing mySpacing mySpacing)
                               True
                  $ ResizableTall 1 (1.5/100) (6/10) []
-                     ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
                      ||| emptyBSP
                      ||| Grid
                      ||| noBorders simpleTabbed
+                     ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a
