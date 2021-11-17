@@ -47,7 +47,7 @@ import           XMonad.Hooks.ManageDocks           (ToggleStruts (..),
 import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Hooks.ScreenCorners
 -- import XMonad.Hooks.SetWMName
-import           XMonad.Layout.BinarySpacePartition (emptyBSP)
+import           XMonad.Layout.BinarySpacePartition
 import           XMonad.Layout.Grid                 (Grid (..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
@@ -243,8 +243,8 @@ keysAdditional =
       , ("M-/ t", spawn myThunderbird)
       , ("M-C-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-C-a", spawn "pactl set-card-profile 0 output:analog-stereo")
-      , ("M-S-<Left>", sendMessage Shrink)
-      , ("M-S-<Right>", sendMessage Expand)
+      , ("M-M1-<Left>", sendMessage Shrink)
+      , ("M-M1-<Right>", sendMessage Expand)
       , ("M-<Left>", windows W.focusUp)
       , ("M-<Right>", windows W.focusDown)
       , ("M-C-<Down>", windows W.swapDown >> windows W.focusUp)
@@ -256,16 +256,16 @@ keysAdditional =
       , ("M-S-<Tab>", prevWS)
       , ("M-C-<Tab>", shiftToNext >> nextWS)
       , ("M-C-S-<Tab>", shiftToPrev >> prevWS)
-      , ("M-M1-<Left>", prevWS)
-      , ("M-M1-<Right>", nextWS)
+      -- , ("M-M1-<Left>", prevWS)
+      -- , ("M-M1-<Right>", nextWS)
       , ("M-C-M1-<Left>", shiftToPrev >> prevWS)
       , ("M-C-M1-<Right>", shiftToNext >> nextWS)
       , ("M-C-<Left>", prevScreen)
       , ("M-C-<Right>", nextScreen)
-      , ("M-S-C-<Left>", shiftPrevScreen)
-      , ("M-S-C-<Right>", shiftNextScreen)
-      , ("M-S-C-<Up>", swapPrevScreen)
-      , ("M-S-C-<Down>", swapNextScreen)
+      -- , ("M-S-C-<Left>", shiftPrevScreen)
+      -- , ("M-S-C-<Right>", shiftNextScreen)
+      -- , ("M-S-C-<Up>", swapPrevScreen)
+      -- , ("M-S-C-<Down>", swapNextScreen)
       , ("M-`", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       -- , ("M-C-u", sendMessage Arrange)
@@ -284,6 +284,25 @@ keysAdditional =
       , ("<XF86AudioPlay>", spawn "clementine -t")
       , ("<XF86AudioPrev>", spawn "clementine -r")
       , ("<XF86AudioNext>", spawn "clementine -f")
+      -- https://github.com/benweitzman/BinarySpacePartition
+      -- , ("M-M1-<Left>", sendMessage $ ExpandTowards L)
+      , ("M-S-<Left>", sendMessage $ ExpandTowards L)
+      -- , ("M-M1-<Right>", sendMessage $ ShrinkFrom L)
+      , ("M-S-<Right>", sendMessage $ ShrinkFrom L)
+      -- , ("M-M1-<Up>", sendMessage $ ExpandTowards U)
+      , ("M-S-<Up>", sendMessage $ ExpandTowards U)
+      -- , ("M-M1-<Down>", sendMessage $ ShrinkFrom U)
+      , ("M-S-<Down>", sendMessage $ ShrinkFrom U)
+      -- , ("M-M1-C-<Left>", sendMessage $ ShrinkFrom R)
+      , ("M-S-C-<Left>", sendMessage $ ShrinkFrom R)
+      -- , ("M-M1-C-<Right>", sendMessage $ ExpandTowards R)
+      , ("M-S-C-<Right>", sendMessage $ ExpandTowards R)
+      -- , ("M-M1-C-<Up>", sendMessage $ ShrinkFrom D)
+      , ("M-S-C-<Up>", sendMessage $ ShrinkFrom D)
+      -- , ("M-M1-C-<Down>", sendMessage $ ExpandTowards D)
+      , ("M-S-C-<Down>", sendMessage $ ExpandTowards D)
+      , ("M-s", sendMessage $ Swap)
+      , ("M-r", sendMessage $ Rotate)
       ]
 
       -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
@@ -364,10 +383,10 @@ main = do
                               True
                               (Border mySpacing mySpacing mySpacing mySpacing)
                               True
-                 $ ResizableTall 1 (1.5/100) (6/10) []
-                     ||| emptyBSP
+                 $ emptyBSP
                      ||| Grid
                      ||| noBorders simpleTabbed
+                     ||| ResizableTall 1 (1.5/100) (6/10) []
                      ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
 
 --------------------------------------------------------------------------------
