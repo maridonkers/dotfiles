@@ -303,6 +303,8 @@ keysAdditional =
       , ("M-S-C-<Down>", sendMessage $ ExpandTowards D)
       , ("M-s", sendMessage $ Swap)
       , ("M-r", sendMessage $ Rotate)
+      , ("M-[", sendMessage $ SplitShift Prev)
+      , ("M-]", sendMessage $ SplitShift Next)
       ]
 
       -- Appending swap workspace keybindings (Mod+Control+# swaps with current WS).
