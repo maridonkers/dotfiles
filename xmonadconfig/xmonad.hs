@@ -245,6 +245,8 @@ keysAdditional =
       , ("M-C-a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-M1-<Left>", sendMessage Shrink)
       , ("M-M1-<Right>", sendMessage Expand)
+      , ("M-M1-<Up>", windows W.swapDown)
+      , ("M-M1-<Down>", windows W.swapUp)
       , ("M-<Left>", windows W.focusUp)
       , ("M-<Right>", windows W.focusDown)
       , ("M-C-<Down>", windows W.swapDown >> windows W.focusUp)
