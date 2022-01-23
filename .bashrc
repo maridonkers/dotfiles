@@ -18,10 +18,14 @@ alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 alias sless="vim -R"  
 alias mdless="mdcat -p"
 
+alias ls="ls --color=never"
+alias l="exa -l"
+
 alias ps="ps -ww"
-alias s="screen -ls"
-alias z="screen -ls | grep '(Detached)'"
-alias r="screen -DR"
+alias sl="screen -ls"
+alias ss="screen -S"
+alias sz="screen -ls | grep '(Detached)'"
+alias sr="screen -DR"
 
 # Security CAM.
 export SC_IPADDRESS="192.168.1.4"

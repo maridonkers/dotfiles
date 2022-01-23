@@ -76,7 +76,7 @@ import           XMonad.Util.SpawnOnce
 
 myTerminal :: String
 -- myTerminal = "xterm -e \"exec screen\""
-myTerminal = "~/bin/termonad"
+myTerminal = "termonad"
 
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\" -e \"exec screen\""
@@ -116,7 +116,7 @@ toggleFloat w = do
                  else W.float w rr s)
 
 mySpacing :: Integer
-mySpacing = 5
+mySpacing = 1
 
 myBorderWidth :: Dimension
 myBorderWidth = 1
