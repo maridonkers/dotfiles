@@ -11,7 +11,7 @@ import           Termonad               (CursorBlinkMode (CursorBlinkModeOff),
                                          FontConfig, FontSize (FontSizePoints),
                                          Option (Set),
                                          ShowScrollbar (ShowScrollbarNever),
-                                         ShowTabBar (ShowTabBarNever, ShowTabBarRequired),
+                                         ShowTabBar (ShowTabBarNever),
                                          TMConfig, confirmExit, cursorBlinkMode,
                                          defaultConfigOptions,
                                          defaultFontConfig, defaultTMConfig,
@@ -45,9 +45,8 @@ myTMConfig =
     { options =
         defaultConfigOptions
           { fontConfig = fontConf
-          ,  showScrollbar = ShowScrollbarNever
-          -- ,  showTabBar = ShowTabBarNever
-          ,  showTabBar = ShowTabBarRequired
+          , showScrollbar = ShowScrollbarNever
+          , showTabBar = ShowTabBarNever
           , confirmExit = False
           , showMenu = False
           , cursorBlinkMode = CursorBlinkModeOff
