@@ -1,5 +1,6 @@
 # https://askubuntu.com/questions/432217/prevent-duplicate-entries-in-path
 [[ ":$PATH:" =~ ":~/bin:" ]] || PATH="$PATH:~/bin"
+[[ ":$PATH:" =~ ":~/.local/bin" ]] || PATH="~/.local/bin:$PATH"
 [[ ":$PATH:" =~ ":~/.cabal/bin" ]] || PATH="$PATH:~/.cabal/bin"
 
 export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
@@ -22,10 +23,10 @@ alias ls="ls --color=never"
 alias l="exa -l"
 
 alias ps="ps -ww"
-alias sl="screen -ls"
-alias ss="screen -S"
-alias sz="screen -ls | grep '(Detached)'"
-alias sr="screen -DR"
+alias scl="screen -ls"
+alias scs="screen -S"
+alias scz="screen -ls | grep '(Detached)'"
+alias scr="screen -DR"
 
 # Security CAM.
 export SC_IPADDRESS="192.168.1.4"
@@ -39,4 +40,3 @@ if [[ ${EUID} == 0 ]] ; then
 else
     PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 fi
-
