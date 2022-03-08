@@ -46,8 +46,8 @@ myTMConfig =
         defaultConfigOptions
           { fontConfig = fontConf
           , showScrollbar = ShowScrollbarNever
-          -- , showTabBar = ShowTabBarNever
-          , showTabBar = ShowTabBarIfNeeded
+          -- , showTabBar = ShowTabBarIfNeeded
+          , showTabBar = ShowTabBarNever
           , confirmExit = False
           , showMenu = False
           , cursorBlinkMode = CursorBlinkModeOff
