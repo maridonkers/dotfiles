@@ -80,7 +80,7 @@ myTerminal :: String
 myTerminal = "xterm"
 
 myFloatingTerminal :: String
-myFloatingTerminal = "xterm -title \"floatterm\" -e \"exec screen\""
+myFloatingTerminal = "xterm -title \"floatterm\""
 
 {-
 -- https://github.com/SimSaladin/configs/blob/646a363ed2f47db190e41a4ed58808687f92e0dd/.xmonad/xmonad.hs
