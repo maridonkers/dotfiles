@@ -75,8 +75,9 @@ import           XMonad.Util.SpawnOnce
 ------------------------------------------------------------------------
 
 myTerminal :: String
--- myTerminal = "xterm -e \"exec screen\""
-myTerminal = "termonad"
+-- myTerminal = "termonad"
+-- myTerminal = "xterm -e \"exec tmux\""
+myTerminal = "xterm"
 
 myFloatingTerminal :: String
 myFloatingTerminal = "xterm -title \"floatterm\" -e \"exec screen\""

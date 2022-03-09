@@ -3,7 +3,6 @@
 [[ ":$PATH:" =~ ":~/.local/bin" ]] || PATH="~/.local/bin:$PATH"
 [[ ":$PATH:" =~ ":~/.cabal/bin" ]] || PATH="$PATH:~/.cabal/bin"
 
-export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 export TERM="xterm-256color"              # getting proper colors
 export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 
