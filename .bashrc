@@ -19,13 +19,17 @@ alias sless="vim -R"
 alias mdless="mdcat -p"
 
 alias ls="ls --color=never"
-alias l="exa -l"
+alias l="exa"
+alias ll="exa -l"
 
 alias ps="ps -ww"
 alias scl="screen -ls"
 alias scs="screen -S"
 alias scz="screen -ls | grep '(Detached)'"
 alias scr="screen -DR"
+
+export LESSOPEN="| highlight --out-format=xterm256 %s"
+export LESS=' -R '
 
 # Security CAM.
 export SC_IPADDRESS="192.168.1.4"
