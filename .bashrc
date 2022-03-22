@@ -19,8 +19,8 @@ alias sless="vim -R"
 alias mdless="mdcat -p"
 
 alias ls="ls --color=never"
-alias l="exa"
-alias ll="exa -l"
+alias ll="exa"
+alias l="exa -l"
 
 alias ps="ps -ww"
 alias scl="screen -ls"
