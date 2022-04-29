@@ -22,11 +22,25 @@ alias ls="ls --color=never"
 alias ll="exa"
 alias l="exa -l"
 
+alias lsdict="dict -h dict.org -I"
+alias dicten="dict -h dict.org -d gcide"
+alias dictnlen="dict -h dict.org -d fd-nld-eng"
+alias dictennl="dict -h dict.org -d fd-eng-nld"
+alias dictesen="dict -h dict.org -d fd-spa-eng"
+alias dictfrnl="dict -h dict.org -d fd-fra-nld"
+
+alias emi="offlineimap --info"
+alias emo="offlineimap -q"
+alias emof="offlineimap"
+alias emn="notmuch new"
+
 alias ps="ps -ww"
 alias scl="screen -ls"
 alias scs="screen -S"
 alias scz="screen -ls | grep '(Detached)'"
 alias scr="screen -DR"
+
+alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 export LESSOPEN="| highlight --out-format=xterm256 %s"
 export LESS=' -R '
