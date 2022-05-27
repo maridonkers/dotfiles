@@ -6,6 +6,9 @@
 export TERM="xterm-256color"              # getting proper colors
 export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 
+# PAGER is set to `less` by default but I'll tell you when I want to paginate!
+unset PAGER
+
 # IHP
 export IHP_TELEMETRY_DISABLED=1
 export IHP_BROWSER=firefox
@@ -17,6 +20,7 @@ alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 
 alias sless="vim -R"  
 alias mdless="mdcat -p"
+alias lcat="less -EX"
 
 alias ls="ls --color=never"
 alias ll="exa"
