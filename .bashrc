@@ -47,6 +47,8 @@ alias scr="screen -DR"
 
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
+alias nixsearch="nix search nixpkgs"
+
 export LESSOPEN="| highlight --out-format=xterm256 %s"
 export LESS=' -R '
 
