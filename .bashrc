@@ -22,6 +22,7 @@ alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 alias sless="vim -R"  
 alias mdless="mdcat -p"
 alias lcat="less -EX"
+alias bl="LESSOPEN='' less"  
 
 alias ls="ls --color=never"
 alias ll="exa"
@@ -49,7 +50,7 @@ alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 alias nixsearch="nix search nixpkgs"
 
-export LESSOPEN="| highlight --out-format=xterm256 %s"
+export LESSOPEN="| highlight --out-format=xterm256 --style=clarity %s"
 export LESS=' -R '
 
 # Security CAM.

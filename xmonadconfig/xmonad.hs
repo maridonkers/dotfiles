@@ -29,6 +29,7 @@ import           Text.Printf
 import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
+-- import           XMonad.Actions.Minimize
 import           XMonad.Actions.MouseResize
 import           XMonad.Actions.NoBorders
 -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Actions-OnScreen.html
@@ -42,16 +43,18 @@ import           XMonad.Hooks.DynamicLog            (PP (..), dynamicLogWithPP,
 -- import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import           XMonad.Hooks.ManageDocks           (ToggleStruts (..),
                                                      avoidStruts,
-                                                     docksEventHook,
+                                                     docks,
                                                      manageDocks)
 import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Hooks.ScreenCorners
 -- import XMonad.Hooks.SetWMName
 import           XMonad.Layout.BinarySpacePartition
+-- import qualified XMonad.Layout.BoringWindows as BW
 import           XMonad.Layout.Grid                 (Grid (..))
 import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
 -- import           XMonad.Layout
+-- import           XMonad.Layout.Minimize
 import           XMonad.Layout.NoBorders            (hasBorder, noBorders,
                                                      smartBorders)
 import           XMonad.Layout.ResizableTile        (ResizableTall (..))
@@ -228,6 +231,8 @@ keysAdditional =
       , ("M-<Home>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
       , ("M-<Esc>", withFocused toggleFloat)
       , ("M-m", goToSelected def) --defaultGSConfig)
+      -- , ("M-w", withFocused minimizeWindow)
+      -- , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
@@ -343,14 +348,13 @@ main = do
   -- xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920 , ypos=744, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1"
   xmproc1 <- spawnPipe "xmobar -b -p \"xpos=1920, width=1366, height=24\" -x 0 /home/mdo/.config/xmobar/xmobarrc1"
 
-  xmonad $ def {
+  xmonad $ docks def {
     terminal = myTerminal,
     borderWidth = myBorderWidth,
     focusedBorderColor = myFocusedBorderColor,
     modMask = mod4Mask, -- Use the "Win" key for the mod key
     workspaces = myWorkspaces,
     manageHook = myManageHook <+> manageHook desktopConfig <+> manageDocks,
-    handleEventHook = docksEventHook, -- <+> screenCornerEventHook,
     layoutHook = desktopLayoutModifiers myLayouts, -- $ screenCornerLayoutHook myLayouts,
     logHook = dynamicLogWithPP xmobarPP
         { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x  -- >> hPutStrLn xmproc2 x
@@ -377,7 +381,8 @@ main = do
     -- Use the 'M-<Esc>' key binding defined above to toggle between the
     -- current layout and a full screen layout. Use 'M-f' key binding for
     -- a full screen layout with xmobar visible at the top.
-    myLayouts = avoidStruts
+    myLayouts = -- minimize . BW.boringWindows $
+        avoidStruts
       $ mouseResize
       $ windowArrange
       $ toggleLayouts (noBorders Full) others
