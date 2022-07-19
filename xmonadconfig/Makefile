@@ -8,6 +8,9 @@ xmonad:
 shell:
 	nix-shell
 
+edit:
+	emacs &
+
 rebuild: clean
 	cabal new-build
 

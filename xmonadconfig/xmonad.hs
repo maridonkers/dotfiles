@@ -284,6 +284,7 @@ keysAdditional =
       -- , ("M-0", spawn "xscreensaver-command -lock")
       -- , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
       , ("<Scroll_lock>", spawn myScreensaverOn)
+      , ("M-<Pause>", spawn "systemctl suspend")
       , ("M-<Scroll_lock>", spawn $ myScreensaverOn ++ " -startCmd \"systemctl suspend\"")
       , ("M-C-<Scroll_lock>", spawn "systemctl hibernate")
       , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
