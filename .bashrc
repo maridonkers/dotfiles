@@ -46,9 +46,15 @@ alias scs="screen -S"
 alias scz="screen -ls | grep '(Detached)'"
 alias scr="screen -DR"
 
+alias lsblks="lsblk -o +FSSIZE,FSAVAIL,PTTYPE,HOTPLUG,UUID"
+
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 alias nixsearch="nix search nixpkgs"
+
+alias france24="mpv https://www.youtube.com/watch?v=gxG3pdKvlIs &"
+alias franceinfo="mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
+alias euronews="mpv https://www.youtube.com/watch?v=MsN0_WNXvh8 &"
 
 export LESSOPEN="| highlight --out-format=xterm256 --style=clarity %s"
 export LESS=' -R '
