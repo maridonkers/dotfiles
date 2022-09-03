@@ -12,6 +12,7 @@
 -- https://wiki.haskell.org/Xmonad/Config_archive/dmwit%27s_xmonad.hs
 -- https://gitlab.com/dwt1/dotfiles  (xmonad and xmobar configuration)
 -- https://xiangji.me/2018/11/19/my-xmonad-configuration/
+-- https://github.com/xmonad/xmonad/issues/245
 --
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
@@ -42,8 +43,7 @@ import           XMonad.Hooks.DynamicLog            (PP (..), dynamicLogWithPP,
                                                      xmobarPP)
 -- import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import           XMonad.Hooks.ManageDocks           (ToggleStruts (..),
-                                                     avoidStruts,
-                                                     docks,
+                                                     avoidStruts, docks,
                                                      manageDocks)
 import           XMonad.Hooks.ManageHelpers
 -- import XMonad.Hooks.ScreenCorners
@@ -55,6 +55,10 @@ import           XMonad.Layout.IndependentScreens
 -- import XMonad.Layout.LayoutModifier (ModifiedLayout)
 -- import           XMonad.Layout
 -- import           XMonad.Layout.Minimize
+import           XMonad.Hooks.RefocusLast           (--isFloat,
+                                                     refocusLastLayoutHook,
+                                                     -- refocusLastWhen
+                                                    )
 import           XMonad.Layout.NoBorders            (hasBorder, noBorders,
                                                      smartBorders)
 import           XMonad.Layout.ResizableTile        (ResizableTall (..))
@@ -62,6 +66,7 @@ import           XMonad.Layout.Spacing
 import           XMonad.Layout.Tabbed
 import           XMonad.Layout.ToggleLayouts        (ToggleLayout (..),
                                                      toggleLayouts)
+import           XMonad.Layout.TrackFloating
 import           XMonad.Layout.WindowArranger       (windowArrange)
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
@@ -383,7 +388,8 @@ main = do
     -- current layout and a full screen layout. Use 'M-f' key binding for
     -- a full screen layout with xmobar visible at the top.
     myLayouts = -- minimize . BW.boringWindows $
-        avoidStruts
+      refocusLastLayoutHook . trackFloating
+      $ avoidStruts
       $ mouseResize
       $ windowArrange
       $ toggleLayouts (noBorders Full) others
