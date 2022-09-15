@@ -139,6 +139,9 @@ myEditor = "bin/ec"
 myFloatingGHCI :: String
 myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
 
+myFloatingPureScript :: String
+myFloatingPureScript = "xterm -title \"floatterm\" -e \"exec spago repl\""
+
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 
@@ -244,13 +247,14 @@ keysAdditional =
       , ("M-v", mpvPrompt "mpv")
       , ("M-/ e", spawn myEditor)
       , ("M-/ h", spawn myFloatingGHCI)
+      , ("M-/ p", spawn myFloatingPureScript)
       , ("M-/ i", spawn myFloatingPython)
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ c", spawn myChromium)
       , ("M-/ b", spawn myBrave)
       , ("M-/ f", spawn myFirefox)
-      , ("M-/ p", spawn myTorBrowser)
+      , ("M-/ o", spawn myTorBrowser)
       , ("M-/ t", spawn myThunderbird)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
