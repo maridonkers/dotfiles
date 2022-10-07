@@ -431,8 +431,8 @@ myXPConfig = def
 myManageHook :: ManageHook
 myManageHook = composeOne
   [ className =? "mpv" -?> doFloat <+> hasBorder False
-    , title =? "ghci" -?> doFloat
-    , title =? "python" -?> doFloat
+    -- , title =? "ghci" -?> doFloat
+    -- , title =? "python" -?> doFloat
     , title =? "floatterm" -?> doFloat
     , className =? "Pinentry" -?> doFloat
     , className =? "Pavucontrol"  -?> doFloat

@@ -39,6 +39,8 @@ alias emi="offlineimap --info"
 alias emo="offlineimap -q"
 alias emof="offlineimap"
 alias emn="notmuch new"
+alias emgf="offlineimap && notmuch new"
+alias emg="offlineimap -q && notmuch new"
 
 alias ps="ps -ww"
 alias scl="screen -ls"
