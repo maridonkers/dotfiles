@@ -125,10 +125,10 @@ toggleFloat w = do
                  else W.float w rr s)
 
 mySpacing :: Integer
-mySpacing = 1
+mySpacing = 2
 
 myBorderWidth :: Dimension
-myBorderWidth = 1
+myBorderWidth = 3
 
 myFocusedBorderColor :: String
 myFocusedBorderColor = "#ff0000"
@@ -140,7 +140,7 @@ myFloatingGHCI :: String
 myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
 
 myFloatingPureScript :: String
-myFloatingPureScript = "xterm -title \"floatterm\" -e \"exec spago repl\""
+myFloatingPureScript = "xterm -title \"floatterm\" -e \"exec /home/mdo/bin/spagorepl.sh\""
 
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""

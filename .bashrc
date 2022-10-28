@@ -50,7 +50,7 @@ alias emly="notmuch search date:yesterday..today"
 alias emlw="notmuch search date:week"
 alias emlm="notmuch search date:month"
 alias ems="notmuch show --include-html --entire-thread=true"
-alias emsa="notmuch show --part "
+alias emsp="notmuch show --part "
 
 alias ps="ps -ww"
 alias scl="screen -ls"
