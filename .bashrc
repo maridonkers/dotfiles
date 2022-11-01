@@ -51,7 +51,9 @@ alias emly="notmuch search date:yesterday..today"
 alias emlw="notmuch search date:week"
 alias emlm="notmuch search date:month"
 alias ems="notmuch show --include-html --entire-thread=true"
-# Use lynx -stdin to browse stdin
+function emsl() {
+  ems $1 | grep 'part{ ID:'
+}
 function emsp() {
   notmuch show --part $1 $2 | lynx -stdin
 }
