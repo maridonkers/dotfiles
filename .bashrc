@@ -57,6 +57,15 @@ function emsl() {
 function emsp() {
   notmuch show --part $1 $2 | lynx -stdin
 }
+function emsw() {
+  IDX=`emsl $1 | grep 'Content-type: text/html' | sed -e "s/^.*ID: \([0-9]\+\),.*$/\1/"`
+  if [ $IDX -ge 1 ]
+  then
+    notmuch show --part $IDX $1 | lynx -stdin
+  else
+    echo "NO HTML CONTENT"
+  fi
+}
 
 alias ps="ps -ww"
 alias scl="screen -ls"
