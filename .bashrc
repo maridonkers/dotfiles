@@ -37,6 +37,7 @@ alias dictfrnl="dict -h dict.org -d fd-fra-nld"
 
 alias emi="offlineimap --info"
 alias emc="offlineimap --info 2>&1 | grep 'offlineimap.error.OfflineImapError:'"
+alias emcf="offlineimapgenerator -v"
 alias emo="offlineimap -q"
 alias emof="offlineimap"
 alias emgf="offlineimap && notmuch new"
@@ -50,6 +51,7 @@ alias emly="notmuch search date:yesterday..today"
 alias emlw="notmuch search date:week"
 alias emlm="notmuch search date:month"
 alias ems="notmuch show --include-html --entire-thread=true"
+# Use lynx -stdin to browse stdin
 alias emsp="notmuch show --part "
 
 alias ps="ps -ww"
