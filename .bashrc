@@ -59,7 +59,7 @@ function emsp() {
 }
 function emsw() {
   IDX=`emsl $1 | grep 'Content-type: text/html' | sed -e "s/^.*ID: \([0-9]\+\),.*$/\1/"`
-  if [ $IDX -ge 1 ]
+  if [ "$IDX" != "" ]
   then
     notmuch show --part $IDX $1 | lynx -stdin
   else
