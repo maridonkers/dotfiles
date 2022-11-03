@@ -55,6 +55,9 @@ function emsl() {
   ems $1 | grep 'part{ ID:'
 }
 function emsp() {
+  notmuch show --part $1 $2 | zathura -
+}
+function emsa() {
   notmuch show --part $1 $2 | lynx -stdin
 }
 function emsw() {
