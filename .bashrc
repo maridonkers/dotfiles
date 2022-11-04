@@ -52,19 +52,22 @@ alias emlw="notmuch search date:week"
 alias emlm="notmuch search date:month"
 alias ems="notmuch show --include-html --entire-thread=true"
 function emsl() {
-  ems $1 | grep 'part{ ID:'
+  ems $1 | grep '{ ID:'
+}
+function emsi() {
+  notmuch show --part=$1 $2 | feh -
 }
 function emsp() {
-  notmuch show --part $1 $2 | zathura -
+  notmuch show --part=$1 $2 | zathura -
 }
 function emsa() {
-  notmuch show --part $1 $2 | lynx -stdin
+  notmuch show --part=$1 $2
 }
 function emsw() {
   IDX=`emsl $1 | grep 'Content-type: text/html' | sed -e "s/^.*ID: \([0-9]\+\),.*$/\1/"`
   if [ "$IDX" != "" ]
   then
-    notmuch show --part $IDX $1 | lynx -stdin
+    notmuch show --part=$IDX $1 | lynx -stdin
   else
     echo "NO HTML CONTENT"
   fi
