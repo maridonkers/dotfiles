@@ -49,8 +49,8 @@ alias emf="notmuch search"
 alias eml="notmuch search date:today"
 alias emlt="notmuch search date:today"
 alias emly="notmuch search date:yesterday..today"
-alias emlw="notmuch search date:week"
-alias emlm="notmuch search date:month"
+alias emlw="notmuch search date:week..today"
+alias emlm="notmuch search date:month..today"
 alias ems="notmuch show --include-html --entire-thread=true"
 function emsl() { # get list of ID's in e-mail
   ems $1 | grep '{ ID:'
