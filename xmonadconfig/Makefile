@@ -3,9 +3,9 @@ all: help
 xmonad:
 	xmonad --recompile
 
-# First use a make shell and then a make rebuild to check your
+# First use a make develop and then a make rebuild to check your
 # changes. Finally a make xmonad to activate an updated configuration.
-shell:
+develop:
 	nix-shell
 
 edit:
