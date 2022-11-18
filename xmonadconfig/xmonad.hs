@@ -148,6 +148,9 @@ myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 myFileManager :: String
 myFileManager = "pcmanfm"
 
+myMusicPlayer :: String
+myMusicPlayer = "clementine"
+
 myKeepassXc :: String
 myKeepassXc = "keepassxc"
 
@@ -245,16 +248,17 @@ keysAdditional =
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
       , ("M-v", mpvPrompt "mpv")
+      , ("M-/ b", spawn myBrave)
+      , ("M-/ c", spawn myChromium)
       , ("M-/ e", spawn myEditor)
+      , ("M-/ f", spawn myFirefox)
       , ("M-/ h", spawn myFloatingGHCI)
-      , ("M-/ p", spawn myFloatingPureScript)
       , ("M-/ i", spawn myFloatingPython)
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ m", spawn myFileManager)
-      , ("M-/ c", spawn myChromium)
-      , ("M-/ b", spawn myBrave)
-      , ("M-/ f", spawn myFirefox)
       , ("M-/ o", spawn myTorBrowser)
+      , ("M-/ p", spawn myFloatingPureScript)
+      , ("M-/ r", spawn myMusicPlayer)
       , ("M-/ t", spawn myThunderbird)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
