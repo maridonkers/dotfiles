@@ -35,6 +35,7 @@ alias dictennl="dict -h dict.org -d fd-eng-nld"
 alias dictesen="dict -h dict.org -d fd-spa-eng"
 alias dictfrnl="dict -h dict.org -d fd-fra-nld"
 
+export LYNX_LSS=$HOME/lynx.lss
 alias emh="grep ' em' ~/.bashrc"
 alias emi="offlineimap --info"
 alias emc="offlineimap --info 2>&1 | grep 'offlineimap.error.OfflineImapError:'"
