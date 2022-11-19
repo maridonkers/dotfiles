@@ -49,16 +49,16 @@ alias emcf="offlineimapgenerator -v"
 alias emo="offlineimap -q"
 # EMH emof: gets new e-mails from all folders (slower) via offlineimap (beware: not added to notmuch; use emn command to add)
 alias emof="offlineimap"
-# EMH emgf: gets new e-mails from all folders (slower) via offlineimap and adds them to notmuch
-alias emgf="offlineimap && notmuch new"
 # EMH emg: gets new e-mails via offlineimap and adds them to notmuch
 alias emg="offlineimap -q && notmuch new"
+# EMH emgf: gets new e-mails from all folders (slower) via offlineimap and adds them to notmuch
+alias emgf="offlineimap && notmuch new"
 
 # EMH emn: adds new e-mails to notmuch
 alias emn="notmuch new"
 # EMH emf: searches e-mail for search term; see man notmuch-search-terms
 alias emf="notmuch search"
-# EMH emlw: list e-mails for today
+# EMH emlt: list e-mails for today
 alias emlt="notmuch search date:today"
 # EMH emlw: list e-mails from yesterday to today
 alias emly="notmuch search date:yesterday..today"
