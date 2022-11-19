@@ -60,7 +60,7 @@ alias emn="notmuch new"
 alias emf="notmuch search"
 # EMH emlt: list e-mails for today
 alias emlt="notmuch search date:today"
-# EMH emlw: list e-mails from yesterday to today
+# EMH emly: list e-mails from yesterday to today
 alias emly="notmuch search date:yesterday..today"
 # EMH emlw: list e-mails for week to today
 alias emlw="notmuch search date:week..today"
