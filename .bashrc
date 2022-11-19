@@ -36,39 +36,72 @@ alias dictesen="dict -h dict.org -d fd-spa-eng"
 alias dictfrnl="dict -h dict.org -d fd-fra-nld"
 
 export LYNX_LSS=$HOME/lynx.lss
-alias emh="grep ' em' ~/.bashrc"
+
+# EMH emh: displays help for command line e-mail commands
+alias emh="grep '^# EMH ' ~/.bashrc | sed -e 's/^# EMH //'"
+# EMH emc: list offlinemap information on its configuration
 alias emi="offlineimap --info"
+# EMH emc: check offlinemap configuration for invalid certificates
 alias emc="offlineimap --info 2>&1 | grep 'offlineimap.error.OfflineImapError:'"
+# EMH emcf: verify offlinemap configuration (e.g. certificates can get outdated)
 alias emcf="offlineimapgenerator -v"
+# EMH emo: gets new e-mails via offlineimap (beware: not added to notmuch; use emn command to add)
 alias emo="offlineimap -q"
+# EMH emof: gets new e-mails from all folders (slower) via offlineimap (beware: not added to notmuch; use emn command to add)
 alias emof="offlineimap"
+# EMH emgf: gets new e-mails from all folders (slower) via offlineimap and adds them to notmuch
 alias emgf="offlineimap && notmuch new"
+# EMH emg: gets new e-mails via offlineimap and adds them to notmuch
 alias emg="offlineimap -q && notmuch new"
 
+# EMH emn: adds new e-mails to notmuch
 alias emn="notmuch new"
+# EMH emf: searches e-mail for search term; see man notmuch-search-terms
 alias emf="notmuch search"
-alias eml="notmuch search date:today"
+# EMH emlw: list e-mails for today
 alias emlt="notmuch search date:today"
+# EMH emlw: list e-mails from yesterday to today
 alias emly="notmuch search date:yesterday..today"
+# EMH emlw: list e-mails for week to today
 alias emlw="notmuch search date:week..today"
+# EMH emlm: list e-mails for month to today
 alias emlm="notmuch search date:month..today"
+# EMH ems: show e-mail content, including textual HTML dump for the entire thread (if applicable)
 alias ems="notmuch show --include-html --entire-thread=true"
+# EMH emsl: list mime IDs
 function emsl() { # get list of ID's in e-mail
   ems $1 | grep '{ ID:'
 }
+# EMH emsi: show image content by ID in feh image viewer
 function emsi() { # show image by ID in e-mail
   notmuch show --part=$1 $2 | feh -
 }
+# EMH emsp: show PDF content by ID in zathura PDF viewer
 function emsp() { # show PDF by ID in e-mail
   notmuch show --part=$1 $2 | zathura -
 }
-function emsa() { # show attachment by ID in e-mail
+# EMH emsm: show mime content by ID (likely clutters terminal, hence store in file).
+function emsm() { # show mime part by ID in e-mail
   notmuch show --part=$1 $2
 }
-function emsww() { # show HTML by ID in e-mail
+# EMH emsa: show attachment by ID and type (likely clutters terminal, hence store in file).
+# EMH       attachment{ ID: 5, Filename: Brief voor - ambassade def2.docx, Content-id: ...
+# EMH       verify type of attachment by ID and type in e-mail; e.g.: emsa 5 def2.docx thread:0000000000005dea
+function emsa() { # show attachment by ID and type in e-mail; e.g.: emsa 5 docx thread:0000000000005dea
+  notmuch show --part=$1 attachment:$2 and $3
+}
+# EMH emsav: verify attachment type by ID and type (reported is file type).
+# EMH        attachment{ ID: 5, Filename: Brief voor - ambassade def2.docx, Content-id: ...
+# EMH        verify type of attachment by ID and type in e-mail; e.g.: emsav 5 def2.docx thread:0000000000005dea
+function emsav() {
+  notmuch show --part=$1 attachment:$2 and $3 | file -
+}
+# EMH emsww: show HTML content by ID in lynx command line webbrowser
+function emsww() {
   notmuch show --part=$1 $2 | lynx -stdin
 }
-function emsw() { # show HTML in e-mail (ID determined automatically)
+# EMH emsw: show HTML content (ID determined automatically) in lynx command line webbrowser
+function emsw() {
   IDX=`emsl $1 | grep 'Content-type: text/html' | sed -e "s/^.*ID: \([0-9]\+\),.*$/\1/"`
   if [ "$IDX" != "" ]
   then
