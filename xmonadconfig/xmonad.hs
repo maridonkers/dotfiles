@@ -234,6 +234,7 @@ mpvPrompt _ = do
 -- KEY BINDINGS
 ------------------------------------------------------------------------
 -- Add some extra key bindings; M1 is Alt key.
+-- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Util-EZConfig.html
 keysAdditional :: [(String, X ())]
 keysAdditional =
       [ ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess))
@@ -275,6 +276,8 @@ keysAdditional =
       , ("M-=", toggleWS)
       , ("M-<Tab>", nextWS)
       , ("M-S-<Tab>", prevWS)
+      , ("M-<Page_Down>", nextWS)
+      , ("M-<Page_Up>", prevWS)
       , ("M-C-<Tab>", shiftToNext >> nextWS)
       , ("M-C-S-<Tab>", shiftToPrev >> prevWS)
       -- , ("M-M1-<Left>", prevWS)
