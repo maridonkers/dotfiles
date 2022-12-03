@@ -290,7 +290,7 @@ keysAdditional =
       -- , ("M-S-C-<Right>", shiftNextScreen)
       -- , ("M-S-C-<Up>", swapPrevScreen)
       -- , ("M-S-C-<Down>", swapNextScreen)
-      , ("M-~", sendMessage NextLayout)
+      , ("M-l", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
@@ -412,10 +412,10 @@ main = do
                               (Border mySpacing mySpacing mySpacing mySpacing)
                               True
                  $ emptyBSP
-                     ||| Grid
+                     -- ||| Grid
                      ||| noBorders simpleTabbed
-                     ||| ResizableTall 1 (1.5/100) (6/10) []
-                     ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
+                     -- ||| ResizableTall 1 (1.5/100) (6/10) []
+                     -- ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a
