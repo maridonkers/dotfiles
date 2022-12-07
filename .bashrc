@@ -39,12 +39,12 @@ export LYNX_LSS=$HOME/lynx.lss
 
 # EMH emh: displays help for command line e-mail commands
 alias emh="grep '^# EMH ' ~/.bashrc | sed -e 's/^# EMH //'"
-# EMH emc: list offlinemap information on its configuration
+# EMH emi: list offlinemap information on its configuration
 alias emi="offlineimap --info"
 # EMH emc: check offlinemap configuration for invalid certificates
 alias emc="offlineimap --info 2>&1 | grep 'offlineimap.error.OfflineImapError:'"
 # EMH emcu: update offlinemap configuration (i.e. certificates) with offlineimapgenerator
-alias emcf="offlineimapgenerator -v"
+alias emcu="offlineimapgenerator -v"
 # EMH emo: gets new e-mails via offlineimap (beware: not added to notmuch; use emn command to add)
 alias emo="offlineimap -q"
 # EMH emof: gets new e-mails from all folders (slower) via offlineimap (beware: not added to notmuch; use emn command to add)
