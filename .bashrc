@@ -62,6 +62,10 @@ alias emf="notmuch search"
 alias emlt="notmuch search date:today"
 # EMH emly: list e-mails from yesterday to today
 alias emly="notmuch search date:yesterday..today"
+# EMH emld: list e-mails from # days to today
+function emld() { # get list of ID's in e-mail
+  notmuch search date:$1d..today
+}
 # EMH emlw: list e-mails for week to today
 alias emlw="notmuch search date:week..today"
 # EMH emlm: list e-mails for month to today
@@ -123,9 +127,14 @@ alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 alias nixsearch="nix search nixpkgs"
 
-alias france24="mpv https://www.youtube.com/watch?v=gxG3pdKvlIs &"
-alias franceinfo="mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
-alias euronews="mpv https://www.youtube.com/watch?v=MsN0_WNXvh8 &"
+alias es-dw="mpv https://youtube.com/watch?v=RTjbYKBB828 &"
+alias es-canal24="mpv https://youtube.com/watch?v=xR-4NDFsYNk &"
+alias es-france24="mpv https://www.youtube.com/watch?v=XDJPzMznAjU &"
+alias es-euronews="mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk &"
+
+alias fr-france24="mpv https://www.youtube.com/watch?v=gxG3pdKvlIs &"
+alias fr-franceinfo="mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
+alias fr-euronews="mpv https://www.youtube.com/watch?v=MsN0_WNXvh8 &"
 
 export LESSOPEN="| highlight --out-format=xterm256 --style=clarity %s"
 export LESS=' -R '
