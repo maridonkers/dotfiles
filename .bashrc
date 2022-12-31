@@ -28,12 +28,13 @@ alias ls="ls --color=never"
 alias ll="exa"
 alias l="exa -l"
 
-alias lsdict="dict -h dict.org -I"
-alias dicten="dict -h dict.org -d gcide"
-alias dictnlen="dict -h dict.org -d fd-nld-eng"
-alias dictennl="dict -h dict.org -d fd-eng-nld"
-alias dictesen="dict -h dict.org -d fd-spa-eng"
-alias dictfrnl="dict -h dict.org -d fd-fra-nld"
+alias en="trans -s en"
+alias nlen="trans -s nl -t en"
+alias ennl="trans -s en -t nl"
+alias esnl="trans -s es -t nl"
+alias esen="trans -s es -t en"
+alias frnl="trans -s fr -t nl"
+alias fren="trans -s fr -t en"
 
 export LYNX_LSS=$HOME/lynx.lss
 
@@ -126,6 +127,8 @@ alias lsblks="lsblk -o +FSSIZE,FSAVAIL,PTTYPE,HOTPLUG,UUID"
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 alias nixsearch="nix search nixpkgs"
+
+alias es-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI &"
 
 alias es-dw="mpv https://youtube.com/watch?v=RTjbYKBB828 &"
 alias es-canal24="mpv https://youtube.com/watch?v=xR-4NDFsYNk &"
