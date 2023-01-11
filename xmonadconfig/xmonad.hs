@@ -14,6 +14,8 @@
 -- https://xiangji.me/2018/11/19/my-xmonad-configuration/
 -- https://github.com/xmonad/xmonad/issues/245
 --
+-- To display key strokes use the xev program.
+--
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
 import qualified GHC.IO.Encoding                    as GIO
@@ -221,6 +223,15 @@ windowCount = gets $ Just . show . length .
   W.integrate' . W.stack . W.workspace .
   W.current . windowset
 
+webPrompt :: String -> X ()
+webPrompt _ = do
+    str <- inputPrompt cfg "Path|URL"
+    case str of
+        Just s  -> spawn $ printf "firefox --new-window \"%s\"" s
+        Nothing -> pure ()
+  where
+    cfg = myXPConfig { defaultText = "" }
+
 mpvPrompt :: String -> X ()
 mpvPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
@@ -248,6 +259,7 @@ keysAdditional =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
+      , ("M-w", webPrompt "firefox")
       , ("M-v", mpvPrompt "mpv")
       , ("M-/ b", spawn myBrave)
       , ("M-/ c", spawn myChromium)
