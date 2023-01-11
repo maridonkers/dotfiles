@@ -34,26 +34,18 @@ alias ennl="trans -s en -t nl"
 alias esnl="trans -s es -t nl"
 alias esen="trans -s es -t en"
 alias frnl="trans -s fr -t nl"
+alias pten="trans -s pt -t en"
+alias ptnl="trans -s pt -t nl"
 alias fren="trans -s fr -t en"
 
 export LYNX_LSS=$HOME/lynx.lss
 
 # EMH emh: displays help for command line e-mail commands
 alias emh="grep '^# EMH ' ~/.bashrc | sed -e 's/^# EMH //'"
-# EMH emi: list offlinemap information on its configuration
-alias emi="offlineimap --info"
-# EMH emc: check offlinemap configuration for invalid certificates
-alias emc="offlineimap --info 2>&1 | grep 'offlineimap.error.OfflineImapError:'"
-# EMH emcu: update offlinemap configuration (i.e. certificates) with offlineimapgenerator
-alias emcu="offlineimapgenerator -v"
-# EMH emo: gets new e-mails via offlineimap (beware: not added to notmuch; use emn command to add)
-alias emo="offlineimap -q"
-# EMH emof: gets new e-mails from all folders (slower) via offlineimap (beware: not added to notmuch; use emn command to add)
-alias emof="offlineimap"
-# EMH emg: gets new e-mails via offlineimap and adds them to notmuch
-alias emg="offlineimap -q && notmuch new"
-# EMH emgf: gets new e-mails from all folders (slower) via offlineimap and adds them to notmuch
-alias emgf="offlineimap && notmuch new"
+# EMH emo: gets new e-mails via mbsync (beware: not added to notmuch; use emn command to add)
+alias emo="mbsync -a"
+# EMH emg: gets new e-mails via mbsync and adds them to notmuch
+alias emg="mbsync -a && notmuch new"
 
 # EMH emn: adds new e-mails to notmuch
 alias emn="notmuch new"
@@ -128,7 +120,7 @@ alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 alias nixsearch="nix search nixpkgs"
 
-alias es-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI &"
+alias pt-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI &"
 
 alias es-dw="mpv https://youtube.com/watch?v=RTjbYKBB828 &"
 alias es-canal24="mpv https://youtube.com/watch?v=xR-4NDFsYNk &"
