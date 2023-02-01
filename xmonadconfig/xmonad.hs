@@ -281,6 +281,8 @@ keysAdditional =
       , ("M-M1-<Down>", windows W.swapUp)
       , ("M-<Left>", windows W.focusUp)
       , ("M-<Right>", windows W.focusDown)
+      , ("M-z", windows W.focusUp)
+      , ("M-x", windows W.focusDown)
       , ("M-C-<Down>", windows W.swapDown >> windows W.focusUp)
       , ("M-C-<Up>", windows W.swapUp >> windows W.focusDown)
       , ("M-<Up>", rotSlavesDown)
