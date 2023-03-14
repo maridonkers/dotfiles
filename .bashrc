@@ -1,14 +1,15 @@
 # https://askubuntu.com/questions/432217/prevent-duplicate-entries-in-path
 [[ ":$PATH:" =~ ":~/bin:" ]] || PATH="$PATH:~/bin"
 [[ ":$PATH:" =~ ":~/.local/bin" ]] || PATH="~/.local/bin:$PATH"
+[[ ":$PATH:" =~ ":~/.cargo/bin" ]] || PATH="$PATH:~/.cargo/bin"
 [[ ":$PATH:" =~ ":~/.cabal/bin" ]] || PATH="$PATH:~/.cabal/bin"
 
 export TERM="xterm-256color"              # getting proper colors
 export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 
-# PAGER is set to `less` by default but I'll tell you when I want to paginate!
-#unset PAGER
-export PAGER=""
+# Rust
+# https://internals.rust-lang.org/t/cargo-sparse-protocol-feedback-thread/18234
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL="sparse"
 
 # IHP
 export IHP_TELEMETRY_DISABLED=1
@@ -19,7 +20,8 @@ eval "$(direnv hook bash)"
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 
-alias sless="vim -R"  
+alias b="bat -n"
+alias sless="vim -R"
 alias mdless="mdcat -p"
 alias lcat="less -EX"
 alias bl="LESSOPEN='' less"  
@@ -115,6 +117,8 @@ alias scz="screen -ls | grep '(Detached)'"
 alias scr="screen -DR"
 
 alias lsblks="lsblk -o +FSSIZE,FSAVAIL,PTTYPE,HOTPLUG,UUID"
+
+alias externip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 

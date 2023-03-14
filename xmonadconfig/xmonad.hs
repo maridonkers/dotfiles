@@ -241,6 +241,15 @@ mpvPrompt _ = do
   where
     cfg = myXPConfig { defaultText = "" }
 
+mpvFfmpegPrompt :: String -> X ()
+mpvFfmpegPrompt _ = do
+    str <- inputPrompt cfg "Path|URL"
+    case str of
+        Just s  -> spawn $ printf "/home/mdo/bin/mpv-ffmpeg.sh -i \"%s\"" s
+        Nothing -> pure ()
+  where
+    cfg = myXPConfig { defaultText = "" }
+
 ------------------------------------------------------------------------
 -- KEY BINDINGS
 ------------------------------------------------------------------------
@@ -261,6 +270,7 @@ keysAdditional =
       , ("M-C-<Return>", spawn myFloatingTerminal)
       , ("M-w", webPrompt "firefox")
       , ("M-v", mpvPrompt "mpv")
+      , ("M-S-v", mpvFfmpegPrompt "mpv-ffmpeg.sh")
       , ("M-/ b", spawn myBrave)
       , ("M-/ c", spawn myChromium)
       , ("M-/ e", spawn myEditor)
@@ -304,7 +314,7 @@ keysAdditional =
       -- , ("M-S-C-<Right>", shiftNextScreen)
       -- , ("M-S-C-<Up>", swapPrevScreen)
       -- , ("M-S-C-<Down>", swapNextScreen)
-      , ("M-l", sendMessage NextLayout)
+      , ("M-y", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
