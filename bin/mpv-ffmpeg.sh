@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # See: https://raw.githubusercontent.com/NapoleonWils0n/nixos-bin/master/dash-ffmpeg
+# UPDATE: cumbersome; instead use this: "yt-dlp \"%s\" -o - | mpv -
 #
 
 #===============================================================================

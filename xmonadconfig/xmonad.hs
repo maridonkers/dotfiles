@@ -241,11 +241,11 @@ mpvPrompt _ = do
   where
     cfg = myXPConfig { defaultText = "" }
 
-mpvFfmpegPrompt :: String -> X ()
-mpvFfmpegPrompt _ = do
+mpvYTPrompt :: String -> X ()
+mpvYTPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "/home/mdo/bin/mpv-ffmpeg.sh -i \"%s\"" s
+        Just s  -> spawn $ printf "yt-dlp \"%s\" -o - | mpv -" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
@@ -270,7 +270,7 @@ keysAdditional =
       , ("M-C-<Return>", spawn myFloatingTerminal)
       , ("M-w", webPrompt "firefox")
       , ("M-v", mpvPrompt "mpv")
-      , ("M-S-v", mpvFfmpegPrompt "mpv-ffmpeg.sh")
+      , ("M-y", mpvYTPrompt "mpv")
       , ("M-/ b", spawn myBrave)
       , ("M-/ c", spawn myChromium)
       , ("M-/ e", spawn myEditor)
@@ -314,7 +314,7 @@ keysAdditional =
       -- , ("M-S-C-<Right>", shiftNextScreen)
       -- , ("M-S-C-<Up>", swapPrevScreen)
       -- , ("M-S-C-<Down>", swapNextScreen)
-      , ("M-y", sendMessage NextLayout)
+      , ("M-l", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
