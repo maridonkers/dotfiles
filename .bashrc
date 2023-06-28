@@ -116,6 +116,8 @@ alias scs="screen -S"
 alias scz="screen -ls | grep '(Detached)'"
 alias scr="screen -DR"
 
+alias speedtest="speedtest -p"
+
 alias lsblks="lsblk -o +FSSIZE,FSAVAIL,PTTYPE,HOTPLUG,UUID"
 
 alias externip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -123,6 +125,7 @@ alias externip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 
 alias nixsearch="nix search nixpkgs"
+alias nix-env="PAGER= nix-env"
 
 alias pt-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI &"
 
