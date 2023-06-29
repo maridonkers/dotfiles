@@ -127,16 +127,20 @@ alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 alias nixsearch="nix search nixpkgs"
 alias nix-env="PAGER= nix-env"
 
-alias pt-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI &"
+alias pt-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb25ld3MgbGl2ZSBwb3J0dWd1ZXNl &"
 
-alias es-dw="mpv https://youtube.com/watch?v=RTjbYKBB828 &"
-alias es-canal24="mpv https://youtube.com/watch?v=xR-4NDFsYNk &"
-alias es-france24="mpv https://www.youtube.com/watch?v=XDJPzMznAjU &"
-alias es-euronews="mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk &"
+alias es-dw="mpv https://www.youtube.com/watch?v=tsStUN73_6I &"
+alias es-rtve="mpv https://www.youtube.com/watch?v=8GmR9H2iH8Q &"
+alias es-france24="mpv https://www.youtube.com/watch?v=XDJPzMznAjU&pp=ygUWZnJhbmNlIDI0IGxpdmUgc3BhbmlzaA%3D%3D &"
+alias es-euronews="mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
 
-alias fr-france24="mpv https://www.youtube.com/watch?v=gxG3pdKvlIs &"
+alias fr-france24="mpv https://www.youtube.com/watch?v=gxG3pdKvlIs&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
 alias fr-franceinfo="mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
-alias fr-euronews="mpv https://www.youtube.com/watch?v=MsN0_WNXvh8 &"
+alias fr-euronews="mpv https://www.youtube.com/watch?v=NiRIbKwAejk &"
+
+alias en-france24="mpv https://www.youtube.com/watch?v=h3MuIUNCCzI&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
+alias en-euronews="mpv https://www.youtube.com/watch?v=pykpO5kQJ98&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+alias en-dw="mpv https://www.youtube.com/watch?v=pqabxBKzZ6M&pp=ygUIZHcgbGl2ZSA%3D &"
 
 export LESSOPEN="| highlight --out-format=xterm256 --style=clarity %s"
 export LESS=' -R '
