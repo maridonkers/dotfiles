@@ -441,9 +441,9 @@ main = do
                               True
                  $ ResizableTall 1 (1.5/100) (6/10) []
                      ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
-                     ||| noBorders simpleTabbed
-                     ||| emptyBSP
                      -- ||| Grid
+                     ||| noBorders simpleTabbed
+                     -- ||| emptyBSP
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a
