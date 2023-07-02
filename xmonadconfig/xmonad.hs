@@ -285,10 +285,10 @@ keysAdditional =
       , ("M-/ t", spawn myThunderbird)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
-      , ("M-M1-<Left>", sendMessage Shrink)
-      , ("M-M1-<Right>", sendMessage Expand)
-      , ("M-M1-<Up>", windows W.swapDown)
-      , ("M-M1-<Down>", windows W.swapUp)
+      , ("M-S-<Left>", sendMessage Shrink)
+      , ("M-S-<Right>", sendMessage Expand)
+      , ("M-S-<Up>", windows W.swapDown)
+      , ("M-S-<Down>", windows W.swapUp)
       , ("M-<Left>", windows W.focusUp)
       , ("M-<Right>", windows W.focusDown)
       , ("M-z", windows W.focusUp)
@@ -339,21 +339,21 @@ keysAdditional =
       , ("<XF86AudioNext>", spawn "clementine -f")
       -- https://github.com/benweitzman/BinarySpacePartition
       -- , ("M-M1-<Left>", sendMessage $ ExpandTowards L)
-      , ("M-S-C-<Left>", sendMessage $ ExpandTowards L)
+      , ("M-M1-C-<Left>", sendMessage $ ExpandTowards L)
       -- , ("M-M1-<Right>", sendMessage $ ShrinkFrom L)
-      , ("M-S-C-<Right>", sendMessage $ ShrinkFrom L)
+      , ("M-M1-C-<Right>", sendMessage $ ShrinkFrom L)
       -- , ("M-M1-<Up>", sendMessage $ ExpandTowards U)
-      , ("M-S-C-<Up>", sendMessage $ ExpandTowards U)
+      , ("M-M1-C-<Up>", sendMessage $ ExpandTowards U)
       -- , ("M-M1-<Down>", sendMessage $ ShrinkFrom U)
-      , ("M-S-C-<Down>", sendMessage $ ShrinkFrom U)
+      , ("M-M1-C-<Down>", sendMessage $ ShrinkFrom U)
       -- , ("M-M1-C-<Left>", sendMessage $ ShrinkFrom R)
-      , ("M-S-<Left>", sendMessage $ ShrinkFrom R)
+      , ("M-M1-<Left>", sendMessage $ ShrinkFrom R)
       -- , ("M-M1-C-<Right>", sendMessage $ ExpandTowards R)
-      , ("M-S-<Right>", sendMessage $ ExpandTowards R)
+      , ("M-M1-<Right>", sendMessage $ ExpandTowards R)
       -- , ("M-M1-C-<Up>", sendMessage $ ShrinkFrom D)
-      , ("M-S-<Up>", sendMessage $ ShrinkFrom D)
+      , ("M-M1-<Up>", sendMessage $ ShrinkFrom D)
       -- , ("M-M1-C-<Down>", sendMessage $ ExpandTowards D)
-      , ("M-S-<Down>", sendMessage $ ExpandTowards D)
+      , ("M-M1-<Down>", sendMessage $ ExpandTowards D)
       , ("M-s", sendMessage $ Swap)
       , ("M-r", sendMessage $ Rotate)
       , ("M-[", sendMessage $ SplitShift Prev)
@@ -439,10 +439,10 @@ main = do
                               True
                               (Border mySpacing mySpacing mySpacing mySpacing)
                               True
-                 $ emptyBSP
-                     -- ||| Grid
+                 $ ResizableTall 1 (1.5/100) (6/10) []
                      ||| noBorders simpleTabbed
-                     -- ||| ResizableTall 1 (1.5/100) (6/10) []
+                     ||| emptyBSP
+                     -- ||| Grid
                      -- ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
 
 --------------------------------------------------------------------------------
