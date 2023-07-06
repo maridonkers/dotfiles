@@ -150,6 +150,9 @@ myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 myFileManager :: String
 myFileManager = "pcmanfm"
 
+myLibreOffice :: String
+myLibreOffice = "libreoffice"
+
 myMusicPlayer :: String
 myMusicPlayer = "clementine"
 
@@ -278,6 +281,7 @@ keysAdditional =
       , ("M-/ h", spawn myFloatingGHCI)
       , ("M-/ i", spawn myFloatingPython)
       , ("M-/ k", spawn myKeepassXc)
+      , ("M-/ l", spawn myLibreOffice)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ o", spawn myTorBrowser)
       , ("M-/ p", spawn myFloatingPureScript)
@@ -314,7 +318,7 @@ keysAdditional =
       -- , ("M-S-C-<Right>", shiftNextScreen)
       -- , ("M-S-C-<Up>", swapPrevScreen)
       -- , ("M-S-C-<Down>", swapNextScreen)
-      , ("M-l", sendMessage NextLayout)
+      , ("M-n", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
@@ -466,7 +470,9 @@ myXPConfig = def
 myManageHook :: ManageHook
 myManageHook = composeOne
   [ className =? "mpv" -?> doFloat <+> hasBorder False
-    , title =? "cvlc" -?> doFloat <+> hasBorder False
+    , className =? "cvlc" -?> doFloat <+> hasBorder False
+    , className =? "vlc" -?> doFloat <+> hasBorder False
+    , title =? "Clementine" -?> doFloat <+> hasBorder False
     -- , title =? "ghci" -?> doFloat
     -- , title =? "python" -?> doFloat
     , title =? "floatterm" -?> doFloat
