@@ -141,9 +141,6 @@ myEditor = "bin/ec"
 myFloatingGHCI :: String
 myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
 
-myFloatingPureScript :: String
-myFloatingPureScript = "xterm -title \"floatterm\" -e \"exec /home/mdo/bin/spagorepl.sh\""
-
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 
@@ -153,8 +150,8 @@ myFileManager = "pcmanfm"
 myLibreOffice :: String
 myLibreOffice = "libreoffice"
 
-myMusicPlayer :: String
-myMusicPlayer = "clementine"
+myFloatingMusicPlayer :: String
+myFloatingMusicPlayer = "xterm -title \"floatterm\" -e \"exec musikcube\""
 
 myKeepassXc :: String
 myKeepassXc = "keepassxc"
@@ -284,8 +281,7 @@ keysAdditional =
       , ("M-/ l", spawn myLibreOffice)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ o", spawn myTorBrowser)
-      , ("M-/ p", spawn myFloatingPureScript)
-      , ("M-/ r", spawn myMusicPlayer)
+      , ("M-/ p", spawn myFloatingMusicPlayer)
       , ("M-/ t", spawn myThunderbird)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
@@ -472,7 +468,7 @@ myManageHook = composeOne
   [ className =? "mpv" -?> doFloat <+> hasBorder False
     , className =? "cvlc" -?> doFloat <+> hasBorder False
     , className =? "vlc" -?> doFloat <+> hasBorder False
-    , title =? "Clementine" -?> doFloat <+> hasBorder False
+    -- , title =? "Clementine" -?> doFloat <+> hasBorder False
     -- , title =? "ghci" -?> doFloat
     -- , title =? "python" -?> doFloat
     , title =? "floatterm" -?> doFloat
