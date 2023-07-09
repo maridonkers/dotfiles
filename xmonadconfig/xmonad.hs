@@ -150,8 +150,8 @@ myFileManager = "pcmanfm"
 myLibreOffice :: String
 myLibreOffice = "libreoffice"
 
-myFloatingMusicPlayer :: String
-myFloatingMusicPlayer = "xterm -title \"floatterm\" -e \"exec musikcube\""
+myMusicPlayer :: String
+myMusicPlayer = "xterm -title \"musikcube\" -e \"exec musikcube\""
 
 myKeepassXc :: String
 myKeepassXc = "keepassxc"
@@ -281,7 +281,7 @@ keysAdditional =
       , ("M-/ l", spawn myLibreOffice)
       , ("M-/ m", spawn myFileManager)
       , ("M-/ o", spawn myTorBrowser)
-      , ("M-/ p", spawn myFloatingMusicPlayer)
+      , ("M-/ p", spawn myMusicPlayer)
       , ("M-/ t", spawn myThunderbird)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
