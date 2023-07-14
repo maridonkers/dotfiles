@@ -123,6 +123,15 @@ alias lsblks="lsblk -o +FSSIZE,FSAVAIL,PTTYPE,HOTPLUG,UUID"
 alias externip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
+alias tarssh="ssh -i ~/.ssh/id_rsa-tartarus -p 2022 u0_a44@192.168.1.205"
+
+alias dcdf="tarssh '(cd ~/storage/movies/DroidDashcam/Temporary; df -h .)'"
+alias dcdu="tarssh '(cd ~/storage/movies/DroidDashcam/Temporary; du -h .)'"
+alias dcls="tarssh '(cd ~/storage/movies/DroidDashcam/Temporary; exa -l)'"
+alias dccpa="tarssh '(cd ~/storage/movies/DroidDashcam/Temporary; tar cf - *)' | tar xvf -"
+function dccp() {
+	tarssh "(cd ~/storage/movies/DroidDashcam/Temporary; tar cf - $1)" | tar xvf -
+}
 
 alias nixsearch="nix search nixpkgs"
 alias nix-env="PAGER= nix-env"
