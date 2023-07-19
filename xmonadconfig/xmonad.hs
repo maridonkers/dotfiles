@@ -162,6 +162,9 @@ myThunderbird = "thunderbird"
 myFirefox :: String
 myFirefox = "firefox"
 
+myOpera :: String
+myOpera = "opera"
+
 myChromium :: String
 myChromium = "chromium"
 
@@ -276,13 +279,14 @@ keysAdditional =
       , ("M-/ e", spawn myEditor)
       , ("M-/ f", spawn myFirefox)
       , ("M-/ h", spawn myFloatingGHCI)
-      , ("M-/ i", spawn myFloatingPython)
+      , ("M-/ i", spawn myFileManager)
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ l", spawn myLibreOffice)
-      , ("M-/ m", spawn myFileManager)
-      , ("M-/ o", spawn myTorBrowser)
+      , ("M-/ m", spawn myThunderbird)
+      , ("M-/ o", spawn myOpera)
       , ("M-/ p", spawn myMusicPlayer)
-      , ("M-/ t", spawn myThunderbird)
+      , ("M-/ t", spawn myTorBrowser)
+      , ("M-/ y", spawn myFloatingPython)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
@@ -468,6 +472,7 @@ myManageHook = composeOne
   [ className =? "mpv" -?> doFloat <+> hasBorder False
     , className =? "cvlc" -?> doFloat <+> hasBorder False
     , className =? "vlc" -?> doFloat <+> hasBorder False
+    , className =? "opera" -?> hasBorder True
     -- , title =? "Clementine" -?> doFloat <+> hasBorder False
     -- , title =? "ghci" -?> doFloat
     -- , title =? "python" -?> doFloat
