@@ -174,6 +174,9 @@ myNyxt = "nyxt"
 myChromium :: String
 myChromium = "chromium"
 
+myNetsurf :: String
+myNetsurf = "netsurf-gtk3"
+
 myBrave :: String
 myBrave = "brave"
 
@@ -236,7 +239,7 @@ webPrompt :: String -> X ()
 webPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "firefox --new-window \"%s\"" s
+        Just s  -> spawn $ printf "brave --new-window \"%s\"" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
@@ -277,22 +280,23 @@ keysAdditional =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
-      , ("M-w", webPrompt "firefox")
+      , ("M-w", webPrompt "brave")
       , ("M-v", mpvPrompt "mpv")
       , ("M-y", mpvYTPrompt "mpv")
       , ("M-/ b", spawn myBrave)
-      , ("M-/ c", spawn myChromium)
+      -- , ("M-/ c", spawn myChromium)
       , ("M-/ e", spawn myEditor)
-      , ("M-/ f", spawn myFirefox)
+      -- , ("M-/ f", spawn myFirefox)
       , ("M-/ h", spawn myFloatingGHCI)
       , ("M-/ i", spawn myFloatingPython)
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ l", spawn myLibreOffice)
       , ("M-/ m", spawn myThunderbird)
-      , ("M-/ n", spawn myNyxt)
+      -- , ("M-/ n", spawn myNyxt)
       , ("M-/ o", spawn myOpera)
       , ("M-/ p", spawn myMusicPlayer)
       , ("M-/ r", spawn myFileManager)
+      , ("M-/ s", spawn myNetsurf)
       , ("M-/ t", spawn myTorBrowser)
       , ("M-/ y", spawn myFloatingFreetube)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
