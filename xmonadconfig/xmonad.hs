@@ -144,9 +144,6 @@ myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 
-myFloatingFreetube :: String
-myFloatingFreetube = "freetube"
-
 myFileManager :: String
 myFileManager = "pcmanfm"
 
@@ -179,6 +176,9 @@ myNetsurf = "netsurf-gtk3"
 
 myBrave :: String
 myBrave = "brave"
+
+myYoutubeBrowser :: String
+myYoutubeBrowser = "brave --new-window https://youtube.com"
 
 myTorBrowser :: String
 myTorBrowser = "tor-browser"
@@ -284,7 +284,7 @@ keysAdditional =
       , ("M-v", mpvPrompt "mpv")
       , ("M-y", mpvYTPrompt "mpv")
       , ("M-/ b", spawn myBrave)
-      -- , ("M-/ c", spawn myChromium)
+      , ("M-/ c", spawn myChromium)
       , ("M-/ e", spawn myEditor)
       -- , ("M-/ f", spawn myFirefox)
       , ("M-/ h", spawn myFloatingGHCI)
@@ -298,7 +298,7 @@ keysAdditional =
       , ("M-/ r", spawn myFileManager)
       , ("M-/ s", spawn myNetsurf)
       , ("M-/ t", spawn myTorBrowser)
-      , ("M-/ y", spawn myFloatingFreetube)
+      , ("M-/ y", spawn myYoutubeBrowser)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
@@ -484,7 +484,6 @@ myManageHook = composeOne
   [ className =? "mpv" -?> doFloat <+> hasBorder False
     , className =? "cvlc" -?> doFloat <+> hasBorder False
     , className =? "vlc" -?> doFloat <+> hasBorder False
-    , className =? "FreeTube" -?> doFloat <+> hasBorder False
     , className =? "opera" -?> hasBorder True
     -- , title =? "Clementine" -?> doFloat <+> hasBorder False
     -- , title =? "ghci" -?> doFloat
