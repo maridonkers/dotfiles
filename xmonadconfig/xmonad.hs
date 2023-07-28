@@ -330,7 +330,7 @@ keysAdditional =
       -- , ("M-S-C-<Right>", shiftNextScreen)
       -- , ("M-S-C-<Up>", swapPrevScreen)
       -- , ("M-S-C-<Down>", swapNextScreen)
-      , ("M-n", sendMessage NextLayout)
+      , ("M-`", sendMessage NextLayout)
       -- , ("M-S-`", setLayout $ layoutHook conf)
       -- , ("M-C-u", sendMessage Arrange)
       -- , ("M-C-d", sendMessage DeArrange)
