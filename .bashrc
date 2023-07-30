@@ -27,8 +27,8 @@ alias lcat="less -EX"
 alias bl="LESSOPEN='' less"  
 
 alias ls="ls --color=never"
-alias ll="exa"
-alias l="exa -l"
+alias l="exa"
+alias ll="exa -l"
 
 alias en="trans -s en"
 alias nlen="trans -s nl -t en"
