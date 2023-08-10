@@ -3,6 +3,7 @@
 [[ ":$PATH:" =~ ":~/.local/bin" ]] || PATH="~/.local/bin:$PATH"
 [[ ":$PATH:" =~ ":~/.cargo/bin" ]] || PATH="$PATH:~/.cargo/bin"
 [[ ":$PATH:" =~ ":~/.cabal/bin" ]] || PATH="$PATH:~/.cabal/bin"
+[[ ":$PATH:" =~ ":~/go/bin" ]] || PATH="$PATH:~/go/bin"
 
 export TERM="xterm-256color"              # getting proper colors
 export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
@@ -30,7 +31,12 @@ alias ls="ls --color=never"
 alias l="exa"
 alias ll="exa -l"
 
-alias en="trans -s en"
+alias nl="trans -s nl"
+alias en="ennl"
+alias fr="frnl"
+alias es="esnl"
+alias pt="ptnl"
+alias it="itnl"
 alias nlen="trans -s nl -t en"
 alias ennl="trans -s en -t nl"
 alias esnl="trans -s es -t nl"
@@ -38,6 +44,7 @@ alias esen="trans -s es -t en"
 alias frnl="trans -s fr -t nl"
 alias pten="trans -s pt -t en"
 alias ptnl="trans -s pt -t nl"
+alias itnl="trans -s it -t nl"
 alias fren="trans -s fr -t en"
 
 export LYNX_LSS=$HOME/lynx.lss

@@ -171,14 +171,14 @@ myNyxt = "nyxt"
 myChromium :: String
 myChromium = "chromium"
 
-myNetsurf :: String
-myNetsurf = "netsurf-gtk3"
+myLibreWolf :: String
+myLibreWolf = "librewolf"
 
 myBrave :: String
 myBrave = "brave"
 
 myYoutubeBrowser :: String
-myYoutubeBrowser = "brave --new-window https://youtube.com"
+myYoutubeBrowser = "librewolf --new-window https://youtube.com"
 
 myTorBrowser :: String
 myTorBrowser = "tor-browser"
@@ -239,7 +239,7 @@ webPrompt :: String -> X ()
 webPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "brave --new-window \"%s\"" s
+        Just s  -> spawn $ printf "librewolf --new-window \"%s\"" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
@@ -280,7 +280,7 @@ keysAdditional =
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
       , ("M-C-<Return>", spawn myFloatingTerminal)
-      , ("M-w", webPrompt "brave")
+      , ("M-w", webPrompt "librewolf")
       , ("M-v", mpvPrompt "mpv")
       , ("M-y", mpvYTPrompt "mpv")
       , ("M-/ b", spawn myBrave)
@@ -292,12 +292,12 @@ keysAdditional =
       , ("M-/ k", spawn myKeepassXc)
       , ("M-/ l", spawn myLibreOffice)
       , ("M-/ m", spawn myThunderbird)
-      -- , ("M-/ n", spawn myNyxt)
+      , ("M-/ n", spawn myNyxt)
       , ("M-/ o", spawn myOpera)
       , ("M-/ p", spawn myMusicPlayer)
       , ("M-/ r", spawn myFileManager)
-      , ("M-/ s", spawn myNetsurf)
       , ("M-/ t", spawn myTorBrowser)
+      , ("M-/ w", spawn myLibreWolf)
       , ("M-/ y", spawn myYoutubeBrowser)
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
