@@ -5,6 +5,7 @@
 [[ ":$PATH:" =~ ":~/.cabal/bin" ]] || PATH="$PATH:~/.cabal/bin"
 [[ ":$PATH:" =~ ":~/go/bin" ]] || PATH="$PATH:~/go/bin"
 
+export DISPLAY=":0"
 export TERM="xterm-256color"              # getting proper colors
 export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 
@@ -22,14 +23,19 @@ eval "$(direnv hook bash)"
 alias config='git --git-dir=/home/mdo/.cfg/ --work-tree=/home/mdo'
 
 alias b="bat -n"
-alias sless="vim -R"
-alias mdless="mdcat -p"
+alias v="nvim -R"
+alias md="mdcat -p"
 alias lcat="less -EX"
 alias bl="LESSOPEN='' less"  
 
 alias ls="ls --color=never"
 alias l="exa"
 alias ll="exa -l"
+alias lls="exa -ls modified"
+
+alias tma="tmux attach-session"
+alias tmn="tmux new-session -s"
+alias tml="tmux list-sessions"
 
 alias nl="trans -s nl"
 alias en="ennl"

@@ -69,6 +69,8 @@ import           XMonad.Layout.Tabbed
 import           XMonad.Layout.ToggleLayouts        (ToggleLayout (..),
                                                      toggleLayouts)
 import           XMonad.Layout.TrackFloating
+import           XMonad.Layout.MultiColumns
+import           XMonad.Layout.ThreeColumns
 import           XMonad.Layout.WindowArranger       (windowArrange)
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
@@ -137,6 +139,9 @@ myFocusedBorderColor = "#ff0000"
 
 myEditor :: String
 myEditor = "bin/ec"
+
+myScreendump :: String
+myScreendump = "scrot"
 
 myFloatingGHCI :: String
 myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
@@ -274,6 +279,7 @@ keysAdditional =
       , ("M-<Space>", sendMessage (Toggle "Full"))
       , ("M-<Home>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
       , ("M-<Esc>", withFocused toggleFloat)
+      , ("M-d", spawn myScreendump)
       , ("M-m", goToSelected def) --defaultGSConfig)
       -- , ("M-w", withFocused minimizeWindow)
       -- , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
@@ -286,7 +292,7 @@ keysAdditional =
       , ("M-/ b", spawn myBrave)
       , ("M-/ c", spawn myChromium)
       , ("M-/ e", spawn myEditor)
-      -- , ("M-/ f", spawn myFirefox)
+      , ("M-/ f", spawn myFileManager)
       , ("M-/ h", spawn myFloatingGHCI)
       , ("M-/ i", spawn myFloatingPython)
       , ("M-/ k", spawn myKeepassXc)
@@ -295,7 +301,6 @@ keysAdditional =
       , ("M-/ n", spawn myNyxt)
       , ("M-/ o", spawn myOpera)
       , ("M-/ p", spawn myMusicPlayer)
-      , ("M-/ r", spawn myFileManager)
       , ("M-/ t", spawn myTorBrowser)
       , ("M-/ w", spawn myLibreWolf)
       , ("M-/ y", spawn myYoutubeBrowser)
@@ -461,7 +466,9 @@ main = do
                               True
                  $ ResizableTall 1 (1.5/100) (6/10) []
                      ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
-                     -- ||| Grid
+                     ||| ThreeCol 1 (3/100) (1/2)
+                     ||| multiCol [1] 1 0.01 (-0.5)
+                     ||| Grid
                      ||| noBorders simpleTabbed
                      -- ||| emptyBSP
 
