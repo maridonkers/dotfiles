@@ -9,6 +9,13 @@ export DISPLAY=":0"
 export TERM="xterm-256color"              # getting proper colors
 export HISTCONTROL=ignoredups:erasedups   # no duplicate entries
 
+# Determine if there's an HDMI monitor and switch off screen off if there is.
+xrandr --listactivemonitors --verbose|grep '^HDMI-[0-9] connected ' > /dev/null
+if [ $? -eq 0 ]
+then
+  xset s off -dpms
+fi
+
 # Rust
 # https://internals.rust-lang.org/t/cargo-sparse-protocol-feedback-thread/18234
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL="sparse"
@@ -33,7 +40,7 @@ alias l="exa"
 alias ll="exa -l"
 alias lls="exa -ls modified"
 
-alias tma="tmux attach-session"
+alias tma="tmux attach-session -t"
 alias tmn="tmux new-session -s"
 alias tml="tmux list-sessions"
 
@@ -46,8 +53,11 @@ alias it="itnl"
 alias nlen="trans -s nl -t en"
 alias ennl="trans -s en -t nl"
 alias esnl="trans -s es -t nl"
+alias nles="trans -s nl -t es"
 alias esen="trans -s es -t en"
+alias enes="trans -s en -t es"
 alias frnl="trans -s fr -t nl"
+alias nlfr="trans -s nl -t fr"
 alias pten="trans -s pt -t en"
 alias ptnl="trans -s pt -t nl"
 alias itnl="trans -s it -t nl"

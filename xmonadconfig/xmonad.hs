@@ -146,6 +146,9 @@ myScreendump = "scrot"
 myFloatingGHCI :: String
 myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
 
+myFloatingSpagoRepl :: String
+myFloatingSpagoRepl = "xterm -title \"floatterm\" -e \"exec spago repl\""
+
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python\""
 
@@ -301,6 +304,7 @@ keysAdditional =
       , ("M-/ n", spawn myNyxt)
       , ("M-/ o", spawn myOpera)
       , ("M-/ p", spawn myMusicPlayer)
+      , ("M-/ u", spawn myFloatingSpagoRepl)
       , ("M-/ t", spawn myTorBrowser)
       , ("M-/ w", spawn myLibreWolf)
       , ("M-/ y", spawn myYoutubeBrowser)
@@ -405,8 +409,13 @@ main = do
   if numberOfScreens > (1 :: Integer)
    then do
     -- spawn "xrandr --output LVDS-1 --primary --auto  --output HDMI-1 --auto --left-of LVDS-1"
+    -- My monitor struggles more and more to come out of HDMI black screen after resume
     spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"
+    -- Use VGA output instead of HDMI for video output
+    -- spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
+    -- My monitor struggels more and more to come out of HDMI black screen after resume
     spawn "pactl set-card-profile 0 output:hdmi-stereo"
+    -- Use analog stereo audio output
     -- spawn "pactl set-card-profile 0 output:analog-stereo"
    else do
     spawn "xrandr --output LVDS-1 --primary --auto"
