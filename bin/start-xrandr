@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# First reset the display.
+xrandr -s 0
+
+# Determine if external monitor connected and configure accordingly.
+if xrandr -q | grep 'HDMI-1 connected' >/dev/null
+then
+    echo "Dual screen configuration (external HDMI monitor connected).";
+    xrandr --output LVDS-1 --primary --auto --output HDMI-1 --auto --left-of LVDS-1
+else
+    echo "Laptop screen only configuration.";
+    xrandr --output LVDS-1 --primary --auto
+fi
