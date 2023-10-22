@@ -200,6 +200,9 @@ myTorBrowser = "tor-browser"
 myScreensaverOn :: String
 myScreensaverOn = "xlock -mode blank"
 
+myScreenBlank :: String
+myScreenBlank = "sleep 1; xset dpms force off"
+
 -- logCommand :: String
 -- logCommand = "echo \"" ++ (show (typeOf defaults)) ++ "\" > /tmp/XMONAD.txt"
 
@@ -308,8 +311,8 @@ keysAdditional =
       , ("M-/ t", spawn myTorBrowser)
       , ("M-/ w", spawn myLibreWolf)
       , ("M-/ y", spawn myYoutubeBrowser)
-      -- , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --auto --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off")
-      , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off")
+      -- , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off")
+      , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --auto --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off")
       , ("M-/ ]", spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --off --output VGA-1 --off --output DP-1 --off")
       , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
@@ -352,6 +355,7 @@ keysAdditional =
       -- , ("M-0", spawn "xscreensaver-command -lock")
       -- , ("M-C-0", spawn "xscreensaver-command -lock & systemctl suspend")
       , ("<Scroll_lock>", spawn myScreensaverOn)
+      , ("<Pause>", spawn myScreenBlank)
       , ("M-<Pause>", spawn "systemctl suspend")
       , ("M-<Scroll_lock>", spawn $ myScreensaverOn ++ " -startCmd \"systemctl suspend\"")
       , ("M-C-<Scroll_lock>", spawn "systemctl hibernate")
@@ -413,8 +417,8 @@ main = do
    then do
     -- spawn "xrandr --output LVDS-1 --primary --auto  --output HDMI-1 --auto --left-of LVDS-1"
     -- My monitor struggles more and more to come out of HDMI black screen after resume
-    -- spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"
-    spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
+    -- spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
+    spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"
     -- Use VGA output instead of HDMI for video output
     -- spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
     -- My monitor struggels more and more to come out of HDMI black screen after resume
