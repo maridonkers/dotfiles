@@ -188,6 +188,9 @@ myBrave = "brave"
 myYoutubeBrowser :: String
 myYoutubeBrowser = "librewolf --new-window https://youtube.com"
 
+myFilezilla :: String
+myFilezilla = "filezilla"
+
 myTorBrowser :: String
 myTorBrowser = "tor-browser"
 
@@ -311,6 +314,7 @@ keysAdditional =
       , ("M-/ t", spawn myTorBrowser)
       , ("M-/ w", spawn myLibreWolf)
       , ("M-/ y", spawn myYoutubeBrowser)
+      , ("M-/ z", spawn myFilezilla)
       -- , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off")
       , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --auto --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off")
       , ("M-/ ]", spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --off --output VGA-1 --off --output DP-1 --off")
