@@ -163,10 +163,10 @@ alias pt-euronews="mpv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb2
 
 alias es-dw="mpv https://www.youtube.com/watch?v=tsStUN73_6I &"
 alias es-rtve="mpv https://www.youtube.com/watch?v=8GmR9H2iH8Q &"
-alias es-france24="mpv https://www.youtube.com/watch?v=XDJPzMznAjU&pp=ygUWZnJhbmNlIDI0IGxpdmUgc3BhbmlzaA%3D%3D &"
+alias es-france24="mpv https://www.youtube.com/live/Y-IlMeCCtIg &"
 alias es-euronews="mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
 
-alias fr-france24="mpv https://www.youtube.com/watch?v=gxG3pdKvlIs&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
+alias fr-france24="mpv https://www.youtube.com/live/l8PMl7tUDIE &"
 alias fr-franceinfo="mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
 alias fr-euronews="mpv https://www.youtube.com/watch?v=NiRIbKwAejk &"
 

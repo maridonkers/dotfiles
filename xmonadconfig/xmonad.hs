@@ -194,6 +194,32 @@ myFilezilla = "filezilla"
 myTorBrowser :: String
 myTorBrowser = "tor-browser"
 
+myPtEuronews :: String
+myPtEuronews = "mpv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb25ld3MgbGl2ZSBwb3J0dWd1ZXNl &"
+
+myEsDw :: String
+myEsDw = "mpv https://www.youtube.com/watch?v=tsStUN73_6I &"
+myEsRtve :: String
+myEsRtve = "mpv https://www.youtube.com/watch?v=8GmR9H2iH8Q &"
+myEsFrance24 :: String
+myEsFrance24 = "mpv https://www.youtube.com/live/Y-IlMeCCtIg &"
+myEsEuronews :: String
+myEsEuronews = "mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+
+myFrFrance24 :: String
+myFrFrance24 = "mpv https://www.youtube.com/live/l8PMl7tUDIE &"
+myFrFranceinfo :: String
+myFrFranceinfo = "mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
+myFrEuronews :: String
+myFrEuronews = "mpv https://www.youtube.com/watch?v=NiRIbKwAejk &"
+
+myEnFrance24 :: String
+myEnFrance24 = "mpv https://www.youtube.com/watch?v=h3MuIUNCCzI&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
+myEnEuronews :: String
+myEnEuronews = "mpv https://www.youtube.com/watch?v=pykpO5kQJ98&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+myEnDw :: String
+myEnDw = "mpv https://www.youtube.com/watch?v=pqabxBKzZ6M&pp=ygUIZHcgbGl2ZSA%3D &"
+
 -- myRedshiftOn :: String
 -- myRedshiftOn = "redshift"
 
@@ -312,13 +338,24 @@ keysAdditional =
       , ("M-/ p", spawn myMusicPlayer)
       , ("M-/ u", spawn myFloatingSpagoRepl)
       , ("M-/ t", spawn myTorBrowser)
+      , ("M-/ v p e", spawn myPtEuronews)
+      , ("M-/ v e 2", spawn myEsFrance24)
+      , ("M-/ v e d", spawn myEsDw)
+      , ("M-/ v e e", spawn myEsEuronews)
+      , ("M-/ v e r", spawn myEsRtve)
+      , ("M-/ v f 2", spawn myFrFrance24)
+      , ("M-/ v f e", spawn myFrEuronews)
+      , ("M-/ v f f", spawn myFrFranceinfo)
+      , ("M-/ v u 2", spawn myEnFrance24)
+      , ("M-/ v u d", spawn myEnDw)
+      , ("M-/ v u e", spawn myEnEuronews)
       , ("M-/ w", spawn myLibreWolf)
       , ("M-/ y", spawn myYoutubeBrowser)
       , ("M-/ z", spawn myFilezilla)
       -- , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off")
       , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --auto --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off")
       , ("M-/ ]", spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --off --output VGA-1 --off --output DP-1 --off")
-      , ("M-h", spawn "pactl set-card-profile 0 output:hdmi-stereo")
+      , ("M-i", spawn "pactl set-card-profile 0 output:hdmi-stereo")
       , ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo")
       , ("M-S-<Left>", sendMessage Shrink)
       , ("M-S-<Right>", sendMessage Expand)
@@ -422,13 +459,13 @@ main = do
     -- spawn "xrandr --output LVDS-1 --primary --auto  --output HDMI-1 --auto --left-of LVDS-1"
     -- My monitor struggles more and more to come out of HDMI black screen after resume
     -- spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
-    spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"
-    -- Use VGA output instead of HDMI for video output
-    -- spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
+    -- spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"
+    -- Use VGA output instead of HDMI for video output (switch off HDMI completely)
+    spawn "xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off"
     -- My monitor struggels more and more to come out of HDMI black screen after resume
-    spawn "pactl set-card-profile 0 output:hdmi-stereo"
+    -- spawn "pactl set-card-profile 0 output:hdmi-stereo"
     -- Use analog stereo audio output
-    -- spawn "pactl set-card-profile 0 output:analog-stereo"
+    spawn "pactl set-card-profile 0 output:analog-stereo"
    else do
     spawn "xrandr --output LVDS-1 --primary --auto"
     spawn "pactl set-card-profile 0 output:analog-stereo"
