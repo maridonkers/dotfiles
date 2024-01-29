@@ -198,30 +198,30 @@ myTorBrowser :: String
 myTorBrowser = "tor-browser"
 
 myPtEuronews :: String
-myPtEuronews = "mpv -vo xv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb25ld3MgbGl2ZSBwb3J0dWd1ZXNl &"
+myPtEuronews = "mpv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb25ld3MgbGl2ZSBwb3J0dWd1ZXNl &"
 
 myEsDw :: String
-myEsDw = "mpv -vo xv https://www.youtube.com/watch?v=tsStUN73_6I &"
+myEsDw = "mpv https://www.youtube.com/watch?v=tsStUN73_6I &"
 myEsRtve :: String
-myEsRtve = "mpv -vo xv https://www.youtube.com/watch?v=mzdfGCdNSHQ &"
+myEsRtve = "mpv https://www.youtube.com/watch?v=mzdfGCdNSHQ &"
 myEsFrance24 :: String
-myEsFrance24 = "mpv -vo xv https://www.youtube.com/live/Y-IlMeCCtIg &"
+myEsFrance24 = "mpv https://www.youtube.com/live/Y-IlMeCCtIg &"
 myEsEuronews :: String
-myEsEuronews = "mpv -vo xv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+myEsEuronews = "mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
 
 myFrFrance24 :: String
-myFrFrance24 = "mpv -vo xv https://www.youtube.com/live/l8PMl7tUDIE &"
+myFrFrance24 = "mpv https://www.youtube.com/live/l8PMl7tUDIE &"
 myFrFranceinfo :: String
-myFrFranceinfo = "mpv -vo xv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
+myFrFranceinfo = "mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
 myFrEuronews :: String
-myFrEuronews = "mpv -vo xv https://www.youtube.com/watch?v=NiRIbKwAejk &"
+myFrEuronews = "mpv https://www.youtube.com/watch?v=NiRIbKwAejk &"
 
 myEnFrance24 :: String
-myEnFrance24 = "mpv -vo xv https://www.youtube.com/watch?v=h3MuIUNCCzI&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
+myEnFrance24 = "mpv https://www.youtube.com/watch?v=h3MuIUNCCzI&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
 myEnEuronews :: String
-myEnEuronews = "mpv -vo xv https://www.youtube.com/watch?v=pykpO5kQJ98&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+myEnEuronews = "mpv https://www.youtube.com/watch?v=pykpO5kQJ98&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
 myEnDw :: String
-myEnDw = "mpv -vo xv https://www.youtube.com/watch?v=pqabxBKzZ6M&pp=ygUIZHcgbGl2ZSA%3D &"
+myEnDw = "mpv https://www.youtube.com/watch?v=pqabxBKzZ6M&pp=ygUIZHcgbGl2ZSA%3D &"
 
 -- myRedshiftOn :: String
 -- myRedshiftOn = "redshift"
@@ -294,7 +294,7 @@ mpvPrompt :: String -> X ()
 mpvPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "mpv -vo xv \"%s\"" s
+        Just s  -> spawn $ printf "mpv \"%s\"" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
@@ -303,7 +303,7 @@ mpvYTPrompt :: String -> X ()
 mpvYTPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "yt-dlp \"%s\" -o - | mpv -vo xv -" s
+        Just s  -> spawn $ printf "yt-dlp \"%s\" -o - | mpv -" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
