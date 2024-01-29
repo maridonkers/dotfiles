@@ -185,6 +185,9 @@ myLibreWolf = "librewolf"
 myBrave :: String
 myBrave = "brave"
 
+myVivaldi :: String
+myVivaldi = "vivaldi"
+
 myYoutubeBrowser :: String
 myYoutubeBrowser = "librewolf --new-window https://youtube.com"
 
@@ -195,30 +198,30 @@ myTorBrowser :: String
 myTorBrowser = "tor-browser"
 
 myPtEuronews :: String
-myPtEuronews = "mpv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb25ld3MgbGl2ZSBwb3J0dWd1ZXNl &"
+myPtEuronews = "mpv -vo xv https://www.youtube.com/watch?v=fLtn2L7OdeI&pp=ygUYZXVyb25ld3MgbGl2ZSBwb3J0dWd1ZXNl &"
 
 myEsDw :: String
-myEsDw = "mpv https://www.youtube.com/watch?v=tsStUN73_6I &"
+myEsDw = "mpv -vo xv https://www.youtube.com/watch?v=tsStUN73_6I &"
 myEsRtve :: String
-myEsRtve = "mpv https://www.youtube.com/watch?v=8GmR9H2iH8Q &"
+myEsRtve = "mpv -vo xv https://www.youtube.com/watch?v=mzdfGCdNSHQ &"
 myEsFrance24 :: String
-myEsFrance24 = "mpv https://www.youtube.com/live/Y-IlMeCCtIg &"
+myEsFrance24 = "mpv -vo xv https://www.youtube.com/live/Y-IlMeCCtIg &"
 myEsEuronews :: String
-myEsEuronews = "mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+myEsEuronews = "mpv -vo xv https://www.youtube.com/watch?v=O9mOtdZ-nSk&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
 
 myFrFrance24 :: String
-myFrFrance24 = "mpv https://www.youtube.com/live/l8PMl7tUDIE &"
+myFrFrance24 = "mpv -vo xv https://www.youtube.com/live/l8PMl7tUDIE &"
 myFrFranceinfo :: String
-myFrFranceinfo = "mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
+myFrFranceinfo = "mpv -vo xv https://www.youtube.com/watch?v=Z-Nwo-ypKtM &"
 myFrEuronews :: String
-myFrEuronews = "mpv https://www.youtube.com/watch?v=NiRIbKwAejk &"
+myFrEuronews = "mpv -vo xv https://www.youtube.com/watch?v=NiRIbKwAejk &"
 
 myEnFrance24 :: String
-myEnFrance24 = "mpv https://www.youtube.com/watch?v=h3MuIUNCCzI&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
+myEnFrance24 = "mpv -vo xv https://www.youtube.com/watch?v=h3MuIUNCCzI&pp=ygUPZnJhbmNlIDI0IGxpdmUg &"
 myEnEuronews :: String
-myEnEuronews = "mpv https://www.youtube.com/watch?v=pykpO5kQJ98&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
+myEnEuronews = "mpv -vo xv https://www.youtube.com/watch?v=pykpO5kQJ98&pp=ygUVZXVyb25ld3MgbGl2ZSBzcGFuaXNo &"
 myEnDw :: String
-myEnDw = "mpv https://www.youtube.com/watch?v=pqabxBKzZ6M&pp=ygUIZHcgbGl2ZSA%3D &"
+myEnDw = "mpv -vo xv https://www.youtube.com/watch?v=pqabxBKzZ6M&pp=ygUIZHcgbGl2ZSA%3D &"
 
 -- myRedshiftOn :: String
 -- myRedshiftOn = "redshift"
@@ -231,6 +234,9 @@ myScreensaverOn = "xlock -mode blank"
 
 myScreenBlank :: String
 myScreenBlank = "sleep 1; xset dpms force off"
+
+myCursorToggle :: String
+myCursorToggle = "~/bin/togglecursor"
 
 -- logCommand :: String
 -- logCommand = "echo \"" ++ (show (typeOf defaults)) ++ "\" > /tmp/XMONAD.txt"
@@ -288,7 +294,7 @@ mpvPrompt :: String -> X ()
 mpvPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "mpv \"%s\"" s
+        Just s  -> spawn $ printf "mpv -vo xv \"%s\"" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
@@ -297,7 +303,7 @@ mpvYTPrompt :: String -> X ()
 mpvYTPrompt _ = do
     str <- inputPrompt cfg "Path|URL"
     case str of
-        Just s  -> spawn $ printf "yt-dlp \"%s\" -o - | mpv -" s
+        Just s  -> spawn $ printf "yt-dlp \"%s\" -o - | mpv -vo xv -" s
         Nothing -> pure ()
   where
     cfg = myXPConfig { defaultText = "" }
@@ -320,12 +326,14 @@ keysAdditional =
       -- , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
       , ("M-<Backspace>", kill)
       , ("M-b", withFocused toggleBorder)
+      , ("M-c", spawn myCursorToggle)
       , ("M-C-<Return>", spawn myFloatingTerminal)
       , ("M-w", webPrompt "librewolf")
       , ("M-v", mpvPrompt "mpv")
       , ("M-y", mpvYTPrompt "mpv")
       , ("M-/ b", spawn myBrave)
       , ("M-/ c", spawn myChromium)
+      , ("M-/ d", spawn myVivaldi)
       , ("M-/ e", spawn myEditor)
       , ("M-/ f", spawn myFileManager)
       , ("M-/ h", spawn myFloatingGHCI)
@@ -526,9 +534,9 @@ main = do
                      ||| Mirror (ResizableTall 1 (1.5/100) (6/10) [])
                      ||| ThreeCol 1 (3/100) (1/2)
                      ||| multiCol [1] 1 0.01 (-0.5)
+                     ||| emptyBSP
                      ||| Grid
                      ||| noBorders simpleTabbed
-                     -- ||| emptyBSP
 
 --------------------------------------------------------------------------------
 -- | Customize the way 'XMonad.Prompt' looks and behaves.  It's a

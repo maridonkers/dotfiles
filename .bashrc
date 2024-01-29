@@ -40,6 +40,8 @@ alias l="exa"
 alias ll="exa -l"
 alias lls="exa -ls modified"
 
+alias lsb="lsblk -o PATH,SIZE,FSTYPE,MOUNTPOINTS,UUID"
+
 alias tma="tmux attach-session -t"
 alias tmn="tmux new-session -s"
 alias tml="tmux list-sessions"
@@ -62,6 +64,8 @@ alias pten="trans -s pt -t en"
 alias ptnl="trans -s pt -t nl"
 alias itnl="trans -s it -t nl"
 alias fren="trans -s fr -t en"
+
+alias xdg-list-paths="XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query default text/html"
 
 export LYNX_LSS=$HOME/lynx.lss
 
@@ -143,7 +147,7 @@ alias speedtest="speedtest -p"
 
 alias lsblks="lsblk -o +FSSIZE,FSAVAIL,PTTYPE,HOTPLUG,UUID"
 
-alias externip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias eip4="dig +short myip.opendns.com @resolver1.opendns.com"
 
 alias sophia="ssh -i ~/.ssh/id_rsa-sophia mdo@192.168.1.43"
 alias tarssh="ssh -i ~/.ssh/id_rsa-tartarus -p 2022 u0_a44@192.168.1.205"
