@@ -71,30 +71,18 @@ bindsym $mod+BackSpace kill
 bindsym $mod+Delete exec --no-startup-id xkill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+p exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Ctrl+Left move left
@@ -114,20 +102,20 @@ bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # split in horizontal orientation
 bindsym $mod+h split h
+bindsym $mod+Shift+h layout splith
 
 # split in vertical orientation
 bindsym $mod+v split v
-
-# Flip layout
-bindsym $mod+Shift+space layout toggle split
+bindsym $mod+Shift+v layout splitv
 
 # enter fullscreen mode for the focused container
 bindsym $mod+space fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
+bindsym $mod+b layout tabbed
+bindsym $mod+d layout default
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
@@ -187,23 +175,26 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # Screen lock, suspend, hibernate controls
 #bindsym $mod+ exec 
 bindsym $mod+End exec --no-startup-id xlock -mode blank
-bindsym $mod+Shift+End exec --no-startup-id xlock -mode blank -startCmd "systemctl suspend"
+bindsym $mod+Shift+End exec --no-startup-id systemctl suspend
+bindsym $mod+Ctrl+End exec --no-startup-id xlock -mode blank -startCmd "systemctl suspend"
 bindsym $mod+Shift+Ctrl+End exec --no-startup-id xlock -mode blank -startCmd "systemctl hibernate"
 
-# Application launchers: press $mod+p followed by a followup key
-set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube libre[w]olf [t]hunderbird [l]ibreoffice
-bindsym $mod+p mode "$mode_launcher"
+# Convenience shortcuts
+bindsym $mod+e exec emacsclient -nc -a ""
+bindsym $mod+w exec librewolf --new-window
+
+# Application launchers: press $mod+l followed by a followup key
+set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube [t]hunderbird [l]ibreoffice
+bindsym $mod+l mode "$mode_launcher"
 
 # Commands can be chained (;) and the mode "default" automatically exits
 mode "$mode_launcher" {
     bindsym b exec brave --new-window; mode "default"
     bindsym c exec chromium --new-window; mode "default"
-    bindsym e exec emacsclient -nc -a ""; mode "default"
     bindsym k exec keepassxc; mode "default"
     bindsym l exec libreoffice; mode "default"
     bindsym m exec xterm -title "float musikcube" -e "exec musikcube"; mode "default"
     bindsym t exec thunderbird; mode "default"
-    bindsym w exec librewolf --new-window; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -240,31 +231,31 @@ bindsym $mod+Shift+Right resize grow width 5 px or 5 ppt
 bindsym $mod+Shift+Down resize shrink height 5 px or 5 ppt
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# mode "resize" {
+#         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+#         # Pressing left will shrink the window’s width.
+#         # Pressing right will grow the window’s width.
+#         # Pressing up will shrink the window’s height.
+#         # Pressing down will grow the window’s height.
+#         bindsym j resize shrink width 10 px or 10 ppt
+#         bindsym k resize grow height 10 px or 10 ppt
+#         bindsym l resize shrink height 10 px or 10 ppt
+#         bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+#         # same bindings, but for the arrow keys
+#         bindsym Left resize shrink width 10 px or 10 ppt
+#         bindsym Down resize grow height 10 px or 10 ppt
+#         bindsym Up resize shrink height 10 px or 10 ppt
+#         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
+#         # back to normal: Enter or Escape or $mod+r
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+#         bindsym $mod+r mode "default"
+# }
 
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
