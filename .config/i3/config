@@ -183,9 +183,9 @@ bindsym $mod+Shift+Ctrl+End exec --no-startup-id xlock -mode blank -startCmd "sy
 bindsym $mod+e exec emacsclient -nc -a ""
 bindsym $mod+w exec librewolf --new-window
 
-# Application launchers: press $mod+l followed by a followup key
+# Application launchers: press $mod+/ followed by a followup key
 set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube [t]hunderbird [l]ibreoffice
-bindsym $mod+l mode "$mode_launcher"
+bindsym $mod+slash mode "$mode_launcher"
 
 # Commands can be chained (;) and the mode "default" automatically exits
 mode "$mode_launcher" {
