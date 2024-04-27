@@ -54,6 +54,9 @@ bindsym $mod+KP_Divide exec --no-startup-id pactl suspend-sink @DEFAULT_SINK@ tr
 bindsym $mod+KP_Multiply exec --no-startup-id pactl suspend-sink @DEFAULT_SINK@ false
 bindsym $mod+KP_Enter exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
+# Hide cursor shortcut
+bindsym $mod+c exec --no-startup-id ~/bin/togglecursor
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -68,7 +71,7 @@ bindsym $mod+Ctrl+Shift+Return exec xterm -title "float racket" -e "exec racket"
 bindsym $mod+BackSpace kill
 
 # x-kill (the Grim Reaper himself)
-bindsym $mod+Delete exec --no-startup-id xkill
+bindsym $mod+Delete exec xkill
 
 # start dmenu (a program launcher)
 bindsym $mod+p exec --no-startup-id dmenu_run
@@ -83,6 +86,12 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# previous/next from full screen
+bindsym $mod+Mod1+Left fullscreen toggle; focus left; fullscreen toggle
+bindsym $mod+Mod1+Down fullscreen toggle; focus down; fullscreen toggle
+bindsym $mod+Mod1+Up fullscreen toggle; focus up; fullscreen toggle
+bindsym $mod+Mod1+Right fullscreen toggle; focus right; fullscreen toggle
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Ctrl+Left move left
@@ -156,7 +165,9 @@ bindsym $mod+0 workspace number $ws10
 
 # previous/next, back and forth
 bindsym $mod+Tab workspace next
+bindsym $mod+Next workspace next
 bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Prior workspace prev
 bindsym $mod+equal workspace back_and_forth
 bindsym $mod+Shift+equal move container to workspace back_and_forth
 
@@ -184,7 +195,7 @@ bindsym $mod+e exec emacsclient -nc -a ""
 bindsym $mod+w exec librewolf --new-window
 
 # Application launchers: press $mod+/ followed by a followup key
-set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube [t]hunderbird [l]ibreoffice
+set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube tor-br[o]wser [l]ibreoffice [t]hunderbird
 bindsym $mod+slash mode "$mode_launcher"
 
 # Commands can be chained (;) and the mode "default" automatically exits
@@ -194,6 +205,7 @@ mode "$mode_launcher" {
     bindsym k exec keepassxc; mode "default"
     bindsym l exec libreoffice; mode "default"
     bindsym m exec xterm -title "float musikcube" -e "exec musikcube"; mode "default"
+    bindsym o exec tor-browser; mode "default"
     bindsym t exec thunderbird; mode "default"
 
     bindsym Escape mode "default"

@@ -7,6 +7,12 @@ general {
   separator = "|"
 }
 
+cpu_usage {
+  format = "CPU_0: %cpu0 CPU_1: %cpu1 CPU_2: %cpu2 CPU_3: %cpu3"
+  degraded_threshold = 90
+  max_threshold = 95
+}
+
 memory {
   memory_used_method = classical
   format="Memory: %used/%total"
@@ -24,11 +30,6 @@ disk "/boot" {
   format = "/boot: %percentage_used"
 }
 
-cpu_usage {
-  format = "CPU_0: %cpu0 CPU_1: %cpu1 CPU_2: %cpu2 CPU_3: %cpu3"
-  degraded_threshold = 90
-  max_threshold = 95
-}
 
 ethernet ens5 {
   format_up = "ETH: %ip (%speed)"
@@ -56,11 +57,11 @@ battery all {
   low_threshold=10
 }
 
+order += "cpu_usage"
 order += "memory"
 order += "disk /"
 order += "disk /boot"
 order += "disk /home"
-order += "cpu_usage"
 order += "ethernet ens5"
 order += "wireless __first__"
 order += "battery all"
