@@ -31,16 +31,16 @@ disk "/boot" {
 }
 
 
-ethernet ens5 {
-  format_up = "ETH: %ip (%speed)"
-  format_down = "ETH: down"
-}
+# ethernet ens5 {
+#   format_up = "ETH: %ip (%speed)"
+#   format_down = "ETH: down"
+# }
 
 # wlp3s0
-wireless __first__ {
-  format_up = "WLS: (%quality at %ssid) %ip"
-  format_down  = "WLS: down"
-}
+#wireless __first__ {
+#  format_up = "WLS: (%quality at %ssid) %ip"
+#  format_down  = "WLS: down"
+#}
 
 tztime amsterdam {
         format = "<span foreground='#ffffff'>time:</span> %time"
@@ -62,7 +62,7 @@ order += "memory"
 order += "disk /"
 order += "disk /boot"
 order += "disk /home"
-order += "ethernet ens5"
-order += "wireless __first__"
+# order += "ethernet ens5"
+#order += "wireless __first__"
 order += "battery all"
 order += "timezone amsterdam"
