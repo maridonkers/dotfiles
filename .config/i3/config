@@ -197,8 +197,9 @@ bindsym $mod+w exec librewolf --new-window
 # Browse URL from clipboard
 bindsym $mod+u --release exec --no-startup-id librewolf --new-window "$(xclip -o -selection clipboard)"
 
-# Play video URL from clipboard (&t is not supported by mpv, hence strip it)
-bindsym $mod+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard | sed -e 's/[?&]t=[^&]*//')"
+# Play video URL from clipboard
+bindsym $mod+Shift+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard | sed -e 's/[?&]t=[^&]*//')"
+bindsym $mod+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard)"
 
 # Application launchers: press $mod+/ followed by a followup key
 set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube tor-br[o]wser [l]ibreoffice [t]hunderbird
