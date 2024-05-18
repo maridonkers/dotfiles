@@ -194,6 +194,12 @@ bindsym $mod+Shift+Ctrl+End exec --no-startup-id xlock -mode blank -startCmd "sy
 bindsym $mod+e exec emacsclient -nc -a ""
 bindsym $mod+w exec librewolf --new-window
 
+# Browse URL from clipboard
+bindsym $mod+u --release exec --no-startup-id librewolf --new-window "$(xclip -o -selection clipboard)"
+
+# Play video URL from clipboard (&t is not supported by mpv, hence strip it)
+bindsym $mod+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard | sed -e 's/[?&]t=[^&]*//')"
+
 # Application launchers: press $mod+/ followed by a followup key
 set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube tor-br[o]wser [l]ibreoffice [t]hunderbird
 bindsym $mod+slash mode "$mode_launcher"
@@ -216,6 +222,7 @@ mode "$mode_launcher" {
 for_window [class="^.*"] border pixel 2
 for_window [title="float"] floating enable
 for_window [title=" - mpv"] floating enable
+for_window [title=" - cvlc"] floating enable
 
 # Colors
 # client.focused         #4c7899 #285577 #ffffff #2e9ef4   #285577
