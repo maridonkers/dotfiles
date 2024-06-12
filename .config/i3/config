@@ -64,11 +64,12 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec xterm
 bindsym $mod+Ctrl+Return exec xterm -title "float term" 
-bindsym $mod+Shift+Return exec xterm -title "float python" -e "exec python"
-bindsym $mod+Ctrl+Shift+Return exec xterm -title "float racket" -e "exec racket"
+bindsym $mod+Shift+Return exec xterm -title "float ghci" -e "exec nix-shell -p ghc --command ghci"
+bindsym $mod+Ctrl+Shift+Return exec xterm -title "float python" -e "exec python"
 
 # kill focused window
 bindsym $mod+BackSpace kill
+bindsym $mod+Shift+BackSpace exec pkill -9 racket
 
 # x-kill (the Grim Reaper himself)
 bindsym $mod+Delete exec xkill
@@ -195,14 +196,18 @@ bindsym $mod+e exec emacsclient -nc -a ""
 bindsym $mod+w exec librewolf --new-window
 
 # Browse URL from clipboard
-bindsym $mod+u --release exec --no-startup-id librewolf --new-window "$(xclip -o -selection clipboard)"
+#bindsym $mod+u --release exec --no-startup-id librewolf --new-window "$(xclip -o -selection clipboard)"
+bindsym $mod+u --release exec --no-startup-id librewolf --new-window  "$(xsel)"
+bindsym $mod+i --release exec --no-startup-id dillo  "$(xsel)"
 
 # Play video URL from clipboard
-bindsym $mod+Shift+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard | sed -e 's/[?&]t=[^&]*//')"
-bindsym $mod+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard)"
+# bindsym $mod+Shift+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard | sed -e 's/[?&]t=[^&]*//')"
+bindsym $mod+Shift+y --release exec --no-startup-id mpv "$(xsel | sed -e 's/[?&]t=[^&]*//')"
+# bindsym $mod+y --release exec --no-startup-id mpv "$(xclip -o -selection clipboard)"
+bindsym $mod+y --release exec --no-startup-id mpv "$(xsel)"
 
 # Application launchers: press $mod+/ followed by a followup key
-set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube tor-br[o]wser [l]ibreoffice [t]hunderbird
+set $mode_launcher Launch: [b]rave [c]hromium [k]eepassxc [l]ibreoffice [m]usikcube [n]yxt tor-br[o]wser [l]ibreoffice [t]hunderbird
 bindsym $mod+slash mode "$mode_launcher"
 
 # Commands can be chained (;) and the mode "default" automatically exits
@@ -212,6 +217,7 @@ mode "$mode_launcher" {
     bindsym k exec keepassxc; mode "default"
     bindsym l exec libreoffice; mode "default"
     bindsym m exec xterm -title "float musikcube" -e "exec musikcube"; mode "default"
+    bindsym n exec nyxt; mode "default"
     bindsym o exec tor-browser; mode "default"
     bindsym t exec thunderbird; mode "default"
 
