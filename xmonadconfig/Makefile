@@ -17,6 +17,10 @@ rebuild: clean
 clean:
 	cabal new-clean
 
+build: xmonad.hs
+	cabal new-build
+	ln -fs /home/mdo/xmonadconfig/dist-newstyle/build/x86_64-linux/ghc-9.4.8/xmonadconfig-0.1.0.0/x/xmonadconfig/build/xmonadconfig/xmonadconfig xmonad-x86_64-linux
+
 lint:
 	ag --haskell -l | xargs hlint -v
 
@@ -25,3 +29,4 @@ formatter:
 
 help:
 	@grep '^[^ 	#:]\+:' Makefile | sed -e 's/:[^:]*//g'
+

@@ -1,3 +1,5 @@
+# This file is under control of Propellor.
+         
 general {
   colors = true
   color_good = "#a3be8c"
@@ -29,7 +31,6 @@ disk "/home" {
 disk "/boot" {
   format = "/boot: %percentage_used"
 }
-
 
 # ethernet ens5 {
 #   format_up = "ETH: %ip (%speed)"

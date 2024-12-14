@@ -1,3 +1,5 @@
+! This file is under control of Propellor.
+
 ! Reload this file via the following command:
 ! xrdb ~/.Xresources
 !
@@ -8,12 +10,12 @@
 ! Two usable terminfo names are xterm and xterm-256color
 XTerm.termName: xterm-256color
 
-Emacs.font: DejaVuSansMono-14
+! Emacs.font: DejaVuSansMono-14
 ! Xft.hinting: 1
 ! Xft.dpi: 96
 
 ! Default size of xterm.
-xterm*geometry: 94x28
+xterm*geometry: 80x24
 
 !Xcursor*theme: aero-large-drop
 !Xcursor*size: 48
@@ -26,6 +28,7 @@ xterm*VT100.Translations: #override \
     Ctrl <Key> 0: set-vt-font(d)
 
 ! (set-default-font “DejaVuSansMono-11”)
+! (set-default-font “Hack-12”)
 
 Xft.dpi: 96
 Xft.antialias: true
@@ -35,11 +38,16 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-XTerm*renderFont: true
+!XTerm*renderFont: true
 ! XTerm*faceName: xft:Mononoki Nerd Font, \
 !                 xft:JoyPixels:size=10, \
 !                 xft:Monospace:style=Medium:size=10
-XTerm*faceName: xft:Mononoki Nerd Font
+! XTerm*faceName: xft:Mononoki Nerd Font
+! XTerm*faceName: xft:Jetbrains Mono
+
+! TODO
+XTerm*renderFont: true
+XTerm*faceName: xft:Hack
 XTerm*faceSize: 12
 XTerm*utf8: 2
 XTerm*locale: true
@@ -61,4 +69,22 @@ XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 ! XTerm*background: #282a36
 ! XTerm*cursorColor: #bbc5ff
 
-#include ".Xresources.theme"
+! Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
