@@ -180,6 +180,9 @@ myFloatingMutt = "xterm -title \"floatterm\" -geometry 115x35  -e \"exec mutt\""
 myFloatingSlrn :: String
 myFloatingSlrn = "xterm -title \"floatterm\" -geometry 115x35 -e \"exec slrn\""
 
+myFloatingSecurity :: String
+myFloatingSecurity = "xterm -title \"floatterm\" -geometry 115x35 -e \"w3m https://discourse.nixos.org/c/announcements/security\""
+
 myFileManager :: String
 myFileManager = "pcmanfm"
 
@@ -382,6 +385,7 @@ keysAdditional =
     ("M-/ o", spawn myTorBrowser),
     ("M-/ p", spawn myFloatingPHP),
     ("M-/ u", spawn myFloatingSlrn),
+    ("M-/ s", spawn myFloatingSecurity),
     ("M-/ t", spawn myThunderbird),
     ("M-/ v", spawn myVivaldi),
     ("M-/ w", spawn myLibreWolf),
