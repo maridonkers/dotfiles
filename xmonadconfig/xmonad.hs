@@ -1,4 +1,3 @@
--- This file is under control of Propellor.
 --------------------------------------------------------------------------------
 -- xmonad.hs
 --
@@ -16,6 +15,8 @@
 -- https://github.com/xmonad/xmonad/issues/245
 --
 -- To display key strokes use the xev program.
+--
+-- TODO the some pactl commands no longer work (pipewire?); e.g. suspend-sink
 --
 {-# OPTIONS_GHC -Wall -fwarn-unused-imports #-}
 
@@ -401,8 +402,8 @@ keysAdditional =
     -- , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off")
     ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --auto --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"),
     ("M-/ ]", spawn "xrandr --output LVDS-1 --primary --auto --output HDMI-1 --off --output VGA-1 --off --output DP-1 --off"),
-    ("M-i", spawn "pactl set-card-profile 0 output:hdmi-stereo"),
-    ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo"),
+    -- ("M-i", spawn "pactl set-card-profile 0 output:hdmi-stereo"),
+    -- ("M-a", spawn "pactl set-card-profile 0 output:analog-stereo"),
     ("M-S-<Left>", sendMessage Shrink),
     ("M-S-<Right>", sendMessage Expand),
     ("M-S-<Up>", windows W.swapDown),
@@ -454,9 +455,9 @@ keysAdditional =
     ("M-<KP_Subtract>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
     ("M-<KP_Add>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%"),
     -- , ("M-<KP_Divide>", spawn "pacmd suspend 1")
-    ("M-<KP_Divide>", spawn "pactl suspend-sink @DEFAULT_SINK@ true"),
+    -- ("M-<KP_Divide>", spawn "pactl suspend-sink @DEFAULT_SINK@ true"),
     -- , ("M-<KP_Multiply>", spawn "pacmd suspend 0")
-    ("M-<KP_Multiply>", spawn "pactl suspend-sink @DEFAULT_SINK@ false"),
+    -- ("M-<KP_Multiply>", spawn "pactl suspend-sink @DEFAULT_SINK@ false"),
     ("M-<KP_Enter>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
     ("<XF86AudioMute>", spawn "amixer set Master toggle"),
     -- , ("<XF86AudioPlay>", spawn "clementine -t")
@@ -513,10 +514,10 @@ main = do
       -- My monitor struggels more and more to come out of HDMI black screen after resume
       -- spawn "pactl set-card-profile 0 output:hdmi-stereo"
       -- Use analog stereo audio output
-      spawn "pactl set-card-profile 0 output:analog-stereo"
+      -- spawn "pactl set-card-profile 0 output:analog-stereo"
     else do
       spawn "xrandr --output LVDS-1 --primary --auto"
-      spawn "pactl set-card-profile 0 output:analog-stereo"
+      -- spawn "pactl set-card-profile 0 output:analog-stereo"
 
   -- TODO -p position parameter for both instances.
   -- Launching instances of xmobar on their monitors. TODO check if only one monitor.
