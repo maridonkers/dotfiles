@@ -165,14 +165,8 @@ myFreetube = "freetube"
 myScreendump :: String
 myScreendump = "scrot"
 
-myFloatingGHCI :: String
-myFloatingGHCI = "xterm -title \"floatterm\" -e \"exec ghci\""
-
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python3\""
-
-myFloatingPHP :: String
-myFloatingPHP = "xterm -title \"floatterm\" -e \"exec php -a\""
 
 myFloatingMutt :: String
 myFloatingMutt = "xterm -title \"floatterm\" -geometry 115x35  -e \"exec mutt\""
@@ -182,6 +176,9 @@ myFloatingSlrn = "xterm -title \"floatterm\" -geometry 115x35 -e \"exec slrn\""
 
 myFloatingSecurity :: String
 myFloatingSecurity = "xterm -title \"floatterm\" -geometry 115x35 -e \"w3m https://discourse.nixos.org/c/announcements/security\""
+
+myFloatingNixOSGithub :: String
+myFloatingNixOSGithub = "xterm -title \"floatterm\" -geometry 115x35 -e \"w3m -o accept_encoding=none https://github.com/NixOS/nixpkgs/commits/master/\""
 
 myFileManager :: String
 myFileManager = "pcmanfm"
@@ -377,13 +374,12 @@ keysAdditional =
     ("M-/ c", spawn myChromium),
     ("M-/ e", spawn myEditor),
     ("M-/ f", spawn myFreetube),
-    ("M-/ h", spawn myFloatingGHCI),
     ("M-/ i", spawn myFloatingPython),
     ("M-/ k", spawn myKeepassXc),
     ("M-/ l", spawn myLibreOffice),
     ("M-/ m", spawn myFloatingMutt),
+    ("M-/ n", spawn myFloatingNixOSGithub),
     ("M-/ o", spawn myTorBrowser),
-    ("M-/ p", spawn myFloatingPHP),
     ("M-/ u", spawn myFloatingSlrn),
     ("M-/ s", spawn myFloatingSecurity),
     ("M-/ t", spawn myThunderbird),
@@ -621,7 +617,6 @@ myManageHook =
       -- className =? "vlc" -?> doFloat <+> hasBorder False,
       -- className =? "opera" -?> hasBorder True,
       -- , title =? "Clementine" -?> doFloat <+> hasBorder False
-      -- , title =? "ghci" -?> doFloat
       -- , title =? "python" -?> doFloat
       title =? "floatterm" -?> doFloat,
       className =? "Pinentry" -?> doFloat,
