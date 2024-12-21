@@ -177,9 +177,6 @@ myFloatingSlrn = "xterm -title \"floatterm\" -geometry 115x35 -e \"exec slrn\""
 myFloatingSecurity :: String
 myFloatingSecurity = "xterm -title \"floatterm\" -geometry 115x35 -e \"w3m https://discourse.nixos.org/c/announcements/security\""
 
-myFloatingNixOSGithub :: String
-myFloatingNixOSGithub = "xterm -title \"floatterm\" -geometry 115x35 -e \"w3m -o accept_encoding=none https://github.com/NixOS/nixpkgs/commits/master/\""
-
 myFileManager :: String
 myFileManager = "pcmanfm"
 
@@ -225,7 +222,7 @@ myNeedrestart :: String
 myNeedrestart = "needrestart-session"
 
 myTorBrowser :: String
-myTorBrowser = "torbrowser-launcher"
+myTorBrowser = "tor-browser"
 
 myKOReader :: String
 myKOReader = "koreader"
@@ -312,7 +309,7 @@ mpvPrompt :: String -> X ()
 mpvPrompt _ = do
   str <- inputPrompt cfg "Path|URL"
   case str of
-    Just s -> spawn $ printf "mpv \"%s\"" s
+    Just s -> spawn $ printf "mpv --no-terminal \"%s\"" s
     Nothing -> pure ()
   where
     cfg = myXPConfig {defaultText = ""}
@@ -366,7 +363,7 @@ keysAdditional =
     ("M-v", spawn $ printf "vlc " <> "$(xsel)"),
     ("M-S-v", vlcPrompt "vlc"),
     ("M-w", spawn myLibreWolf),
-    ("M-y", spawn $ "mpv " <> "$(xsel)"),
+    ("M-y", spawn $ "mpv --no-terminal " <> "$(xsel)"),
     ("M-S-y", mpvPrompt "mpv"),
     
     ("M-/ a", spawn myMusicPlayer),
@@ -378,7 +375,6 @@ keysAdditional =
     ("M-/ k", spawn myKeepassXc),
     ("M-/ l", spawn myLibreOffice),
     ("M-/ m", spawn myFloatingMutt),
-    ("M-/ n", spawn myFloatingNixOSGithub),
     ("M-/ o", spawn myTorBrowser),
     ("M-/ u", spawn myFloatingSlrn),
     ("M-/ s", spawn myFloatingSecurity),
@@ -388,16 +384,16 @@ keysAdditional =
     ("M-/ y", spawn myYoutubeBrowser),
     ("M-/ z", spawn myFilezilla),
     
-    ("M-. s d", spawn "mpv https://www.youtube.com/watch?v=Io5mt83nCcU"), -- dw
-    ("M-. s e", spawn "mpv https://www.youtube.com/watch?v=O9mOtdZ-nSk"), -- euronews
-    ("M-. s f", spawn "mpv https://www.youtube.com/live/Y-IlMeCCtIg"), -- france24
-    ("M-. s r", spawn "mpv https://www.youtube.com/watch?v=M90qWFGEsv4"), -- rtve
-    ("M-. f e", spawn "mpv https://www.youtube.com/watch?v=NiRIbKwAejk"), -- euronews
-    ("M-. f f", spawn "mpv https://www.youtube.com/live/l8PMl7tUDIE"), -- france24
-    ("M-. f i", spawn "mpv https://www.youtube.com/watch?v=Z-Nwo-ypKtM"), -- franceinfo
-    ("M-. e d", spawn "mpv https://www.youtube.com/watch?v=tZT2MCYu6Zw"), -- dw
-    ("M-. e e", spawn "mpv https://www.youtube.com/watch?v=pykpO5kQJ98"), -- euronews
-    ("M-. e f", spawn "mpv https://www.youtube.com/watch?v=Ap-UM1O9RBU"), -- france24
+    ("M-. s d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Io5mt83nCcU"), -- dw
+    ("M-. s e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=O9mOtdZ-nSk"), -- euronews
+    ("M-. s f", spawn "mpv --no-terminal https://www.youtube.com/live/Y-IlMeCCtIg"), -- france24
+    ("M-. s r", spawn "mpv --no-terminal https://www.youtube.com/watch?v=M90qWFGEsv4"), -- rtve
+    ("M-. f e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=NiRIbKwAejk"), -- euronews
+    ("M-. f f", spawn "mpv --no-terminal https://www.youtube.com/live/l8PMl7tUDIE"), -- france24
+    ("M-. f i", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Z-Nwo-ypKtM"), -- franceinfo
+    ("M-. e d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=tZT2MCYu6Zw"), -- dw
+    ("M-. e e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=pykpO5kQJ98"), -- euronews
+    ("M-. e f", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Ap-UM1O9RBU"), -- france24
     
     -- , ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --auto --mode 1440x900 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off")
     ("M-/ [", spawn "xrandr --output LVDS-1 --primary --auto --mode 1366x768 --pos 1920x312 --rotate normal --output VGA-1 --off --output HDMI-1 --auto --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off"),
