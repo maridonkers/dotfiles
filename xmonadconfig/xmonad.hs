@@ -349,7 +349,7 @@ keysAdditional =
     ("M-<Esc>", withFocused toggleFloat),
     ("M-d", spawn myScreendump),
     ("M-0", goToSelected def), --defaultGSConfig)
-    ("M-n", spawn myNeedrestart),
+    ("M-n", spawn "netsurf-gtk3"),
     -- , ("M-w", withFocused minimizeWindow)
     -- , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
     ("M-<Backspace>", kill),
@@ -358,8 +358,8 @@ keysAdditional =
     ("M-C-<Return>", spawn myFloatingTerminal),
     ("M-e", spawn myEditor),
     ("M-f", spawn myFileManager),
-    ("M-u", spawn $ "librewolf --new-window " <> "$(xsel)"),
-    ("M-S-u", webPrompt "librewolf"),
+    ("M-u", spawn $ "netsurf-gtk3 " <> "$(xsel)"),
+    ("M-S-u", webPrompt "netsurf-gtk3"),
     ("M-v", spawn $ printf "vlc " <> "$(xsel)"),
     ("M-S-v", vlcPrompt "vlc"),
     ("M-w", spawn myLibreWolf),
@@ -383,13 +383,14 @@ keysAdditional =
     ("M-/ w", spawn myLibreWolf),
     ("M-/ y", spawn myYoutubeBrowser),
     ("M-/ z", spawn myFilezilla),
-    
+
+    -- Check the YouTube URLs from time to time, because they tend to change regularly.
     ("M-. s d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Io5mt83nCcU"), -- dw
     ("M-. s e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=O9mOtdZ-nSk"), -- euronews
-    ("M-. s f", spawn "mpv --no-terminal https://www.youtube.com/live/Y-IlMeCCtIg"), -- france24
+    ("M-. s f", spawn "mpv --no-terminal https://www.youtube.com/live/Y-IlMeCCtIg"),    -- france24
     ("M-. s r", spawn "mpv --no-terminal https://www.youtube.com/watch?v=M90qWFGEsv4"), -- rtve
     ("M-. f e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=NiRIbKwAejk"), -- euronews
-    ("M-. f f", spawn "mpv --no-terminal https://www.youtube.com/live/l8PMl7tUDIE"), -- france24
+    ("M-. f f", spawn "mpv --no-terminal https://www.youtube.com/live/l8PMl7tUDIE"),    -- france24
     ("M-. f i", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Z-Nwo-ypKtM"), -- franceinfo
     ("M-. e d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=tZT2MCYu6Zw"), -- dw
     ("M-. e e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=pykpO5kQJ98"), -- euronews
