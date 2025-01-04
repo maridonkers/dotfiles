@@ -388,7 +388,7 @@ keysAdditional =
     ("M-. s d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Io5mt83nCcU"), -- dw
     ("M-. s e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=O9mOtdZ-nSk"), -- euronews
     ("M-. s f", spawn "mpv --no-terminal https://www.youtube.com/live/Y-IlMeCCtIg"),    -- france24
-    ("M-. s r", spawn "mpv --no-terminal https://www.youtube.com/watch?v=M90qWFGEsv4"), -- rtve
+    ("M-. s r", spawn "mpv --no-terminal https://www.youtube.com/@rtvenoticias/live"), -- rtve
     ("M-. f e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=NiRIbKwAejk"), -- euronews
     ("M-. f f", spawn "mpv --no-terminal https://www.youtube.com/live/l8PMl7tUDIE"),    -- france24
     ("M-. f i", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Z-Nwo-ypKtM"), -- franceinfo
