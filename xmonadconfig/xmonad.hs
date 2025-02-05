@@ -168,11 +168,12 @@ myScreendump = "scrot"
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python3\""
 
-myFloatingMutt :: String
-myFloatingMutt = "xterm -title \"floatterm\" -geometry 115x35  -e \"exec mutt\""
+myMutt :: String
+-- myMutt = "xterm -title \"floatterm\" -geometry 115x35  -e \"exec mutt\""
+myMutt = "xterm -e \"exec mutt\""
 
-myFloatingSlrn :: String
-myFloatingSlrn = "xterm -title \"floatterm\" -geometry 115x35 -e \"exec slrn\""
+mySlrn :: String
+mySlrn = "xterm -e \"exec slrn\""
 
 myFloatingSecurity :: String
 myFloatingSecurity = "xterm -title \"floatterm\" -geometry 115x35 -e \"w3m https://discourse.nixos.org/c/announcements/security\""
@@ -200,9 +201,6 @@ myChromium = "chromium"
 -- myFalkon = "QTWEBENGINE_CHROMIUM_FLAGS=--blink-settings=forceDarkModeEnabled=true falkon"
 -- myFalkon = "falkon"
 
-myLibreWolf :: String
-myLibreWolf = "librewolf"
-
 myBrave :: String
 myBrave = "brave-browser"
 
@@ -210,7 +208,7 @@ myVivaldi :: String
 myVivaldi = "vivaldi"
 
 myYoutubeBrowser :: String
-myYoutubeBrowser = "librewolf --new-window https://youtube.com"
+myYoutubeBrowser = "chromium --new-window https://youtube.com"
 
 myFilezilla :: String
 myFilezilla = "filezilla"
@@ -300,7 +298,7 @@ webPrompt :: String -> X ()
 webPrompt _ = do
   str <- inputPrompt cfg "Path|URL"
   case str of
-    Just s -> spawn $ printf "librewolf --new-window \"%s\"" s
+    Just s -> spawn $ printf "chromium --new-window \"%s\"" s
     Nothing -> pure ()
   where
     cfg = myXPConfig {defaultText = ""}
@@ -344,43 +342,45 @@ keysAdditional =
   [("M-q", spawn "xmonad --recompile && xmonad --restart"),
     ("M-S-q", confirmPrompt myXPConfig "exit" (io exitSuccess)),
     ("M-p", shellPrompt myXPConfig),
-    ("M-<Home>", sendMessage (Toggle "Full")),
-    ("M-<Space>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts),
+    ("M-S-<Space>", sendMessage (Toggle "Full") >> sendMessage ToggleStruts),
+    ("M-<Space>", sendMessage (Toggle "Full")),
     ("M-<Esc>", withFocused toggleFloat),
+    ("M-c", spawn myChromium),
     ("M-d", spawn myScreendump),
     ("M-0", goToSelected def), --defaultGSConfig)
-    ("M-n", spawn "netsurf-gtk3"),
+    ("M-o", spawn "opera"),
     -- , ("M-w", withFocused minimizeWindow)
     -- , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
     ("M-<Backspace>", kill),
     ("M-b", withFocused toggleBorder),
-    ("M-c", spawn myCursorToggle),
+    ("M-h", spawn myCursorToggle),
     ("M-C-<Return>", spawn myFloatingTerminal),
     ("M-e", spawn myEditor),
     ("M-f", spawn myFileManager),
-    ("M-u", spawn $ "netsurf-gtk3 " <> "$(xsel)"),
-    ("M-S-u", webPrompt "netsurf-gtk3"),
+    ("M-u", spawn $ "opera " <> "$(xsel)"),
+    ("M-S-u", webPrompt "opera"),
     ("M-v", spawn $ printf "vlc " <> "$(xsel)"),
     ("M-S-v", vlcPrompt "vlc"),
-    ("M-w", spawn myLibreWolf),
+    ("M-w", spawn myChromium),
     ("M-y", spawn $ "mpv --no-terminal " <> "$(xsel)"),
     ("M-S-y", mpvPrompt "mpv"),
     
     ("M-/ a", spawn myMusicPlayer),
     ("M-/ b", spawn myBrave),
-    ("M-/ c", spawn myChromium),
+    -- ("M-/ c", spawn myChromium),
     ("M-/ e", spawn myEditor),
     ("M-/ f", spawn myFreetube),
     ("M-/ i", spawn myFloatingPython),
     ("M-/ k", spawn myKeepassXc),
     ("M-/ l", spawn myLibreOffice),
-    ("M-/ m", spawn myFloatingMutt),
-    ("M-/ o", spawn myTorBrowser),
-    ("M-/ u", spawn myFloatingSlrn),
+    ("M-/ m", spawn myMutt),
+    ("M-/ o", spawn "opera"),
     ("M-/ s", spawn myFloatingSecurity),
     ("M-/ t", spawn myThunderbird),
+    ("M-/ u", spawn mySlrn),
     ("M-/ v", spawn myVivaldi),
-    ("M-/ w", spawn myLibreWolf),
+    ("M-/ w", spawn myChromium),
+    ("M-/ x", spawn myTorBrowser),
     ("M-/ y", spawn myYoutubeBrowser),
     ("M-/ z", spawn myFilezilla),
 
