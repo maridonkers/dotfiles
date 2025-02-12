@@ -168,6 +168,9 @@ myScreendump = "scrot"
 myFloatingPython :: String
 myFloatingPython = "xterm -title \"floatterm\" -e \"exec python3\""
 
+myFloatingElixir :: String
+myFloatingElixir = "xterm -title \"floatterm\" -e \"exec iex\""
+
 myMutt :: String
 -- myMutt = "xterm -title \"floatterm\" -geometry 115x35  -e \"exec mutt\""
 myMutt = "xterm -e \"exec mutt\""
@@ -365,10 +368,9 @@ keysAdditional =
     ("M-y", spawn $ "mpv --no-terminal " <> "$(xsel)"),
     ("M-S-y", mpvPrompt "mpv"),
     
-    ("M-/ a", spawn myMusicPlayer),
     ("M-/ b", spawn myBrave),
     -- ("M-/ c", spawn myChromium),
-    ("M-/ e", spawn myEditor),
+    ("M-/ e", spawn myFloatingElixir),
     ("M-/ f", spawn myFreetube),
     ("M-/ i", spawn myFloatingPython),
     ("M-/ k", spawn myKeepassXc),
@@ -384,6 +386,8 @@ keysAdditional =
     ("M-/ y", spawn myYoutubeBrowser),
     ("M-/ z", spawn myFilezilla),
 
+    ("M-. a", spawn myMusicPlayer),
+    
     -- Check the YouTube URLs from time to time, because they tend to change regularly.
     ("M-. s d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Io5mt83nCcU"), -- dw
     ("M-. s e", spawn "mpv --no-terminal https://www.youtube.com/watch?v=O9mOtdZ-nSk"), -- euronews
