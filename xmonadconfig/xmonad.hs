@@ -371,7 +371,6 @@ keysAdditional =
     ("M-/ b", spawn myBrave),
     -- ("M-/ c", spawn myChromium),
     ("M-/ e", spawn myFloatingElixir),
-    ("M-/ f", spawn myFreetube),
     ("M-/ i", spawn myFloatingPython),
     ("M-/ k", spawn myKeepassXc),
     ("M-/ l", spawn myLibreOffice),
@@ -383,10 +382,11 @@ keysAdditional =
     ("M-/ v", spawn myVivaldi),
     ("M-/ w", spawn myChromium),
     ("M-/ x", spawn myTorBrowser),
-    ("M-/ y", spawn myYoutubeBrowser),
     ("M-/ z", spawn myFilezilla),
 
-    ("M-. a", spawn myMusicPlayer),
+    ("M-. f", spawn myFreetube),
+    ("M-. m", spawn myMusicPlayer),
+    ("M-. y", spawn myYoutubeBrowser),
     
     -- Check the YouTube URLs from time to time, because they tend to change regularly.
     ("M-. s d", spawn "mpv --no-terminal https://www.youtube.com/watch?v=Io5mt83nCcU"), -- dw
