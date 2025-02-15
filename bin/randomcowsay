@@ -1,4 +1,0 @@
-#!/bin/sh
-
-RANDOMCOW=`cowsay -l | grep -v 'Cow files in ' | sed 's/\s/\n/g' | shuf -n1`
-fortune -as | cowsay -f "${RANDOMCOW}"

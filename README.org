@@ -1,9 +1,3 @@
-My configuration files.
+This repository has moved to Codeberg:
 
-* Dotfiles
-See [[https://www.atlassian.com/git/tutorials/dotfiles][dotfiles]] for a technique to manage dotfiles in git.
-
-* Already on GitHub
-- [[https://github.com/maridonkers/nixos-configuration][NixOS configuration]]
-- [[https://github.com/maridonkers/emacs-config][Emacs configuration]]
-
+[photonsphere/dotfiles](https://codeberg.org/photonsphere/dotfiles)
